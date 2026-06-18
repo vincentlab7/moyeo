@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모여 - 할일</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* {margin: 0; padding: 0; box-sizing: border-box;}
+body {font-family: 'Pretendard', -apple-system, sans-serif; font-size: 14px; color: #111111; background: #f0f0f0; display: flex; align-items: flex-start; justify-content: center; min-height: 100vh; padding: 40px 20px; gap: 24px; flex-wrap: wrap;}
+
+.phone-wrap {display: flex; flex-direction: column; align-items: center;}
+.phone-label {margin-bottom: 12px; font-size: 13px; font-weight: 600; color: #888;}
+.phone-frame {width: 390px; background: #f8f9fa; position: relative; box-shadow: 0 0 0 1px #e5e8eb, 0 24px 64px rgba(0,0,0,0.12); border-radius: 48px; overflow: hidden;}
+
+/* 상태바 */
+.status-bar {height: 44px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; background: #ffffff;}
+.status-bar__time {font-size: 15px; font-weight: 600; color: #111;}
+.status-bar__icons {display: flex; gap: 6px; align-items: center;}
+
+/* 헤더 */
+.header {background: #ffffff; padding: 12px 20px 0; border-bottom: 1px solid #f0f0f0;}
+.header__top {display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px;}
+.header__title {font-size: 18px; font-weight: 700; color: #111; letter-spacing: -0.4px;}
+.header__btn {width: 36px; height: 36px; border: none; background: none; cursor: pointer; border-radius: 8px; display: flex; align-items: center; justify-content: center;}
+.header__btn svg {width: 22px; height: 22px; stroke: #333; stroke-width: 1.8; fill: none;}
+
+/* 세그먼트 탭 */
+.segment {display: flex; gap: 0; background: #f8f9fa; border-radius: 10px; padding: 3px; margin: 0 20px 14px;}
+.segment__tab {flex: 1; height: 34px; border: none; background: none; font-size: 13px; font-weight: 500; color: #888; cursor: pointer; border-radius: 8px; font-family: inherit; transition: all 0.15s;}
+.segment__tab.is-active {background: #ffffff; color: #111; font-weight: 700; box-shadow: 0 1px 4px rgba(0,0,0,0.1);}
+
+/* 스크롤 */
+.scroll-area {overflow-y: auto; max-height: 640px; padding-bottom: 80px;}
+.scroll-area::-webkit-scrollbar {display: none;}
+
+/* 진행 상태 요약 바 */
+.progress-summary {margin: 12px 20px; background: #ffffff; border-radius: 12px; padding: 14px 16px;}
+.progress-summary__top {display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;}
+.progress-summary__label {font-size: 13px; font-weight: 600; color: #111;}
+.progress-summary__count {font-size: 13px; color: #888;}
+.progress-summary__count span {color: #111; font-weight: 700;}
+.progress-bar {height: 6px; background: #f0f0f0; border-radius: 3px; overflow: hidden;}
+.progress-bar__fill {height: 100%; background: #111; border-radius: 3px; transition: width 0.3s;}
+
+/* 상태 그룹 */
+.status-group {padding: 16px 20px 0;}
+.status-group__header {display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;}
+.status-group__label {font-size: 12px; font-weight: 700; color: #888; letter-spacing: 0.3px; display: flex; align-items: center; gap: 6px;}
+.status-group__label-dot {width: 6px; height: 6px; border-radius: 50%;}
+.status-group__count {font-size: 12px; color: #c4c9d2;}
+
+/* ToDo 카드 */
+.todo-card {background: #ffffff; border-radius: 12px; padding: 14px 16px; margin-bottom: 8px; display: flex; gap: 12px; align-items: flex-start; cursor: pointer;}
+.todo-card:active {background: #f8f9fa;}
+.todo-card__check {width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #d4d8de; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; transition: all 0.15s;}
+.todo-card__check.is-done {background: #111; border-color: #111;}
+.todo-card__check.is-doing {background: #fff; border-color: #f59e0b; border-width: 2px;}
+.todo-card__check svg {display: none; width: 12px; height: 12px; stroke: #fff; stroke-width: 2.5; fill: none;}
+.todo-card__check.is-done svg {display: block;}
+.todo-card__check.is-doing::after {content: ''; width: 8px; height: 8px; background: #f59e0b; border-radius: 50%; display: block;}
+.todo-card__body {flex: 1;}
+.todo-card__top {display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;}
+.todo-card__title {font-size: 15px; font-weight: 600; color: #111; line-height: 1.4; flex: 1;}
+.todo-card__title.is-done {color: #c4c9d2; text-decoration: line-through; font-weight: 400;}
+.todo-card__meta {display: flex; align-items: center; gap: 6px; margin-top: 6px; flex-wrap: wrap;}
+.todo-badge {font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px;}
+.todo-badge--group {background: #f0f0f0; color: #888;}
+.todo-badge--personal {background: #eff2ff; color: #4f7cff;}
+.todo-badge--doing {background: #fffbeb; color: #f59e0b;}
+.todo-badge--done {background: #f0fdf4; color: #10b981;}
+.todo-card__assignee {display: flex; align-items: center; gap: 4px;}
+.todo-card__assignee-avatar {width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: #fff;}
+.todo-card__assignee-name {font-size: 11px; color: #888;}
+.todo-card__more {width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: -2px;}
+.todo-card__more svg {width: 16px; height: 16px; stroke: #c4c9d2; stroke-width: 2; fill: none;}
+
+/* FAB */
+.fab {position: absolute; bottom: 84px; right: 20px; width: 52px; height: 52px; background: #111; border-radius: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.2);}
+.fab svg {width: 22px; height: 22px; stroke: #fff; stroke-width: 2; fill: none;}
+
+/* 하단 탭바 */
+.tabbar {position: absolute; bottom: 0; left: 0; right: 0; height: 72px; background: #ffffff; border-top: 1px solid #f0f0f0; display: flex; align-items: flex-start; padding-top: 10px;}
+.tab-item {flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer;}
+.tab-item__icon svg {width: 22px; height: 22px; stroke: #c4c9d2; stroke-width: 1.8; fill: none;}
+.tab-item__label {font-size: 10px; color: #c4c9d2; font-weight: 500;}
+.tab-item.is-active .tab-item__icon svg {stroke: #111;}
+.tab-item.is-active .tab-item__label {color: #111; font-weight: 700;}
+
+/* ── 등록 시트 ── */
+.add-sheet-overlay {position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); z-index: 100; display: flex; align-items: flex-end;}
+.add-sheet {background: #fff; border-radius: 20px 20px 0 0; width: 100%; padding: 0 0 40px;}
+.add-sheet__handle {width: 36px; height: 4px; background: #e5e8eb; border-radius: 2px; margin: 12px auto 0;}
+.add-sheet__header {display: flex; align-items: center; justify-content: space-between; padding: 16px 20px 14px; border-bottom: 1px solid #f0f0f0;}
+.add-sheet__title {font-size: 16px; font-weight: 700; color: #111;}
+.add-sheet__save {font-size: 15px; font-weight: 700; color: #111; background: none; border: none; cursor: pointer; font-family: inherit;}
+.add-sheet__body {padding: 20px;}
+.add-input {width: 100%; border: none; outline: none; font-size: 18px; font-weight: 700; font-family: inherit; color: #111; background: transparent; letter-spacing: -0.3px; margin-bottom: 20px;}
+.add-input::placeholder {color: #d4d8de; font-weight: 600;}
+.add-row {display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-top: 1px solid #f8f9fa;}
+.add-row__label {font-size: 13px; color: #888; display: flex; align-items: center; gap: 8px;}
+.add-row__label svg {width: 16px; height: 16px; stroke: #888; stroke-width: 1.8; fill: none;}
+.add-row__value {font-size: 13px; font-weight: 600; color: #111; display: flex; align-items: center; gap: 4px;}
+.add-row__value svg {width: 14px; height: 14px; stroke: #888; stroke-width: 2; fill: none;}
+
+/* 타입 선택 칩 */
+.type-chips {display: flex; gap: 6px;}
+.type-chip {padding: 6px 14px; border-radius: 20px; border: 1.5px solid #e5e8eb; font-size: 13px; font-weight: 500; color: #888; cursor: pointer; background: #fff;}
+.type-chip.is-selected {border-color: #111; background: #111; color: #fff; font-weight: 600;}
+
+/* 상태 선택 칩 */
+.state-chips {display: flex; gap: 6px;}
+.state-chip {padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e5e8eb; font-size: 12px; font-weight: 500; color: #888; cursor: pointer; background: #fff;}
+.state-chip.todo {border-color: #e5e8eb; color: #888;}
+.state-chip.doing.is-selected {border-color: #f59e0b; background: #fffbeb; color: #f59e0b; font-weight: 700;}
+.state-chip.done.is-selected {border-color: #10b981; background: #f0fdf4; color: #10b981; font-weight: 700;}
+.state-chip.todo.is-selected {border-color: #111; background: #111; color: #fff; font-weight: 700;}
+
+/* 담당자 아바타 열 */
+.assignee-row {display: flex; gap: 8px; align-items: center;}
+.assignee-avatar {width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; cursor: pointer; position: relative;}
+.assignee-avatar.is-selected::after {content: ''; position: absolute; bottom: -1px; right: -1px; width: 10px; height: 10px; background: #111; border-radius: 50%; border: 1.5px solid #fff;}
+</style>
+</head>
+<body>
+
+<!-- ① 그룹 할일 탭 -->
+<div class="phone-wrap">
+  <div class="phone-label">① 그룹 할일</div>
+  <div class="phone-frame">
+    <div class="status-bar">
+      <span class="status-bar__time">9:41</span>
+      <div class="status-bar__icons">
+        <svg width="16" height="16" viewBox="0 0 24 24" stroke="#111" stroke-width="2" fill="none"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" stroke="#111" stroke-width="2" fill="none"><rect x="1" y="6" width="15" height="12" rx="2"/><path d="M16 10h2a2 2 0 0 1 0 4h-2"/><rect x="3" y="9" width="9" height="6" rx="1" fill="#111" stroke="none"/></svg>
+      </div>
+    </div>
+
+    <div class="header">
+      <div class="header__top">
+        <div class="header__title">할일</div>
+        <button class="header__btn"><svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="17" y2="18"/></svg></button>
+      </div>
+      <div class="segment">
+        <button class="segment__tab is-active">그룹 할일</button>
+        <button class="segment__tab">내 할일</button>
+      </div>
+    </div>
+
+    <div class="scroll-area">
+
+      <!-- 진행 요약 -->
+      <div class="progress-summary">
+        <div class="progress-summary__top">
+          <div class="progress-summary__label">우리 가족 할일</div>
+          <div class="progress-summary__count"><span>2</span> / 5 완료</div>
+        </div>
+        <div class="progress-bar"><div class="progress-bar__fill" style="width: 40%;"></div></div>
+      </div>
+
+      <!-- 진행전 -->
+      <div class="status-group">
+        <div class="status-group__header">
+          <div class="status-group__label">
+            <div class="status-group__label-dot" style="background:#c4c9d2;"></div>
+            진행전
+          </div>
+          <div class="status-group__count">2</div>
+        </div>
+
+        <div class="todo-card">
+          <div class="todo-card__check"><svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg></div>
+          <div class="todo-card__body">
+            <div class="todo-card__top">
+              <div class="todo-card__title">여행 숙소 예약</div>
+              <div class="todo-card__more"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1" fill="#c4c9d2"/><circle cx="12" cy="12" r="1" fill="#c4c9d2"/><circle cx="12" cy="19" r="1" fill="#c4c9d2"/></svg></div>
+            </div>
+            <div class="todo-card__meta">
+              <div class="todo-badge todo-badge--group">그룹</div>
+              <div class="todo-card__assignee">
+                <div class="todo-card__assignee-avatar" style="background:#4f7cff;">아</div>
+                <div class="todo-card__assignee-name">아빠</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="todo-card">
+          <div class="todo-card__check"><svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg></div>
+          <div class="todo-card__body">
+            <div class="todo-card__top">
+              <div class="todo-card__title">자동차 정기 점검 예약</div>
+              <div class="todo-card__more"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1" fill="#c4c9d2"/><circle cx="12" cy="12" r="1" fill="#c4c9d2"/><circle cx="12" cy="19" r="1" fill="#c4c9d2"/></svg></div>
+            </div>
+            <div class="todo-card__meta">
+              <div class="todo-badge todo-badge--group">그룹</div>
+              <div class="todo-card__assignee">
+                <div class="todo-card__assignee-avatar" style="background:#f97316;">엄</div>
+                <div class="todo-card__assignee-name">엄마</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 진행중 -->
+      <div class="status-group">
+        <div class="status-group__header">
+          <div class="status-group__label">
+            <div class="status-group__label-dot" style="background:#f59e0b;"></div>
+            진행중
+          </div>
+          <div class="status-group__count">1</div>
+        </div>
+
+        <div class="todo-card">
+          <div class="todo-card__check is-doing"></div>
+          <div class="todo-card__body">
+            <div class="todo-card__top">
+              <div class="todo-card__title">에어컨 필터 교체</div>
+              <div class="todo-card__more"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1" fill="#c4c9d2"/><circle cx="12" cy="12" r="1" fill="#c4c9d2"/><circle cx="12" cy="19" r="1" fill="#c4c9d2"/></svg></div>
+            </div>
+            <div class="todo-card__meta">
+              <div class="todo-badge todo-badge--group">그룹</div>
+              <div class="todo-badge todo-badge--doing">진행중</div>
+              <div class="todo-card__assignee">
+                <div class="todo-card__assignee-avatar" style="background:#4f7cff;">아</div>
+                <div class="todo-card__assignee-name">아빠</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 완료 -->
+      <div class="status-group">
+        <div class="status-group__header">
+          <div class="status-group__label">
+            <div class="status-group__label-dot" style="background:#10b981;"></div>
+            완료
+          </div>
+          <div class="status-group__count">2</div>
+        </div>
+
+        <div class="todo-card" style="opacity:0.6;">
+          <div class="todo-card__check is-done"><svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg></div>
+          <div class="todo-card__body">
+            <div class="todo-card__top">
+              <div class="todo-card__title is-done">장보기</div>
+            </div>
+            <div class="todo-card__meta">
+              <div class="todo-badge todo-badge--group">그룹</div>
+              <div class="todo-badge todo-badge--done">완료</div>
+              <div class="todo-card__assignee">
+                <div class="todo-card__assignee-avatar" style="background:#f97316;">엄</div>
+                <div class="todo-card__assignee-name">엄마</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="todo-card" style="opacity:0.6;">
+          <div class="todo-card__check is-done"><svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg></div>
+          <div class="todo-card__body">
+            <div class="todo-card__top">
+              <div class="todo-card__title is-done">인터넷 요금제 변경</div>
+            </div>
+            <div class="todo-card__meta">
+              <div class="todo-badge todo-badge--group">그룹</div>
+              <div class="todo-badge todo-badge--done">완료</div>
+              <div class="todo-card__assignee">
+                <div class="todo-card__assignee-avatar" style="background:#4f7cff;">아</div>
+                <div class="todo-card__assignee-name">아빠</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="fab"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+
+    <div class="tabbar">
+      <div class="tab-item"><div class="tab-item__icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="tab-item__label">홈</div></div>
+      <div class="tab-item"><div class="tab-item__icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="tab-item__label">일정</div></div>
+      <div class="tab-item is-active"><div class="tab-item__icon"><svg viewBox="0 0 24 24" stroke="#111"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div class="tab-item__label">할일</div></div>
+      <div class="tab-item"><div class="tab-item__icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="tab-item__label">알림장</div></div>
+      <div class="tab-item"><div class="tab-item__icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="tab-item__label">내정보</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ② 내 할일 탭 -->
+<div class="phone-wrap">
+  <div class="phone-label">② 내 할일</div>
+  <div class="phone-frame">
+    <div class="status-bar">
+      <span class="status-bar__time">9:41</span>
+      <div class="status-bar__icons">
+        <svg width="16" height="16" viewBox="0 0 24 24" stroke="#111" stroke-width="2" fill="none"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" stroke="#111" stroke-width="2" fill="none"><rect x="1" y="6" width="15" height="12" rx="2"/><path d="M16 10h2a2 2 0 0 1 0 4h-2"/><rect x="3" y="9" width="9" height="6" rx="1" fill="#111" stroke="none"/></svg>
+      </div>
+    </div>
+
+    <div class="header">
+      <div class="header__top">
+        <div class="header__title">할일</div>
+        <button class="header__btn"><svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="17" y2="18"/></svg></button>
+      </div>
+      <div class="segment">
+        <button class="segment__tab">그룹 할일</button>
+        <button class="segment__tab is-active">내 할일</button>
+      </div>
+    </div>
+
+    <div class="scroll-area">
+
+      <div class="progress-summary">
+        <div class="progress-summary__top">
+          <div class="progress-summary__label">내 할일</div>
+          <div class="progress-summary__count"><span>1</span> / 4 완료</div>
+        </div>
+        <div class="progress-bar"><div class="progress-bar__fill" style="width: 25%;"></div></div>
+      </div>
+
+      <!-- 진행전 -->
+      <div class="status-group">
+        <div class="status-group__header">
+          <div class="status-group__label"><div class="status-group__label-dot" style="background:#c4c9d2;"></div>진행전</div>
+          <div class="status-group__count">2</div>
+        </div>
+
+        <div class="todo-card">
+          <div class="todo-card__check"><svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg></div>
+          <div class="todo-card__body">
+            <div class="todo-card__top">
+              <div class="todo-card__title">병원 예약</div>
+              <div class="todo-card__more"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1" fill="#c4c9d2"/><circle cx="12" cy="12" r="1" fill="#c4c9d2"/><circle cx="12" cy="19" r="1" fill="#c4c9d2"/></svg></div>
+            </div>
+            <div class="todo-card__meta">
+              <div class="todo-badge todo-badge--personal">개인</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="todo-card">
+          <div class="todo-card__check"><svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg></div>
+          <div class="todo-card__body">
+            <div class="todo-card__top">
+              <div class="todo-card__title">운전면허 갱신 서류 준비</div>
+              <div class="todo-card__more"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1" fill="#c4c9d2"/><circle cx="12" cy="12" r="1" fill="#c4c9d2"/><circle cx="12" cy="19" r="1" fill="#c4c9d2"/></svg></div>
+            </div>
+            <div class="todo-card__meta">
+              <div class="todo-badge todo-badge--personal">개인</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 진행중 -->
+      <div class="status-group">
+        <div class="status-group__header">
+          <div class="status-group__label"><div class="status-group__label-dot" style="background:#f59e0b;"></div>진행중</div>
+          <div class="status-group__count">1</div>
+        </div>
+
+        <div class="todo-card">
+          <div class="todo-card__check is-doing"></div>
+          <div class="todo-card__body">
+            <div class="todo-card__top">
+              <div class="todo-card__title">발표 자료 준비</div>
+              <div class="todo-card__more"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1" fill="#c4c9d2"/><circle cx="12" cy="12" r="1" fill="#c4c9d2"/><circle cx="12" cy="19" r="1" fill="#c4c9d2"/></svg></div>
+            </div>
+            <div class="todo-card__meta">
+              <div class="todo-badge todo-badge--personal">개인</div>
+              <div class="todo-badge todo-badge--doing">진행중</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 완료 -->
+      <div class="status-group">
+        <div class="status-group__header">
+          <div class="status-group__label"><div class="status-group__label-dot" style="background:#10b981;"></div>완료</div>
+          <div class="status-group__count">1</div>
+        </div>
+
+        <div class="todo-card" style="opacity:0.6;">
+          <div class="todo-card__check is-done"><svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg></div>
+          <div class="todo-card__body">
+            <div class="todo-card__top">
+              <div class="todo-card__title is-done">독서 모임 책 구매</div>
+            </div>
+            <div class="todo-card__meta">
+              <div class="todo-badge todo-badge--personal">개인</div>
+              <div class="todo-badge todo-badge--done">완료</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="fab"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+
+    <div class="tabbar">
+      <div class="tab-item"><div class="tab-item__icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="tab-item__label">홈</div></div>
+      <div class="tab-item"><div class="tab-item__icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="tab-item__label">일정</div></div>
+      <div class="tab-item is-active"><div class="tab-item__icon"><svg viewBox="0 0 24 24" stroke="#111"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div class="tab-item__label">할일</div></div>
+      <div class="tab-item"><div class="tab-item__icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="tab-item__label">알림장</div></div>
+      <div class="tab-item"><div class="tab-item__icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="tab-item__label">내정보</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ③ 할일 등록 바텀시트 -->
+<div class="phone-wrap">
+  <div class="phone-label">③ 할일 등록</div>
+  <div class="phone-frame">
+    <div class="status-bar">
+      <span class="status-bar__time">9:41</span>
+      <div class="status-bar__icons">
+        <svg width="16" height="16" viewBox="0 0 24 24" stroke="#111" stroke-width="2" fill="none"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" stroke="#111" stroke-width="2" fill="none"><rect x="1" y="6" width="15" height="12" rx="2"/><path d="M16 10h2a2 2 0 0 1 0 4h-2"/><rect x="3" y="9" width="9" height="6" rx="1" fill="#111" stroke="none"/></svg>
+      </div>
+    </div>
+
+    <!-- 뒤 화면 (흐림 처리) -->
+    <div class="header">
+      <div class="header__top">
+        <div class="header__title">할일</div>
+      </div>
+      <div class="segment">
+        <button class="segment__tab is-active">그룹 할일</button>
+        <button class="segment__tab">내 할일</button>
+      </div>
+    </div>
+    <div style="padding: 20px; filter: blur(2px); opacity: 0.4;">
+      <div style="background:#fff;border-radius:12px;height:64px;margin-bottom:8px;"></div>
+      <div style="background:#fff;border-radius:12px;height:64px;margin-bottom:8px;"></div>
+      <div style="background:#fff;border-radius:12px;height:64px;"></div>
+    </div>
+
+    <!-- 바텀시트 오버레이 -->
+    <div class="add-sheet-overlay">
+      <div class="add-sheet">
+        <div class="add-sheet__handle"></div>
+        <div class="add-sheet__header">
+          <div class="add-sheet__title">할일 추가</div>
+          <button class="add-sheet__save">저장</button>
+        </div>
+        <div class="add-sheet__body">
+          <input class="add-input" type="text" placeholder="어떤 할일인가요?" value="여행 숙소 예약">
+
+          <!-- 종류 -->
+          <div class="add-row">
+            <div class="add-row__label">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              종류
+            </div>
+            <div class="type-chips">
+              <div class="type-chip is-selected">그룹</div>
+              <div class="type-chip">개인</div>
+            </div>
+          </div>
+
+          <!-- 상태 -->
+          <div class="add-row">
+            <div class="add-row__label">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              상태
+            </div>
+            <div class="state-chips">
+              <div class="state-chip todo is-selected">진행전</div>
+              <div class="state-chip doing">진행중</div>
+              <div class="state-chip done">완료</div>
+            </div>
+          </div>
+
+          <!-- 담당자 -->
+          <div class="add-row">
+            <div class="add-row__label">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              담당자
+            </div>
+            <div class="assignee-row">
+              <div class="assignee-avatar is-selected" style="background:#4f7cff;" title="아빠">아</div>
+              <div class="assignee-avatar" style="background:#f97316;" title="엄마">엄</div>
+              <div class="assignee-avatar" style="background:#a855f7;" title="딸">딸</div>
+              <div class="assignee-avatar" style="background:#10b981;" title="아들">아</div>
+            </div>
+          </div>
+
+          <!-- 메모 -->
+          <div class="add-row" style="align-items:flex-start; padding-top:14px;">
+            <div class="add-row__label" style="margin-top:2px;">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              메모
+            </div>
+            <div style="flex:1; text-align:right; font-size:13px; color:#c4c9d2;">추가 내용 입력</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
