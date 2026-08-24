@@ -6,9 +6,70 @@
 importScripts('https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js');
 
+/* ── 오프라인 지원: 앱 셸 캐싱 ── */
+const CACHE_NAME = 'moyeo-shell-v1';
+const PRECACHE_URLS = [
+  '/app.html',
+  '/manifest.json',
+  '/resource/css/font.css',
+  '/resource/css/reset.css',
+  '/resource/css/pc.css',
+  '/resource/css/mobile.css',
+  '/resource/js/main.js',
+  '/resource/js/app.js',
+  '/resource/js/auth.js',
+  '/resource/js/db.js',
+  '/resource/js/ai.js',
+  '/resource/js/push.js',
+  '/resource/js/firebase-config.js',
+  '/resource/images/icons/icon-pwa-192.png',
+  '/resource/images/icons/icon-pwa-512.png',
+];
+
 /* 대기 없이 즉시 활성화 — 페이지 새로고침 없이도 새 SW 적용 */
-self.addEventListener('install',  function() { self.skipWaiting(); });
-self.addEventListener('activate', function(e) { e.waitUntil(self.clients.claim()); });
+self.addEventListener('install', function(event) {
+  self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(function(cache) {
+      return cache.addAll(PRECACHE_URLS);
+    })
+  );
+});
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    Promise.all([
+      self.clients.claim(),
+      caches.keys().then(function(keys) {
+        return Promise.all(
+          keys.filter(function(key) { return key !== CACHE_NAME; })
+              .map(function(key) { return caches.delete(key); })
+        );
+      }),
+    ])
+  );
+});
+
+/* 같은 출처(same-origin) GET 요청만 캐시 우선 + 백그라운드 갱신, /api/*, 외부 도메인은 그대로 네트워크로 전달 */
+self.addEventListener('fetch', function(event) {
+  var req = event.request;
+  if (req.method !== 'GET') return;
+  var url = new URL(req.url);
+  if (url.origin !== self.location.origin) return;
+  if (url.pathname.indexOf('/api/') === 0) return;
+
+  event.respondWith(
+    caches.match(req).then(function(cached) {
+      var fetchPromise = fetch(req).then(function(res) {
+        if (res && res.ok) {
+          caches.open(CACHE_NAME).then(function(cache) { cache.put(req, res.clone()); });
+        }
+        return res;
+      }).catch(function() { return cached; });
+      return cached || fetchPromise;
+    })
+  );
+});
 
 /* SW는 firebase-config.js를 공유할 수 없으므로 직접 설정 */
 firebase.initializeApp({
