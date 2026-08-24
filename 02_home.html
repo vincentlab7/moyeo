@@ -328,7 +328,7 @@
     if (!el) return;
     var today = list.filter(function (s) { return _isToday(s.startDate); }).slice(0, 5);
     if (!today.length) {
-      el.innerHTML = '<li style="padding:16px 0; text-align:center; color:#8B95A1; font-size:14px;">오늘 일정이 없어요</li>';
+      el.innerHTML = '<li style="padding:16px 0; text-align:center; color:#8B95A1; font-size:15px;">오늘 일정이 없어요</li>';
       return;
     }
     el.innerHTML = today.map(function (s) {
@@ -351,7 +351,7 @@
     if (!el) return;
     var active = list.filter(function (t) { return t.status !== 'done'; }).slice(0, 4);
     if (!active.length) {
-      el.innerHTML = '<div style="padding:12px 0; text-align:center; color:#8B95A1; font-size:14px;">할일이 모두 완료됐어요 🎉</div>';
+      el.innerHTML = '<div style="padding:12px 0; text-align:center; color:#8B95A1; font-size:15px;">할일이 모두 완료됐어요 🎉</div>';
       return;
     }
     el.innerHTML = active.map(function (t) {
@@ -368,7 +368,7 @@
     if (!el) return;
     var recent = list.slice(0, 3);
     if (!recent.length) {
-      el.innerHTML = '<li style="padding:12px 0; text-align:center; color:#8B95A1; font-size:14px;">최근 활동이 없어요</li>';
+      el.innerHTML = '<li style="padding:12px 0; text-align:center; color:#8B95A1; font-size:15px;">최근 활동이 없어요</li>';
       return;
     }
     el.innerHTML = recent.map(function (a) {

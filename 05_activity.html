@@ -248,8 +248,8 @@
 
     <header class="noti-detail-header">
       <button class="noti-detail-back" aria-label="뒤로가기" data-go="activity-log"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-      <h1 style="font-size:17px;font-weight:700;color:#111;flex:1;text-align:center;">알림</h1>
-      <button style="font-size:13px;color:#888;background:none;border:none;cursor:pointer;font-family:inherit;font-weight:500;padding:0 4px;" data-mark-all-read>모두 읽음</button>
+      <h1 style="font-size:18px;font-weight:700;color:#111;flex:1;text-align:center;">알림</h1>
+      <button style="font-size:14px;color:#888;background:none;border:none;cursor:pointer;font-family:inherit;font-weight:500;padding:0 4px;" data-mark-all-read>모두 읽음</button>
     </header>
 
     <section class="scroll-area" style="background:#fff;">
@@ -388,7 +388,7 @@
     var scroll = document.querySelector('[data-screen-wrap="activity-log"] .scroll-area');
     if (!scroll) return;
     if (!list.length) {
-      scroll.innerHTML = '<div style="padding:48px 16px; text-align:center; color:#8B95A1; font-size:14px;">아직 활동 내역이 없어요</div>';
+      scroll.innerHTML = '<div style="padding:48px 16px; text-align:center; color:#8B95A1; font-size:15px;">아직 활동 내역이 없어요</div>';
       return;
     }
 

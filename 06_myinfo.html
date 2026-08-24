@@ -54,7 +54,7 @@
       <ul class="members-card">
         <li class="member-item" data-go="myinfo-member">
           <div class="member-item__avatar" style="background:#4f7cff;" data-my-member-avatar>아</div>
-          <div class="member-item__info"><div class="member-item__name" data-my-member-name>아빠 <span style="font-size:11px;color:#888;font-weight:400;">(나)</span></div><div class="member-item__status" data-my-member-status>부산 출장 중 ✈️</div></div>
+          <div class="member-item__info"><div class="member-item__name" data-my-member-name>아빠 <span style="font-size:12px;color:#888;font-weight:400;">(나)</span></div><div class="member-item__status" data-my-member-status>부산 출장 중 ✈️</div></div>
           <div class="member-item__role member-item__role--owner">Owner</div>
         </li>
         <li class="member-item" data-go="myinfo-member">
@@ -89,7 +89,7 @@
         <div class="menu-item">
           <div class="menu-item__icon" style="background:#f0f0f0;"><svg viewBox="0 0 24 24" stroke="#333"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
           <div class="menu-item__body"><div class="menu-item__label">초대 코드</div><div class="menu-item__sub">FMLY8392</div></div>
-          <div class="menu-item__right"><button class="menu-item__copy-btn" aria-label="초대코드 복사" data-copy-code="FMLY8392" style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#3182F6;font-family:inherit;padding:4px 8px;border-radius:6px;">복사<svg viewBox="0 0 24 24" width="14" height="14" stroke="#3182F6" stroke-width="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
+          <div class="menu-item__right"><button class="menu-item__copy-btn" aria-label="초대코드 복사" data-copy-code="FMLY8392" style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#3182F6;font-family:inherit;padding:4px 8px;border-radius:6px;">복사<svg viewBox="0 0 24 24" width="14" height="14" stroke="#3182F6" stroke-width="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div>
         </div>
       </div>
 
@@ -146,7 +146,7 @@
 
     <header class="member-detail-header">
       <button class="back-btn" aria-label="뒤로가기" data-go="myinfo-main"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-      <h1 style="font-size:17px;font-weight:700;color:#111;flex:1;text-align:center;">멤버 프로필</h1>
+      <h1 style="font-size:18px;font-weight:700;color:#111;flex:1;text-align:center;">멤버 프로필</h1>
       <div style="width:36px;"></div>
     </header>
 
@@ -236,7 +236,7 @@
     }
     if (mName) {
       /* 이름 텍스트 보존 (나) 뱃지 포함 */
-      mName.innerHTML = (profile.displayName || '') + ' <span style="font-size:11px;color:#888;font-weight:400;">(나)</span>';
+      mName.innerHTML = (profile.displayName || '') + ' <span style="font-size:12px;color:#888;font-weight:400;">(나)</span>';
     }
     if (mStatus) mStatus.textContent = profile.status || '';
 
@@ -279,7 +279,7 @@
     list.innerHTML = sorted.map(function (m) {
       var isMe    = m.uid === myUid;
       var initial = (m.displayName || '?').charAt(0);
-      var nameHtml = m.displayName + (isMe ? ' <span style="font-size:11px;color:#888;font-weight:400;">(나)</span>' : '');
+      var nameHtml = m.displayName + (isMe ? ' <span style="font-size:12px;color:#888;font-weight:400;">(나)</span>' : '');
       var myAttrs  = isMe ? ' data-my-member-avatar' : '';
       var myNameA  = isMe ? ' data-my-member-name' : '';
       var myStatA  = isMe ? ' data-my-member-status' : '';
