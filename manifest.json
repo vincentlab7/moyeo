@@ -1,0 +1,15 @@
+{
+  "name": "모여",
+  "short_name": "모여",
+  "description": "가족·소그룹 일정 공유 앱",
+  "start_url": "/app.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3182F6",
+  "orientation": "portrait-primary",
+  "lang": "ko",
+  "icons": [
+    { "src": "/resource/images/icons/icon-pwa-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/resource/images/icons/icon-pwa-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

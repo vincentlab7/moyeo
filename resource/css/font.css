@@ -1,0 +1,7 @@
+/* TODO: resource/font/ 에 Pretendard .woff2 추가 후 @import 를 아래 @font-face 블록으로 교체하세요
+@font-face {font-family: 'Pretendard'; src: url('../font/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap;}
+@font-face {font-family: 'Pretendard'; src: url('../font/Pretendard-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap;}
+@font-face {font-family: 'Pretendard'; src: url('../font/Pretendard-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap;}
+@font-face {font-family: 'Pretendard'; src: url('../font/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap;}
+*/
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap');

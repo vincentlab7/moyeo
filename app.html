@@ -1,0 +1,2295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모여</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#3182F6">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="모여">
+<link rel="apple-touch-icon" href="/resource/images/icons/icon-pwa-192.png">
+<link rel="stylesheet" href="resource/css/font.css">
+<link rel="stylesheet" href="resource/css/reset.css">
+<link rel="stylesheet" href="resource/css/pc.css">
+<link rel="stylesheet" href="resource/css/mobile.css">
+</head>
+<body>
+
+<div class="phone-frame">
+<div class="page-loading" id="page-loading"><div class="page-loading__spinner"></div></div>
+
+<!-- ════════════════════════════════════
+     홈 탭 (tab-screen)
+     ════════════════════════════════════ -->
+<div class="tab-screen is-tab-active" data-tab-screen="home">
+  <div class="screen-wrap is-active" data-screen-wrap="home">
+
+    <header class="header">
+      <div class="header__group-selector" data-open-sheet>
+        <div class="header__group-emoji">👨‍👩‍👧‍👦</div>
+        <div class="header__group-info">
+          <div class="header__group-name">우리 가족 <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          <div class="header__group-sub">멤버 4명</div>
+        </div>
+      </div>
+      <div class="header__actions">
+        <button class="header__btn" aria-label="알림" data-app-tab="activity">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <div class="header__badge"></div>
+        </button>
+      </div>
+    </header>
+
+    <main class="scroll-area">
+
+      <article class="ai-card">
+        <div class="ai-card__bg"></div>
+        <div class="ai-card__bg2"></div>
+        <div class="ai-card__label"><div class="ai-card__label-dot"></div> AI 일정 요약</div>
+        <h2 class="ai-card__title" data-ai-title>오늘 일정 요약 ✦</h2>
+        <p class="ai-card__body">AI가 오늘을 분석하는 중...</p>
+      </article>
+
+      <section class="section">
+        <div class="today-bar">
+          <span class="today-bar__date">6월 18일</span>
+          <span class="today-bar__day">수요일</span>
+          <span class="today-bar__badge">오늘</span>
+        </div>
+        <div class="section__header">
+          <div class="section__title">
+            <div class="section__title-dot" style="background:#111;"></div>
+            오늘 일정
+          </div>
+          <div class="section__more" data-app-tab="schedule">전체 보기 <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+        <ul class="schedule-list">
+          <li class="schedule-item">
+            <div class="schedule-item__avatar" style="background:#4f7cff;">아</div>
+            <div class="schedule-item__info">
+              <div class="schedule-item__name">아빠</div>
+              <div class="schedule-item__title">부산 출장</div>
+              <div class="schedule-item__time">종일</div>
+            </div>
+            <div class="schedule-item__tag" style="background:#eff2ff; color:#4f7cff;">업무</div>
+          </li>
+          <li class="schedule-item">
+            <div class="schedule-item__avatar" style="background:#f97316;">엄</div>
+            <div class="schedule-item__info">
+              <div class="schedule-item__name">엄마</div>
+              <div class="schedule-item__title">친구 모임</div>
+              <div class="schedule-item__time">오후 6:00</div>
+            </div>
+            <div class="schedule-item__tag" style="background:#fff7ed; color:#f97316;">약속</div>
+          </li>
+          <li class="schedule-item">
+            <div class="schedule-item__avatar" style="background:#a855f7;">딸</div>
+            <div class="schedule-item__info">
+              <div class="schedule-item__name">딸</div>
+              <div class="schedule-item__title">사진 동아리</div>
+              <div class="schedule-item__time">오후 4:00 – 6:00</div>
+            </div>
+            <div class="schedule-item__tag" style="background:#faf5ff; color:#a855f7;">동아리</div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="section" data-home-urgent-section style="display:none;">
+        <div class="section__header">
+          <div class="section__title">
+            <div class="section__title-dot" style="background:#e11d48;"></div>
+            마감 임박
+          </div>
+          <div class="section__more" data-app-tab="todo">할일 전체 <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+        <div class="todo-mini"></div>
+      </section>
+
+      <section class="section">
+        <div class="section__header">
+          <div class="section__title">
+            <div class="section__title-dot" style="background:#f97316;"></div>
+            최근 알림
+          </div>
+          <div class="section__more" data-app-tab="activity">전체 보기 <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+        </div>
+        <ul class="noti-list">
+          <li class="noti-item">
+            <div class="noti-item__avatar" style="background:#4f7cff;">아</div>
+            <div class="noti-item__body">
+              <div class="noti-item__text"><strong>아빠</strong>가 부산 출장 일정을 등록했어요</div>
+              <div class="noti-item__time">방금 전</div>
+            </div>
+          </li>
+          <li class="noti-item">
+            <div class="noti-item__avatar" style="background:#a855f7;">딸</div>
+            <div class="noti-item__body">
+              <div class="noti-item__text"><strong>딸</strong>이 동아리 일정을 수정했어요</div>
+              <div class="noti-item__time">1시간 전</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+    </main>
+
+    <aside class="group-sheet" data-sheet role="dialog" aria-modal="true" aria-label="그룹 전환">
+      <div class="group-sheet__panel">
+        <div class="group-sheet__handle"></div>
+        <h2 class="group-sheet__title">그룹 전환</h2>
+        <div class="group-sheet__list" data-group-list></div>
+        <div class="group-sheet__add">
+          <div class="group-sheet__add__icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+          <div class="group-sheet__add__label">그룹 만들기 또는 참여하기</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 그룹 만들기 / 참여하기 시트 -->
+    <aside class="group-add-overlay" data-group-add-overlay role="dialog" aria-modal="true" aria-label="그룹 만들기 또는 참여하기">
+      <div class="group-add-sheet">
+        <div class="group-add-sheet__handle"></div>
+        <div class="group-add-sheet__header">
+          <h2 class="group-add-sheet__title">그룹 만들기 또는 참여하기</h2>
+          <button class="group-add-sheet__close" data-group-add-close aria-label="닫기">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="group-add-sheet__body">
+          <div class="group-add-segment" role="tablist">
+            <button class="group-add-tab is-active" data-group-add-tab="create" role="tab" aria-selected="true">그룹 만들기</button>
+            <button class="group-add-tab" data-group-add-tab="join" role="tab" aria-selected="false">초대 코드 참여</button>
+          </div>
+          <!-- 그룹 만들기 패널 -->
+          <div class="group-add-panel is-active" data-group-add-panel="create">
+            <div class="group-add-emoji-row">
+              <button class="group-add-emoji-btn is-selected" data-emoji="👨‍👩‍👧‍👦">👨‍👩‍👧‍👦</button>
+              <button class="group-add-emoji-btn" data-emoji="🏢">🏢</button>
+              <button class="group-add-emoji-btn" data-emoji="🎓">🎓</button>
+              <button class="group-add-emoji-btn" data-emoji="⚽">⚽</button>
+              <button class="group-add-emoji-btn" data-emoji="🎮">🎮</button>
+            </div>
+            <input class="group-add-input" type="text" id="group-add-name" placeholder="그룹 이름을 입력해주세요" maxlength="20" autocomplete="off">
+            <p class="group-add-hint">최대 20자, 그룹 생성 후 이름을 변경할 수 있어요</p>
+            <button class="group-add-btn" id="group-add-create-btn">그룹 만들기</button>
+          </div>
+          <!-- 초대 코드 참여 패널 -->
+          <div class="group-add-panel" data-group-add-panel="join">
+            <input class="group-add-input" type="text" id="group-add-code" placeholder="초대 코드를 입력해주세요" maxlength="8" autocomplete="off" style="text-transform:uppercase; letter-spacing: 4px; text-align: center;">
+            <p class="group-add-hint">그룹 Owner 또는 Manager에게 초대 코드를 받아 입력하세요</p>
+            <button class="group-add-btn" id="group-add-join-btn">참여하기</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</div><!-- /tab-screen home -->
+
+
+<!-- ════════════════════════════════════
+     할일 탭 (DOM에서 schedule 앞에 위치: main.js가 첫 .fab을 todo FAB으로 바인딩)
+     ════════════════════════════════════ -->
+<div class="tab-screen" data-tab-screen="todo">
+  <div class="screen-wrap is-active" data-screen-wrap="todo-main">
+
+    <header class="header" style="flex-direction:column; align-items:stretch; padding-bottom:0;">
+      <div class="header__top" style="display:flex; align-items:center; justify-content:space-between; padding-bottom:12px;">
+        <div class="header__title">할일</div>
+        <button class="header__btn" aria-label="필터"><svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="17" y2="18"/></svg></button>
+      </div>
+      <div class="segment" role="tablist">
+        <button class="segment__tab is-active" role="tab" aria-selected="true" data-todo="group">그룹 할일<span class="segment__tab-count" data-todo-tab-count="group" style="display:none;"></span></button>
+        <button class="segment__tab" role="tab" aria-selected="false" data-todo="personal">내 할일<span class="segment__tab-count" data-todo-tab-count="personal" style="display:none;"></span></button>
+      </div>
+    </header>
+
+    <section class="scroll-area">
+      <div data-todo-content="group">
+        <div class="progress-summary">
+          <div class="progress-summary__top">
+            <div class="progress-summary__label">우리 가족 할일</div>
+            <div class="progress-summary__count"><span>2</span> / 5 완료</div>
+          </div>
+          <div class="progress-bar"><div class="progress-bar__fill" style="width: 40%;"></div></div>
+        </div>
+        <section class="status-group">
+          <div class="status-group__header">
+            <div class="status-group__label"><div class="status-group__label-dot" style="background:#c4c9d2;"></div>진행전</div>
+            <div class="status-group__count">2</div>
+          </div>
+          <article class="todo-card">
+            <div class="todo-card__check"><svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg></div>
+            <div class="todo-card__body">
+              <div class="todo-card__top">
+                <div class="todo-card__title">여행 숙소 예약</div>
+                <button class="todo-card__more" aria-label="더보기"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1" fill="#c4c9d2"/><circle cx="12" cy="12" r="1" fill="#c4c9d2"/><circle cx="12" cy="19" r="1" fill="#c4c9d2"/></svg></button>
+              </div>
+              <div class="todo-card__meta">
+                <div class="todo-badge todo-badge--group">그룹</div>
+                <div class="todo-card__assignee"><div class="todo-card__assignee-avatar" style="background:#4f7cff;">아</div><div class="todo-card__assignee-name">아빠</div></div>
+              </div>
+            </div>
+          </article>
+          <article class="todo-card">
+            <div class="todo-card__check"><svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg></div>
+            <div class="todo-card__body">
+              <div class="todo-card__top">
+                <div class="todo-card__title">자동차 정기 점검 예약</div>
+                <button class="todo-card__more" aria-label="더보기"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1" fill="#c4c9d2"/><circle cx="12" cy="12" r="1" fill="#c4c9d2"/><circle cx="12" cy="19" r="1" fill="#c4c9d2"/></svg></button>
+              </div>
+              <div class="todo-card__meta">
+                <div class="todo-badge todo-badge--group">그룹</div>
+                <div class="todo-card__assignee"><div class="todo-card__assignee-avatar" style="background:#f97316;">엄</div><div class="todo-card__assignee-name">엄마</div></div>
+              </div>
+            </div>
+          </article>
+        </section>
+        <section class="status-group">
+          <div class="status-group__header">
+            <div class="status-group__label"><div class="status-group__label-dot" style="background:#10b981;"></div>완료</div>
+            <div class="status-group__count">2</div>
+          </div>
+          <article class="todo-card" style="opacity:0.6;">
+            <div class="todo-card__check is-done"><svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg></div>
+            <div class="todo-card__body">
+              <div class="todo-card__top"><div class="todo-card__title is-done">장보기</div></div>
+              <div class="todo-card__meta">
+                <div class="todo-badge todo-badge--group">그룹</div>
+                <div class="todo-badge todo-badge--done">완료</div>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+
+      <div data-todo-content="personal" style="display:none;">
+        <div class="progress-summary">
+          <div class="progress-summary__top">
+            <div class="progress-summary__label">내 할일</div>
+            <div class="progress-summary__count"><span>1</span> / 4 완료</div>
+          </div>
+          <div class="progress-bar"><div class="progress-bar__fill" style="width: 25%;"></div></div>
+        </div>
+        <section class="status-group">
+          <div class="status-group__header">
+            <div class="status-group__label"><div class="status-group__label-dot" style="background:#c4c9d2;"></div>진행전</div>
+            <div class="status-group__count">2</div>
+          </div>
+          <article class="todo-card">
+            <div class="todo-card__check"><svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg></div>
+            <div class="todo-card__body">
+              <div class="todo-card__top">
+                <div class="todo-card__title">병원 예약</div>
+                <button class="todo-card__more" aria-label="더보기"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1" fill="#c4c9d2"/><circle cx="12" cy="12" r="1" fill="#c4c9d2"/><circle cx="12" cy="19" r="1" fill="#c4c9d2"/></svg></button>
+              </div>
+              <div class="todo-card__meta"><div class="todo-badge todo-badge--personal">개인</div></div>
+            </div>
+          </article>
+        </section>
+      </div>
+    </section>
+
+    <button class="fab" aria-label="할일 추가">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+
+    <aside class="add-sheet-overlay" data-add-sheet role="dialog" aria-modal="true" aria-labelledby="add-sheet-title">
+      <div class="add-sheet">
+        <div class="add-sheet__handle"></div>
+        <header class="add-sheet__header">
+          <h2 class="add-sheet__title" id="add-sheet-title">할일 추가</h2>
+          <button class="add-sheet__save">저장</button>
+        </header>
+        <div class="add-sheet__body">
+          <input class="add-input" type="text" placeholder="어떤 할일인가요?">
+          <div class="add-row">
+            <div class="add-row__label"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>종류</div>
+            <div class="type-chips">
+              <button class="type-chip is-selected">그룹</button>
+              <button class="type-chip">개인</button>
+            </div>
+          </div>
+          <div class="add-row">
+            <div class="add-row__label"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>상태</div>
+            <div class="state-chips">
+              <button class="state-chip todo is-selected">진행전</button>
+              <button class="state-chip doing">진행중</button>
+              <button class="state-chip done">완료</button>
+            </div>
+          </div>
+          <div class="add-row">
+            <div class="add-row__label"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>담당자</div>
+            <div class="assignee-row" data-todo-assignee-row>
+              <button class="assignee-avatar is-selected" style="background:#4f7cff;" title="아빠">아</button>
+            </div>
+          </div>
+          <div class="add-row">
+            <div class="add-row__label"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>마감일</div>
+            <input type="date" class="add-due-date" data-todo-due-date>
+          </div>
+          <div class="add-row add-row--memo">
+            <div class="add-row__label"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>메모</div>
+            <textarea class="add-memo" placeholder="추가 내용을 입력하세요" rows="2" maxlength="50"></textarea>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <aside class="filter-sheet-overlay" data-filter-sheet role="dialog" aria-modal="true" aria-labelledby="filter-sheet-title">
+      <div class="filter-sheet">
+        <div class="filter-sheet__handle"></div>
+        <header class="filter-sheet__header">
+          <h2 class="filter-sheet__title" id="filter-sheet-title">필터</h2>
+          <button class="filter-sheet__reset" data-filter-reset>초기화</button>
+        </header>
+        <div class="filter-sheet__body">
+          <div class="filter-section">
+            <div class="filter-section__label">상태</div>
+            <div class="filter-type-list">
+              <button class="filter-type-item is-selected" data-filter-status="all">전체</button>
+              <button class="filter-type-item" data-filter-status="pending">진행전</button>
+              <button class="filter-type-item" data-filter-status="doing">진행중</button>
+              <button class="filter-type-item" data-filter-status="done">완료</button>
+            </div>
+          </div>
+          <div class="filter-section filter-section--type">
+            <div class="filter-section__label">담당자</div>
+            <div class="filter-assignee-list" data-todo-filter-list>
+              <button class="filter-assignee-item is-selected" data-filter-assignee="all">
+                <div class="filter-assignee-item__avatar filter-assignee-item__avatar--all">전</div>
+                <div class="filter-assignee-item__name">전체</div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="filter-sheet__footer">
+          <button class="filter-sheet__apply" data-filter-apply>적용</button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="todo-more-menu" data-todo-more-menu role="menu">
+      <button class="todo-more-menu__item" data-more-action="edit" role="menuitem">수정하기</button>
+      <button class="todo-more-menu__item todo-more-menu__item--danger" data-more-action="delete" role="menuitem">삭제하기</button>
+    </div>
+
+  </div>
+</div><!-- /tab-screen todo -->
+
+
+<!-- ════════════════════════════════════
+     일정 탭
+     ════════════════════════════════════ -->
+<div class="tab-screen" data-tab-screen="schedule">
+
+  <div class="screen-wrap is-active" data-screen-wrap="schedule-list">
+    <header class="header">
+      <div class="header__title">일정</div>
+      <div class="header__actions">
+        <div class="view-toggle" data-view-toggle>
+          <button class="view-toggle__btn is-active" data-view="list" aria-label="목록 보기">
+            <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </button>
+          <button class="view-toggle__btn" data-view="cal" aria-label="달력 보기">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </button>
+        </div>
+        <button class="header__btn" aria-label="검색" data-go="schedule-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+      </div>
+    </header>
+    <nav class="filter-tabs" aria-label="일정 필터">
+      <button class="filter-tab is-active" data-filter="all">전체</button>
+      <button class="filter-tab" data-filter="mine">내 일정</button>
+    </nav>
+    <div class="month-nav">
+      <button class="month-nav__btn" data-month-prev aria-label="이전 달"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="month-nav__label" data-month-label>2026년 7월</span>
+      <button class="month-nav__btn" data-month-next aria-label="다음 달"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+
+    <!-- 달력 뷰 -->
+    <div class="cal-view" data-cal-view>
+      <div class="cal-weekdays">
+        <div class="cal-weekday">일</div><div class="cal-weekday">월</div><div class="cal-weekday">화</div>
+        <div class="cal-weekday">수</div><div class="cal-weekday">목</div><div class="cal-weekday">금</div><div class="cal-weekday">토</div>
+      </div>
+      <div class="cal-grid" data-cal-grid></div>
+    </div>
+
+    <!-- 리스트 뷰 -->
+    <section class="scroll-area" data-list-view>
+      <section class="date-group" data-date="2026-07-29">
+        <div class="date-group__header">
+          <span class="date-group__date">7월 29일</span>
+          <span class="date-group__day">화</span>
+          <div class="date-group__line"></div>
+        </div>
+        <article class="schedule-card" data-go="schedule-detail" data-schedule-type="other" data-title="팀 주간 회의" data-dinner="possible" data-memo="" data-author="아빠" data-author-initial="아" data-author-color="#4f7cff" data-reg-date="7월 25일">
+          <div class="schedule-card__bar" style="background:#4f7cff;"></div>
+          <div class="schedule-card__body">
+            <div class="schedule-card__top">
+              <div class="schedule-card__title">팀 주간 회의</div>
+              <div class="schedule-card__tag" style="background:#eff2ff;color:#4f7cff;">업무</div>
+              <div class="schedule-card__members">
+                <div class="schedule-card__avatar" style="background:#4f7cff;">아</div>
+              </div>
+            </div>
+            <div class="schedule-card__meta">
+              <div class="schedule-card__time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>오전 10:00 – 11:00</div>
+            </div>
+          </div>
+        </article>
+      </section>
+      <div class="empty-month" data-empty-month style="display:none;">
+        <div class="empty-month__icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <p class="empty-month__text">이 달엔 일정이 없어요</p>
+        <p class="empty-month__sub">일정 추가 버튼으로 등록해보세요</p>
+      </div>
+    </section>
+
+    <!-- 달력 날짜 클릭 시 일정 팝업 -->
+    <div class="cal-day-popup" data-cal-popup>
+      <div class="cal-day-popup__header" data-cal-popup-header>날짜</div>
+      <div data-cal-popup-list></div>
+    </div>
+
+    <button class="fab" aria-label="일정 추가" data-go="schedule-register">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+  </div><!-- /schedule-list -->
+
+  <div class="screen-wrap" data-screen-wrap="schedule-register">
+    <div class="register-screen">
+      <header class="register-header">
+        <button class="register-header__back" aria-label="닫기" data-schedule-register-back><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <h1 class="register-header__title" data-register-title>일정 등록</h1>
+        <button class="register-header__save" data-schedule-save>저장</button>
+      </header>
+      <section class="scroll-area">
+        <div class="form-area">
+          <div class="form-row">
+            <div class="form-row__icon"><svg viewBox="0 0 24 24"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg></div>
+            <div class="form-row__content"><input class="form-row__input" type="text" placeholder="어떤 일정인가요?"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-row__icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <div class="form-row__content">
+              <button class="date-field" data-date-picker="start" aria-label="시작일 선택">
+                <div class="form-row__label">시작</div>
+                <div class="form-row__value" data-date-display="start">2026년 7월 29일 (화)</div>
+              </button>
+              <button class="date-field" data-date-picker="end" aria-label="종료일 선택">
+                <div class="form-row__label">종료</div>
+                <div class="form-row__value" data-date-display="end">2026년 7월 29일 (화)</div>
+              </button>
+              <div class="allday-row" data-allday-row>
+                <div class="allday-check is-checked" data-allday-check>
+                  <svg width="11" height="11" viewBox="0 0 10 10" stroke="#fff" stroke-width="2.5" fill="none"><polyline points="1,5 3.5,8 9,1"/></svg>
+                </div>
+                <span class="allday-row__label">종일</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-row__icon"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
+            <div class="form-row__content">
+              <div class="form-row__label">분류</div>
+              <div class="category-chips">
+                <button class="category-chip is-selected">업무</button>
+                <button class="category-chip">학교</button>
+                <button class="category-chip">약속</button>
+                <button class="category-chip">시험</button>
+                <button class="category-chip">여행</button>
+                <button class="category-chip">운동</button>
+                <button class="category-chip">기타</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-row__icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+            <div class="form-row__content">
+              <div class="form-row__label">저녁 식사 가능 여부</div>
+              <div class="dinner-toggle">
+                <button class="dinner-btn" data-dinner-val="possible">가능</button>
+                <button class="dinner-btn" data-dinner-val="impossible">불가능</button>
+                <button class="dinner-btn is-selected" data-dinner-val="none">미정</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-row__icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <div class="form-row__content"><div class="form-row__label">메모</div><textarea class="form-row__memo" data-memo-input placeholder="추가 내용을 입력하세요" rows="3"></textarea></div>
+          </div>
+          <div class="form-row">
+            <div class="form-row__icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="form-row__content">
+              <div class="form-row__label">참여자</div>
+              <div class="member-select" data-member-select></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div><!-- /schedule-register -->
+
+  <div class="screen-wrap" data-screen-wrap="schedule-detail">
+    <div class="detail-screen">
+      <header class="detail-header">
+        <button class="detail-header__back" aria-label="뒤로가기" data-go="schedule-list"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <h1 style="font-size:16px;font-weight:700;color:#111;flex:1;text-align:center;">일정 상세</h1>
+        <div class="detail-header__actions">
+          <button class="detail-header__btn" aria-label="수정" data-schedule-edit><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
+          <button class="detail-header__btn" aria-label="삭제" data-schedule-delete><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
+        </div>
+      </header>
+      <section class="scroll-area">
+        <div class="detail-hero">
+          <div class="detail-tag" data-detail-tag style="background:#fffbeb;color:#f59e0b;">약속</div>
+          <h2 class="detail-title" data-detail-title>일정 제목</h2>
+          <div class="detail-author">
+            <div class="detail-author__avatar" data-detail-author-avatar style="background:#4f7cff;">아</div>
+            <div class="detail-author__name" data-detail-author-name>등록자 · 날짜</div>
+          </div>
+        </div>
+        <div style="height:1px;background:#f0f0f0;margin:0 20px;"></div>
+        <div class="detail-info">
+          <div class="detail-info-item">
+            <div class="detail-info-item__icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <div><div class="detail-info-item__label">일시</div><div class="detail-info-item__value" data-detail-date>-</div></div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-item__icon"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
+            <div><div class="detail-info-item__label">분류</div><div class="detail-info-item__value" data-detail-category>-</div></div>
+          </div>
+          <div class="detail-info-item">
+            <div class="detail-info-item__icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div>
+              <div class="detail-info-item__label">참여 멤버</div>
+              <div data-detail-members style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="detail-dinner">
+          <div style="display:flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" stroke="#333" stroke-width="1.8" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg><div class="detail-dinner__label">저녁 식사 여부</div></div>
+          <div class="detail-dinner__badge" data-detail-dinner-badge style="background:#f0f0f0;color:#888;">미정</div>
+        </div>
+        <div class="detail-memo" data-detail-memo-section style="display:none;">
+          <div class="detail-memo__label">메모</div>
+          <p class="detail-memo__text" data-detail-memo></p>
+        </div>
+      </section>
+    </div>
+  </div><!-- /schedule-detail -->
+
+  <div class="screen-wrap" data-screen-wrap="schedule-search">
+    <div class="search-header">
+      <button class="search-header__back" aria-label="뒤로가기" data-go="schedule-list">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="search-header__input-wrap">
+        <svg class="search-header__icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="search-header__input" type="search" placeholder="일정 검색" aria-label="일정 검색" data-search-input>
+        <button class="search-header__clear" aria-label="지우기" data-search-clear hidden>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </button>
+      </div>
+    </div>
+    <section class="scroll-area" data-search-panel="empty">
+      <div class="search-recent">
+        <div class="search-recent__header">
+          <span class="search-recent__title">최근 검색</span>
+          <button class="search-recent__clear-all" data-search-clear-all>전체 삭제</button>
+        </div>
+        <div class="search-recent__chips" data-recent-chips></div>
+      </div>
+    </section>
+    <section class="scroll-area" data-search-panel="results" hidden>
+      <div class="search-result-count" data-search-count></div>
+      <div data-search-results></div>
+      <div class="search-no-result" data-search-no-result hidden>
+        <svg viewBox="0 0 24 24" width="40" height="40" stroke="#cdd1d5" stroke-width="1.5" fill="none"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <p>검색 결과가 없습니다</p>
+      </div>
+    </section>
+  </div><!-- /schedule-search -->
+
+  <div class="confirm-overlay" data-confirm-overlay>
+    <div class="confirm-sheet" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+      <p class="confirm-sheet__text" id="confirm-title">이 일정을 삭제하시겠습니까?</p>
+      <div class="confirm-sheet__btns">
+        <button class="confirm-btn confirm-btn--cancel" data-confirm-cancel>취소</button>
+        <button class="confirm-btn confirm-btn--danger" data-confirm-ok>삭제</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="date-picker-overlay" data-date-picker-overlay>
+    <div class="date-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="picker-title">
+      <div class="date-picker-handle"></div>
+      <div class="date-picker-header">
+        <span class="date-picker-title" id="picker-title" data-picker-title>시작일 선택</span>
+        <button class="date-picker-done" data-picker-done>완료</button>
+      </div>
+      <div class="date-picker-nav">
+        <button class="date-picker-nav__btn" data-date-prev aria-label="이전 달"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <span class="date-picker-nav__label" data-date-month></span>
+        <button class="date-picker-nav__btn" data-date-next aria-label="다음 달"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+      <div class="date-picker-weekdays" aria-hidden="true">
+        <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+      </div>
+      <div class="date-picker-grid" data-date-grid role="grid"></div>
+      <div class="time-picker" data-time-picker>
+        <div class="time-picker__ampm">
+          <button class="time-picker__ampm-btn" data-ampm="am">오전</button>
+          <button class="time-picker__ampm-btn" data-ampm="pm">오후</button>
+        </div>
+        <div class="time-picker__hours" data-time-hours></div>
+        <div class="time-picker__mins">
+          <button class="time-picker__min" data-min="0">:00</button>
+          <button class="time-picker__min" data-min="10">:10</button>
+          <button class="time-picker__min" data-min="20">:20</button>
+          <button class="time-picker__min" data-min="30">:30</button>
+          <button class="time-picker__min" data-min="40">:40</button>
+          <button class="time-picker__min" data-min="50">:50</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-screen schedule -->
+
+
+<!-- ════════════════════════════════════
+     알림장 탭
+     ════════════════════════════════════ -->
+<div class="tab-screen" data-tab-screen="activity">
+
+  <div class="screen-wrap is-active" data-screen-wrap="activity-log">
+    <header class="header">
+      <div class="header__title">알림장</div>
+      <button class="header__btn" aria-label="필터" data-activity-filter-btn><svg viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2V12.46L22 3z"/></svg></button>
+    </header>
+    <section class="scroll-area">
+
+      <!-- 새 알림 섹션 -->
+      <div class="activity-section" data-activity-section="new">
+        <div class="activity-section__header">
+          <span class="activity-section__title">새 알림</span>
+          <span class="activity-section__count" data-new-count>4</span>
+        </div>
+
+        <article class="log-item" data-log-item data-actor="아빠" data-log-type="schedule">
+          <div class="log-item__timeline">
+            <div class="log-item__avatar" style="background:#4f7cff;">아</div>
+            <div class="log-item__line"></div>
+          </div>
+          <div class="log-item__body">
+            <div class="log-item__header">
+              <span class="log-item__name">아빠</span>
+              <span class="log-item__action">일정을 등록했어요</span>
+              <div class="action-badge action-badge--create"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>등록</div>
+              <span class="log-item__time">방금 전</span>
+            </div>
+            <div class="log-card">
+              <div class="log-card__type" style="background:#eff2ff;color:#4f7cff;">업무</div>
+              <div class="log-card__title">팀 주간 회의</div>
+              <div class="log-card__meta"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>7월 30일 · 오전 10:00</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="log-item" data-log-item data-actor="딸" data-log-type="schedule">
+          <div class="log-item__timeline">
+            <div class="log-item__avatar" style="background:#a855f7;">딸</div>
+            <div class="log-item__line"></div>
+          </div>
+          <div class="log-item__body">
+            <div class="log-item__header">
+              <span class="log-item__name">딸</span>
+              <span class="log-item__action">일정을 수정했어요</span>
+              <div class="action-badge action-badge--edit"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>수정</div>
+              <span class="log-item__time">1시간 전</span>
+            </div>
+            <div class="log-card">
+              <div class="log-card__type" style="background:#faf5ff;color:#a855f7;">동아리</div>
+              <div class="log-card__title">사진 동아리</div>
+              <div class="log-card__meta"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>7월 30일 · 오후 4:00 – 6:00</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="log-item" data-log-item data-actor="엄마" data-log-type="todo">
+          <div class="log-item__timeline">
+            <div class="log-item__avatar" style="background:#f97316;">엄</div>
+            <div class="log-item__line"></div>
+          </div>
+          <div class="log-item__body">
+            <div class="log-item__header">
+              <span class="log-item__name">엄마</span>
+              <span class="log-item__action">할일을 추가했어요</span>
+              <div class="action-badge action-badge--create"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>등록</div>
+              <span class="log-item__time">3시간 전</span>
+            </div>
+            <div class="log-card">
+              <div class="log-card__type" style="background:#f0f0f0;color:#888;">그룹 할일</div>
+              <div class="log-card__title">여행 숙소 예약</div>
+              <div class="log-card__meta">담당자 · 아빠</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="log-item log-item--system" data-log-item data-log-type="system">
+          <div class="log-item__timeline">
+            <div class="log-item__avatar log-item__avatar--system"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+          </div>
+          <div class="log-item__body">
+            <div class="log-item__header"><span class="log-item__name" style="color:#888;font-weight:600;">자동 알림</span><span class="log-item__time">오전 9:00</span></div>
+            <div class="system-bubble"><p class="system-bubble__text">📅 내일 <strong>아들 중간고사</strong> 마지막 날이에요. 힘내라고 응원해 주세요!</p></div>
+          </div>
+        </article>
+
+        <div class="activity-section__empty" data-new-empty style="display:none;">새로운 알림이 없어요</div>
+      </div>
+
+      <!-- 이전 알림 섹션 -->
+      <div class="activity-section activity-section--old" data-activity-section="old">
+        <div class="activity-section__header">
+          <span class="activity-section__title">이전 알림</span>
+          <span class="activity-section__hint">(확인 후 30일이 지나면 자동으로 삭제돼요)</span>
+        </div>
+
+        <div class="day-divider"><div class="day-divider__label">어제 · 7월 29일 화요일</div><div class="day-divider__line"></div></div>
+
+        <article class="log-item" data-log-item data-actor="아들" data-log-type="todo">
+          <div class="log-item__timeline">
+            <div class="log-item__avatar" style="background:#10b981;">아</div>
+            <div class="log-item__line"></div>
+          </div>
+          <div class="log-item__body">
+            <div class="log-item__header">
+              <span class="log-item__name">아들</span>
+              <span class="log-item__action">할일을 완료했어요</span>
+              <div class="action-badge action-badge--complete"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>완료</div>
+              <span class="log-item__time">오후 3:14</span>
+            </div>
+            <div class="log-card">
+              <div class="log-card__type" style="background:#eff2ff;color:#4f7cff;">개인 할일</div>
+              <div class="log-card__title">독서 모임 책 구매</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="log-item" data-log-item data-actor="아빠" data-log-type="schedule">
+          <div class="log-item__timeline">
+            <div class="log-item__avatar" style="background:#4f7cff;">아</div>
+          </div>
+          <div class="log-item__body">
+            <div class="log-item__header">
+              <span class="log-item__name">아빠</span>
+              <span class="log-item__action">일정을 삭제했어요</span>
+              <div class="action-badge action-badge--delete"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>삭제</div>
+              <span class="log-item__time">오전 11:05</span>
+            </div>
+            <div class="log-card" style="opacity:0.5;">
+              <div class="log-card__type" style="background:#f0f0f0;color:#888;">업무</div>
+              <div class="log-card__title" style="color:#888;text-decoration:line-through;">서울 출장</div>
+              <div class="log-card__meta">7월 29일 · 종일</div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- 필터 바텀시트 -->
+    <div class="activity-filter-overlay" data-activity-filter-overlay>
+      <div class="filter-sheet">
+        <div class="filter-sheet__handle"></div>
+        <div class="filter-sheet__header">
+          <span class="filter-sheet__title">필터</span>
+          <button class="filter-sheet__reset" data-activity-filter-reset>초기화</button>
+        </div>
+        <div class="filter-sheet__body">
+          <div class="filter-section">
+            <div class="filter-section__label">멤버</div>
+            <div class="filter-member-list" data-activity-member-list>
+              <button class="filter-member-item is-selected" data-activity-filter-member="all">
+                <div class="filter-member-item__avatar filter-member-item__avatar--all">전</div>
+                <div class="filter-member-item__name">전체</div>
+              </button>
+            </div>
+          </div>
+          <div class="filter-section filter-section--type">
+            <div class="filter-section__label">유형</div>
+            <div class="filter-type-list">
+              <button class="filter-type-item is-selected" data-activity-filter-type="all">전체</button>
+              <button class="filter-type-item" data-activity-filter-type="schedule">일정</button>
+              <button class="filter-type-item" data-activity-filter-type="todo">할일</button>
+            </div>
+          </div>
+        </div>
+        <div class="filter-sheet__footer">
+          <button class="filter-sheet__apply" data-activity-filter-apply>적용하기</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /activity-log -->
+
+</div><!-- /tab-screen activity -->
+
+
+<!-- ════════════════════════════════════
+     내정보 탭
+     ════════════════════════════════════ -->
+<div class="tab-screen" data-tab-screen="myinfo">
+
+  <div class="screen-wrap is-active" data-screen-wrap="myinfo-main">
+    <header class="header">
+      <div class="header__title">내정보</div>
+    </header>
+    <section class="scroll-area">
+      <div class="profile-hero">
+        <div class="profile-hero__avatar" data-my-avatar style="background:#4f7cff;"><span data-avatar-initial>아</span>
+          <button class="profile-hero__badge" aria-label="프로필 사진 편집" data-open-profile-edit><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
+        </div>
+        <div class="profile-hero__info">
+          <div class="profile-hero__name" data-my-name>사용자</div>
+          <div class="profile-hero__status" data-my-status></div>
+          <div class="profile-hero__role" data-my-role style="display:none;">👑 Owner</div>
+        </div>
+        <button class="profile-hero__edit" data-open-profile-edit>편집</button>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-card__num" data-stat-schedule>0</div><div class="stat-card__label">이번 달 일정</div></div>
+        <div class="stat-card"><div class="stat-card__num" data-stat-todo>0</div><div class="stat-card__label">진행 중 할일</div></div>
+        <div class="stat-card"><div class="stat-card__num" data-stat-group>1</div><div class="stat-card__label">참여 그룹</div></div>
+      </div>
+      <h3 class="section-title">멤버</h3>
+      <ul class="members-card">
+        <li class="member-item" data-go="myinfo-member">
+          <div class="member-item__avatar" style="background:#4f7cff;" data-my-member-avatar>아</div>
+          <div class="member-item__info"><div class="member-item__name" data-my-member-name>사용자 <span style="font-size:11px;color:#888;font-weight:400;">(나)</span></div><div class="member-item__status" data-my-member-status></div></div>
+          <div class="member-item__role member-item__role--owner">Owner</div>
+        </li>
+      </ul>
+      <h3 class="section-title" id="settings-section">설정</h3>
+      <div class="menu-group">
+        <div class="menu-item">
+          <div class="menu-item__icon" style="background:#f0f0f0;"><svg viewBox="0 0 24 24" stroke="#333"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+          <div class="menu-item__body"><div class="menu-item__label">알림 설정</div></div>
+          <div class="menu-item__right"><div class="menu-item__toggle"></div></div>
+        </div>
+        <div class="menu-item" data-gcal-menu>
+          <div class="menu-item__icon" style="background:#e8f0fe;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="none"><rect x="3" y="4" width="18" height="18" rx="2" fill="#4285F4"/><rect x="3" y="4" width="18" height="6" rx="2" fill="#1A73E8"/><rect x="3" y="8" width="18" height="2" fill="#1A73E8"/><circle cx="8" cy="15" r="2" fill="#fff"/><circle cx="16" cy="15" r="2" fill="#fff"/></svg></div>
+          <div class="menu-item__body"><div class="menu-item__label">Google 캘린더 연동</div><div class="menu-item__sub" data-gcal-status>연동되지 않음</div></div>
+          <div class="menu-item__right"><button class="gcal-connect-btn" data-gcal-btn aria-label="Google 캘린더 연동">연동하기</button></div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item__icon" style="background:#f0f0f0;"><svg viewBox="0 0 24 24" stroke="#333"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="menu-item__body"><div class="menu-item__label">초대 코드</div><div class="menu-item__sub" data-invite-code>-</div></div>
+          <div class="menu-item__right">
+            <button class="menu-item__refresh-btn" aria-label="초대코드 재생성" data-refresh-code><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
+            <button class="menu-item__copy-btn" aria-label="초대코드 복사" data-copy-code style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#3182F6;font-family:inherit;padding:4px 8px;border-radius:6px;">복사<svg viewBox="0 0 24 24" width="14" height="14" stroke="#3182F6" stroke-width="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <div data-owner-section style="display:none;">
+        <h3 class="section-title">방장</h3>
+        <div class="menu-group">
+          <div class="menu-item" data-go="myinfo-group-manage" role="button">
+            <div class="menu-item__icon" style="background:#fff4e6;"><svg viewBox="0 0 24 24" width="17" height="17" stroke="#f97316" stroke-width="1.8" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="23" y2="8"/><line x1="21" y1="6" x2="21" y2="10"/></svg></div>
+            <div class="menu-item__body"><div class="menu-item__label">그룹 관리</div><div class="menu-item__sub">이름·이모지·멤버 관리</div></div>
+            <div class="menu-item__right"><svg viewBox="0 0 24 24" width="16" height="16" stroke="#c4c9d2" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+        </div>
+      </div>
+      <button class="logout-btn">로그아웃</button>
+      <div style="height:16px;"></div>
+    </section>
+
+    <aside class="profile-edit-overlay" data-profile-edit-sheet role="dialog" aria-modal="true" aria-labelledby="profile-edit-title">
+      <div class="profile-edit-sheet">
+        <div class="profile-edit-sheet__handle"></div>
+        <header class="profile-edit-sheet__header">
+          <h2 class="profile-edit-sheet__title" id="profile-edit-title">프로필 편집</h2>
+          <button class="profile-edit-sheet__save" data-profile-edit-save>저장</button>
+        </header>
+        <div class="profile-edit-sheet__body">
+          <div class="profile-edit-preview">
+            <div class="profile-edit-avatar" data-edit-avatar style="background:#4f7cff;"><span data-avatar-initial>아</span>
+              <label class="profile-edit-avatar__camera" aria-label="사진 변경">
+                <svg viewBox="0 0 24 24" stroke="#fff" fill="none" stroke-width="2" width="18" height="18"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                <input type="file" accept="image/*" data-avatar-file-input>
+              </label>
+            </div>
+            <button class="profile-edit-avatar__remove" data-avatar-remove style="display:none;">사진 삭제</button>
+          </div>
+          <div class="profile-edit-section">
+            <div class="profile-edit-label">아바타 색상</div>
+            <div class="profile-color-chips">
+              <button class="profile-color-chip is-selected" data-color="#4f7cff" aria-label="파란색"></button>
+              <button class="profile-color-chip" data-color="#f97316" aria-label="주황색"></button>
+              <button class="profile-color-chip" data-color="#a855f7" aria-label="보라색"></button>
+              <button class="profile-color-chip" data-color="#10b981" aria-label="초록색"></button>
+              <button class="profile-color-chip" data-color="#e11d48" aria-label="빨간색"></button>
+              <button class="profile-color-chip" data-color="#0ea5e9" aria-label="하늘색"></button>
+            </div>
+          </div>
+          <div class="profile-edit-section">
+            <div class="profile-edit-label">표시 이름</div>
+            <input class="form-input" data-profile-name-input placeholder="이름을 입력하세요" maxlength="10">
+          </div>
+          <div class="profile-edit-section">
+            <div class="profile-edit-label">상태 메시지</div>
+            <input class="form-input" data-profile-status-input placeholder="상태 메시지를 입력하세요" maxlength="30">
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div><!-- /myinfo-main -->
+
+  <div class="screen-wrap" data-screen-wrap="myinfo-member">
+    <header class="member-detail-header">
+      <button class="back-btn" aria-label="뒤로가기" data-go="myinfo-main"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <h1 style="font-size:17px;font-weight:700;color:#111;flex:1;text-align:center;">멤버 프로필</h1>
+      <div style="width:36px;"></div>
+    </header>
+    <section class="scroll-area" style="background:#f8f9fa;">
+      <div class="member-profile-hero">
+        <div class="member-profile-avatar" data-member-detail-avatar style="background:#4f7cff;">아</div>
+        <div class="member-profile-name" data-member-detail-name>멤버</div>
+        <div class="member-profile-status" data-member-detail-status></div>
+        <div class="member-profile-role" data-member-detail-role>Member</div>
+      </div>
+    </section>
+  </div><!-- /myinfo-member -->
+
+  <div class="screen-wrap" data-screen-wrap="myinfo-group-manage">
+    <header class="member-detail-header">
+      <button class="back-btn" aria-label="뒤로가기" data-go="myinfo-main"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <h1 style="font-size:17px;font-weight:700;color:#111;flex:1;text-align:center;">그룹 관리</h1>
+      <button class="header__save" data-group-manage-save>저장</button>
+    </header>
+    <section class="scroll-area" style="background:#f8f9fa;">
+      <div class="group-manage-info">
+        <div class="group-manage-emoji-row">
+          <button class="group-manage-emoji-btn is-selected" data-manage-emoji="👨‍👩‍👧‍👦">👨‍👩‍👧‍👦</button>
+          <button class="group-manage-emoji-btn" data-manage-emoji="🏠">🏠</button>
+          <button class="group-manage-emoji-btn" data-manage-emoji="✈️">✈️</button>
+          <button class="group-manage-emoji-btn" data-manage-emoji="🐾">🐾</button>
+          <button class="group-manage-emoji-btn" data-manage-emoji="🎮">🎮</button>
+        </div>
+        <input class="group-manage-name-input" data-group-manage-name type="text" placeholder="그룹 이름" maxlength="20" autocomplete="off">
+      </div>
+      <h3 class="section-title">멤버 관리</h3>
+      <ul class="members-card" data-group-manage-member-list></ul>
+      <div class="danger-zone">
+        <h3 class="danger-zone__title">위험 구역</h3>
+        <button class="danger-btn" data-delete-group>그룹 삭제</button>
+        <p class="danger-zone__hint">그룹을 삭제하면 모든 일정, 할일, 알림 내역이 사라지며 복구할 수 없어요.</p>
+      </div>
+    </section>
+  </div><!-- /myinfo-group-manage -->
+
+</div><!-- /tab-screen myinfo -->
+
+
+<!-- ════════════════════════════════════
+     공유 하단 탭바
+     ════════════════════════════════════ -->
+<nav class="tabbar" aria-label="하단 탭바">
+  <button class="tab-item is-active" data-app-tab="home">
+    <span class="tab-item__icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" style="fill:#111;stroke:#111;"/><polyline points="9 22 9 12 15 12 15 22" stroke="#fff" stroke-width="1.8" fill="none"/></svg></span>
+    <span class="tab-item__label" style="color:#111;font-weight:700;">홈</span>
+  </button>
+  <button class="tab-item" data-app-tab="schedule">
+    <span class="tab-item__icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+    <span class="tab-item__label">일정</span>
+  </button>
+  <button class="tab-item" data-app-tab="todo">
+    <span class="tab-item__icon"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+    <span class="tab-item__label">할일</span>
+  </button>
+  <button class="tab-item" data-app-tab="myinfo">
+    <span class="tab-item__icon" data-my-tab-avatar><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+    <span class="tab-item__label">내정보</span>
+  </button>
+  <button class="tab-item" data-app-tab="activity">
+    <span class="tab-item__icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+    <span class="tab-item__label">알림장</span>
+  </button>
+</nav>
+
+</div><!-- /phone-frame -->
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js"></script>
+<script src="resource/js/firebase-config.js"></script>
+<script src="resource/js/push.js"></script>
+<script src="resource/js/auth.js"></script>
+<script src="resource/js/db.js"></script>
+<script src="resource/js/ai.js"></script>
+<script src="resource/js/app.js"></script>
+<script src="resource/js/main.js"></script>
+<script src="https://accounts.google.com/gsi/client" async></script>
+<script>
+  fetch('/api/config').then(function(r){ return r.json(); }).then(function(cfg){
+    window._GCAL_CLIENT_ID = cfg.gcalClientId || '';
+  }).catch(function(){});
+</script>
+
+<!-- 홈 탭 인라인 스크립트 -->
+<script>
+(function () {
+  var _d = { s: [], t: [], sLoaded: false, tLoaded: false, aiDone: false };
+  var CAT = {
+    '업무':   { bg: '#eff2ff', fg: '#4f7cff' },
+    '약속':   { bg: '#fff7ed', fg: '#f97316' },
+    '동아리': { bg: '#faf5ff', fg: '#a855f7' },
+    '가족':   { bg: '#ecfdf5', fg: '#10b981' },
+    '개인':   { bg: '#F2F4F6', fg: '#8B95A1' },
+  };
+  function _isToday(ts) {
+    if (!ts) return false;
+    var d = ts.toDate ? ts.toDate() : new Date(ts);
+    var n = new Date();
+    return d.getFullYear() === n.getFullYear() && d.getMonth() === n.getMonth() && d.getDate() === n.getDate();
+  }
+  function _relTime(ts) {
+    if (!ts) return '';
+    var d; try { d = ts.toDate ? ts.toDate() : new Date(ts); } catch (e) { return '방금 전'; }
+    var diff = Date.now() - d.getTime();
+    if (diff < 60000) return '방금 전';
+    if (diff < 3600000) return Math.floor(diff / 60000) + '분 전';
+    if (diff < 86400000) return Math.floor(diff / 3600000) + '시간 전';
+    return Math.floor(diff / 86400000) + '일 전';
+  }
+  function _maybeAI(group) {
+    if (_d.sLoaded && _d.tLoaded && !_d.aiDone && typeof window.loadAiSummary === 'function') {
+      _d.aiDone = true;
+      var titleEl = document.querySelector('[data-ai-title]');
+      if (titleEl) titleEl.textContent = (group.emoji ? group.emoji + ' ' : '') + '오늘 ' + (group.name || '우리') + ' 일정 요약 ✦';
+      window.loadAiSummary(group, _d.s, _d.t);
+    }
+  }
+  function _renderSchedules(list) {
+    var el = document.querySelector('[data-tab-screen="home"] .schedule-list');
+    if (!el) return;
+    var today = list.filter(function (s) { return _isToday(s.startDate); }).slice(0, 5);
+    if (!today.length) { el.innerHTML = '<li style="list-style:none;padding:16px 0;text-align:center;color:#8B95A1;font-size:14px;">오늘 일정이 없어요</li>'; return; }
+    el.innerHTML = today.map(function (s) {
+      var c = CAT[s.category] || { bg: '#F2F4F6', fg: '#8B95A1' };
+      var initial = (s.authorName || '?').charAt(0);
+      return '<li class="schedule-item">' +
+        '<div class="schedule-item__avatar" style="background:' + (s.authorColor || '#8B95A1') + ';" data-author-uid="' + (s.authorId || '') + '">' + initial + '</div>' +
+        '<div class="schedule-item__info"><div class="schedule-item__name">' + (s.authorName || '') + '</div>' +
+        '<div class="schedule-item__title">' + s.title + '</div>' +
+        '<div class="schedule-item__time">' + (s.isAllDay ? '종일' : (s.startTime || '')) + '</div></div>' +
+        '<div class="schedule-item__tag" style="background:' + c.bg + ';color:' + c.fg + ';">' + (s.category || '기타') + '</div></li>';
+    }).join('');
+    if (typeof window._sweepMyAvatars === 'function') window._sweepMyAvatars();
+  }
+  function _renderTodos(list) {
+    var section = document.querySelector('[data-home-urgent-section]');
+    var el = document.querySelector('[data-tab-screen="home"] .todo-mini');
+    if (!el || !section) return;
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    /* 마감일이 오늘 이하이고 완료되지 않은 항목만 */
+    var urgent = list.filter(function(t) {
+      if (t.status === 'done' || !t.dueDate) return false;
+      return new Date(t.dueDate + 'T00:00:00') <= today;
+    }).sort(function(a, b) {
+      /* 가장 오래된 마감일 순 (초과 심한 것 먼저) */
+      return new Date(a.dueDate + 'T00:00:00') - new Date(b.dueDate + 'T00:00:00');
+    });
+    /* 긴급 항목 없으면 섹션 전체 숨김 */
+    if (!urgent.length) { section.style.display = 'none'; return; }
+    section.style.display = '';
+    el.innerHTML = urgent.map(function(t) {
+      var due = new Date(t.dueDate + 'T00:00:00');
+      var diff = due - today;
+      var isToday = diff === 0;
+      var daysOver = Math.round(Math.abs(diff) / 86400000);
+      var badgeCls = isToday ? 'todo-mini-item__badge--today' : 'todo-mini-item__badge--overdue';
+      var badgeLabel = isToday ? '오늘까지' : daysOver + '일 초과';
+      return '<div class="todo-mini-item">' +
+        '<div class="todo-check"><svg viewBox="0 0 10 10"><polyline points="1,5 3.5,8 9,1"/></svg></div>' +
+        '<div class="todo-mini-item__text">' + t.title + '</div>' +
+        '<div class="todo-mini-item__badge ' + badgeCls + '">' + badgeLabel + '</div></div>';
+    }).join('');
+  }
+  function _renderActivities(list) {
+    var el = document.querySelector('[data-tab-screen="home"] .noti-list');
+    if (!el) return;
+    var recent = list.slice(0, 3);
+    if (!recent.length) { el.innerHTML = '<li style="list-style:none;padding:12px 0;text-align:center;color:#8B95A1;font-size:14px;">최근 활동이 없어요</li>'; return; }
+    el.innerHTML = recent.map(function (a) {
+      var initial = (a.actorName || '?').charAt(0);
+      return '<li class="noti-item">' +
+        '<div class="noti-item__avatar" style="background:' + (a.actorColor || '#8B95A1') + ';" data-author-uid="' + (a.actorId || '') + '">' + initial + '</div>' +
+        '<div class="noti-item__body"><div class="noti-item__text">' + a.content + '</div>' +
+        '<div class="noti-item__time">' + _relTime(a.createdAt) + '</div></div></li>';
+    }).join('');
+    var myUid = window._myProfile ? window._myProfile.uid : null;
+    var hasUnread = list.some(function (a) { return !(myUid && a.readBy && a.readBy[myUid]); });
+    var badge = document.querySelector('[data-tab-screen="home"] .header__badge');
+    if (badge) badge.style.display = hasUnread ? 'block' : 'none';
+    if (typeof window._sweepMyAvatars === 'function') window._sweepMyAvatars();
+  }
+  window._tabInit.home = function (group) {
+    var gn = document.querySelector('[data-tab-screen="home"] .header__group-name');
+    if (gn) gn.innerHTML = (group.emoji || '') + ' ' + group.name + ' <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>';
+    var now = new Date();
+    var days = ['일','월','화','수','목','금','토'];
+    var dateEl = document.querySelector('[data-tab-screen="home"] .today-bar__date');
+    var dayEl  = document.querySelector('[data-tab-screen="home"] .today-bar__day');
+    if (dateEl) dateEl.textContent = (now.getMonth() + 1) + '월 ' + now.getDate() + '일';
+    if (dayEl)  dayEl.textContent  = days[now.getDay()] + '요일';
+    window.onMembers(group.id, function (members) {
+      /* 전역 멤버 캐시 갱신 → 모든 탭의 data-author-uid 아바타에 최신 사진 반영 */
+      window._membersMap = {};
+      members.forEach(function(m) { window._membersMap[m.uid] = m; });
+      if (typeof window._sweepAllAvatars === 'function') window._sweepAllAvatars();
+      var metaEl = document.querySelector('[data-tab-screen="home"] [data-group-list] [data-switch-group="' + group.id + '"] .group-item__meta');
+      if (metaEl) metaEl.textContent = '멤버 ' + members.length + '명';
+      var subEl = document.querySelector('[data-tab-screen="home"] .header__group-sub');
+      if (subEl) subEl.textContent = '멤버 ' + members.length + '명';
+    });
+    /* 그룹 시트: 그룹 목록 동적 렌더링 */
+    var groupList = document.querySelector('[data-tab-screen="home"] [data-group-list]');
+    var groupSheet = document.querySelector('[data-tab-screen="home"] [data-sheet]');
+    window.onUserGroups(function (groups) {
+      if (!groupList) return;
+      var currentId = window._currentGroup ? window._currentGroup.id : '';
+      groupList.innerHTML = groups.map(function (g) {
+        var cnt = (g.memberIds && g.memberIds.length) ? g.memberIds.length : 1;
+        var check = g.id === currentId ? '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' : '';
+        return '<div class="group-item" data-switch-group="' + g.id + '">' +
+          '<div class="group-item__emoji" style="background:#fff3e0;">' + (g.emoji || '👥') + '</div>' +
+          '<div class="group-item__info">' +
+            '<div class="group-item__name">' + g.name + '</div>' +
+            '<div class="group-item__meta">멤버 ' + cnt + '명</div>' +
+          '</div>' +
+          '<div class="group-item__check">' + check + '</div>' +
+        '</div>';
+      }).join('');
+      groupList.querySelectorAll('[data-switch-group]').forEach(function (item) {
+        item.addEventListener('click', function () {
+          var gId = item.dataset.switchGroup;
+          if (!gId || gId === (window._currentGroup ? window._currentGroup.id : '')) {
+            if (groupSheet) groupSheet.classList.remove('is-open');
+          } else {
+            window.switchGroup(gId);
+          }
+        });
+      });
+    });
+    /* 그룹 시트: 그룹 만들기 → 인앱 시트 열기 */
+    var sheetAddBtn  = document.querySelector('[data-tab-screen="home"] .group-sheet__add');
+    var addOverlay   = document.querySelector('[data-group-add-overlay]');
+    function _openGroupAddSheet() {
+      if (groupSheet) groupSheet.classList.remove('is-open');
+      if (addOverlay) addOverlay.classList.add('is-open');
+      var nameInput = document.getElementById('group-add-name');
+      var codeInput = document.getElementById('group-add-code');
+      if (nameInput) nameInput.value = '';
+      if (codeInput) codeInput.value = '';
+      /* 첫 번째 탭(만들기) 활성화 초기화 */
+      document.querySelectorAll('[data-group-add-overlay] [data-group-add-tab]').forEach(function (t) {
+        var isCreate = t.dataset.groupAddTab === 'create';
+        t.classList.toggle('is-active', isCreate);
+        t.setAttribute('aria-selected', isCreate ? 'true' : 'false');
+      });
+      document.querySelectorAll('[data-group-add-overlay] [data-group-add-panel]').forEach(function (p) {
+        p.classList.toggle('is-active', p.dataset.groupAddPanel === 'create');
+      });
+      if (nameInput) nameInput.focus();
+    }
+    function _closeGroupAddSheet() {
+      if (addOverlay) addOverlay.classList.remove('is-open');
+    }
+    if (sheetAddBtn) sheetAddBtn.addEventListener('click', _openGroupAddSheet);
+    /* 닫기 버튼 */
+    var addCloseBtn = document.querySelector('[data-group-add-close]');
+    if (addCloseBtn) addCloseBtn.addEventListener('click', _closeGroupAddSheet);
+    /* 오버레이 배경 클릭 → 닫기 */
+    if (addOverlay) addOverlay.addEventListener('click', function (e) {
+      if (e.target === addOverlay) _closeGroupAddSheet();
+    });
+    /* 세그먼트 탭 전환 */
+    document.querySelectorAll('[data-group-add-overlay] [data-group-add-tab]').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var target = tab.dataset.groupAddTab;
+        document.querySelectorAll('[data-group-add-overlay] [data-group-add-tab]').forEach(function (t) {
+          var active = t.dataset.groupAddTab === target;
+          t.classList.toggle('is-active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        document.querySelectorAll('[data-group-add-overlay] [data-group-add-panel]').forEach(function (p) {
+          p.classList.toggle('is-active', p.dataset.groupAddPanel === target);
+        });
+      });
+    });
+    /* 이모지 선택 */
+    document.querySelectorAll('[data-group-add-overlay] .group-add-emoji-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('[data-group-add-overlay] .group-add-emoji-btn').forEach(function (b) { b.classList.remove('is-selected'); });
+        btn.classList.add('is-selected');
+      });
+    });
+    /* 그룹 만들기 제출 */
+    var createBtn = document.getElementById('group-add-create-btn');
+    if (createBtn) createBtn.addEventListener('click', function () {
+      var nameInput = document.getElementById('group-add-name');
+      var name = nameInput ? nameInput.value.trim() : '';
+      if (!name) { if (nameInput) { nameInput.focus(); nameInput.style.borderColor = '#F04452'; } return; }
+      var selectedEmoji = document.querySelector('[data-group-add-overlay] .group-add-emoji-btn.is-selected');
+      var emoji = selectedEmoji ? selectedEmoji.dataset.emoji : '👥';
+      createBtn.disabled = true;
+      createBtn.textContent = '생성 중…';
+      window.createGroup(name, emoji).catch(function (err) {
+        createBtn.disabled = false;
+        createBtn.textContent = '그룹 만들기';
+        alert(err.message || '그룹 생성에 실패했습니다.');
+      });
+    });
+    /* 초대 코드 참여 제출 */
+    var joinBtn = document.getElementById('group-add-join-btn');
+    if (joinBtn) joinBtn.addEventListener('click', function () {
+      var codeInput = document.getElementById('group-add-code');
+      var code = codeInput ? codeInput.value.trim() : '';
+      if (!code) { if (codeInput) { codeInput.focus(); codeInput.style.borderColor = '#F04452'; } return; }
+      joinBtn.disabled = true;
+      joinBtn.textContent = '참여 중…';
+      window.joinGroup(code)
+        .then(function() { joinBtn.textContent = '참여 완료! ✓'; })
+        .catch(function (err) {
+          joinBtn.disabled = false;
+          joinBtn.textContent = '참여하기';
+          alert(err.message || '참여에 실패했습니다.');
+        });
+    });
+    window.onSchedules(group.id, function (list) { _d.s = list; _d.sLoaded = true; _renderSchedules(list); _maybeAI(group); });
+    window.onTodos(group.id, function (list) { _d.t = list; _d.tLoaded = true; _renderTodos(list); _maybeAI(group); });
+    window.onActivities(group.id, function (list) { _renderActivities(list); });
+  };
+}());
+</script>
+
+<!-- 일정 탭 인라인 스크립트 -->
+<script>
+(function () {
+  var _allSchedules = [];
+  var _curYear  = new Date().getFullYear();
+  var _curMonth = new Date().getMonth();
+  var _filterMine = false;
+  var _gId = '';
+  var _currentId = null;
+  var _editMode  = false;
+  var CAT = { '업무':{ bg:'#eff2ff',fg:'#4f7cff' },'약속':{ bg:'#fff7ed',fg:'#f97316' },'동아리':{ bg:'#faf5ff',fg:'#a855f7' },'가족':{ bg:'#ecfdf5',fg:'#10b981' },'개인':{ bg:'#F2F4F6',fg:'#8B95A1' } };
+  var MON_KO = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+  var DAY_KO = ['일','월','화','수','목','금','토'];
+  function _toDate(ts) { if (!ts) return null; try { return ts.toDate ? ts.toDate() : new Date(ts); } catch(e) { return null; } }
+  function _inMonth(ts,y,m) { var d=_toDate(ts); if(!d) return false; return d.getFullYear()===y&&d.getMonth()===m; }
+  function _fmtDate(ts) { var d=_toDate(ts); if(!d) return ''; return (d.getMonth()+1)+'월 '+d.getDate()+'일'; }
+  function _dateKey(ts) { var d=_toDate(ts); if(!d) return ''; return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function _parseDisplayDate(text) {
+    if (!text) return null;
+    var m = text.match(/(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/); if (!m) return null;
+    var h=0,min=0,tm=text.match(/(오전|오후)\s*(\d{1,2}):(\d{2})/);
+    if (tm) { h=parseInt(tm[2]); min=parseInt(tm[3]); if(tm[1]==='오후'&&h!==12) h+=12; if(tm[1]==='오전'&&h===12) h=0; }
+    return new Date(parseInt(m[1]),parseInt(m[2])-1,parseInt(m[3]),h,min);
+  }
+  function _parseTimeStr(text) { if (!text) return ''; var tm=text.match(/(오전|오후)\s*(\d{1,2}):(\d{2})/); if (!tm) return ''; return tm[1]+' '+tm[2]+':'+tm[3]; }
+  function _updateMonthLabel() { var el=document.querySelector('[data-month-label]'); if(el) el.textContent=_curYear+'년 '+MON_KO[_curMonth]; }
+  function _renderList() {
+    var scroll = document.querySelector('[data-list-view]');
+    if (!scroll) return;
+    var myUid = window._myProfile ? window._myProfile.uid : null;
+    var list = _allSchedules.filter(function(s) { var ok=_inMonth(s.startDate,_curYear,_curMonth); if(_filterMine&&myUid) ok=ok&&(s.authorId===myUid); return ok; });
+    var groups={},keys=[];
+    list.forEach(function(s) { var k=_dateKey(s.startDate); if(!groups[k]){groups[k]=[];keys.push(k);} groups[k].push(s); });
+    keys.sort();
+    if (!keys.length) { scroll.innerHTML='<div style="padding:48px 16px;text-align:center;color:#8B95A1;font-size:14px;">'+MON_KO[_curMonth]+'에 등록된 일정이 없어요</div>'; return; }
+    scroll.innerHTML = keys.map(function(key) {
+      var d=new Date(key+'T00:00:00');
+      var header='<div class="date-group__header"><span class="date-group__date">'+(d.getMonth()+1)+'월 '+d.getDate()+'일</span><span class="date-group__day">'+DAY_KO[d.getDay()]+'</span><div class="date-group__line"></div></div>';
+      var cards=groups[key].map(function(s) {
+        var c=CAT[s.category]||{bg:'#F2F4F6',fg:'#8B95A1'};
+        var initial=(s.authorName||'?').charAt(0);
+        var timeStr=s.isAllDay?'종일':((s.startTime||'')+(s.endTime?' – '+s.endTime:''));
+        return '<article class="schedule-card" data-go="schedule-detail" data-schedule-id="'+s.id+'" data-title="'+s.title.replace(/"/g,'&quot;')+'" data-dinner="'+(s.dinner||'')+'" data-memo="'+(s.memo||'').replace(/"/g,'&quot;')+'" data-author="'+(s.authorName||'')+'" data-author-initial="'+initial+'" data-author-color="'+(s.authorColor||'#8B95A1')+'" data-reg-date="'+_fmtDate(s.createdAt)+'">' +
+          '<div class="schedule-card__bar" style="background:'+(s.authorColor||'#8B95A1')+';"></div>' +
+          '<div class="schedule-card__body"><div class="schedule-card__top"><div class="schedule-card__title">'+s.title+'</div><div class="schedule-card__tag" style="background:'+c.bg+';color:'+c.fg+';">'+(s.category||'기타')+'</div><div class="schedule-card__members"><div class="schedule-card__avatar" style="background:'+(s.authorColor||'#8B95A1')+'" data-author-uid="'+(s.authorId||'')+'">'+initial+'</div></div></div>' +
+          '<div class="schedule-card__meta"><div class="schedule-card__time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'+timeStr+'</div></div>' +
+          '</div></article>';
+      }).join('');
+      return '<section class="date-group" data-date="'+key+'">'+header+cards+'</section>';
+    }).join('');
+    if (typeof window._sweepMyAvatars === 'function') window._sweepMyAvatars();
+  }
+  function _populateMembers(members) {
+    var wrap=document.querySelector('[data-member-select]'); if(!wrap) return;
+    var myUid=window._myProfile?window._myProfile.uid:null;
+    wrap.innerHTML=members.map(function(m) {
+      var isMe=m.uid===myUid; var color=m.color||'#8B95A1'; var init=(m.displayName||'?').charAt(0);
+      return '<button class="member-select__item'+(isMe?' is-selected':'')+'" data-member="'+(m.displayName||'')+'" data-member-uid="'+m.uid+'" data-member-initial="'+init+'" data-member-color="'+color+'" aria-pressed="'+isMe+'">' +
+        '<div class="member-select__avatar" style="background:'+color+';" data-author-uid="'+m.uid+'">'+init+'</div>' +
+        '<span class="member-select__name">'+(m.displayName||'')+'</span></button>';
+    }).join('');
+  }
+  function _resetForm() {
+    var wrap=document.querySelector('[data-screen-wrap="schedule-register"]'); if(!wrap) return;
+    wrap.querySelector('.form-row__input').value='';
+    var memo=wrap.querySelector('[data-memo-input]'); if(memo) memo.value='';
+    wrap.querySelectorAll('.category-chip').forEach(function(c){c.classList.remove('is-selected');});
+    var first=wrap.querySelector('.category-chip'); if(first) first.classList.add('is-selected');
+    wrap.querySelectorAll('.dinner-btn').forEach(function(b){b.classList.remove('is-selected');});
+    var none=wrap.querySelector('[data-dinner-val="none"]'); if(none) none.classList.add('is-selected');
+    var allday=wrap.querySelector('[data-allday-check]'); if(allday) allday.classList.add('is-checked');
+    var title=wrap.querySelector('[data-register-title]'); if(title) title.textContent='일정 등록';
+    _editMode=false; _currentId=null;
+  }
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('[data-schedule-save]')) return;
+    if (!_gId) return;
+    var wrap=document.querySelector('[data-screen-wrap="schedule-register"]');
+    var title=(wrap.querySelector('.form-row__input')||{}).value;
+    if (!title||!title.trim()) { alert('제목을 입력해주세요'); return; }
+    var isAllDay=!!(wrap.querySelector('[data-allday-check]')||{}).classList?.contains('is-checked');
+    var startTxt=(wrap.querySelector('[data-date-display="start"]')||{}).textContent||'';
+    var endTxt=(wrap.querySelector('[data-date-display="end"]')||{}).textContent||'';
+    var startDate=_parseDisplayDate(startTxt)||new Date();
+    var endDate=_parseDisplayDate(endTxt)||startDate;
+    var category=(wrap.querySelector('.category-chip.is-selected')||{}).textContent||'기타';
+    var dinner=(wrap.querySelector('.dinner-btn.is-selected')||{}).dataset?.dinnerVal||'none';
+    var memo=(wrap.querySelector('[data-memo-input]')||{}).value||'';
+    var members=[]; wrap.querySelectorAll('.member-select__item.is-selected').forEach(function(btn) { members.push({name:btn.dataset.member,initial:btn.dataset.memberInitial,color:btn.dataset.memberColor}); });
+    var data={title:title.trim(),isAllDay:isAllDay,startDate:startDate,endDate:endDate,startTime:isAllDay?'':_parseTimeStr(startTxt),endTime:isAllDay?'':_parseTimeStr(endTxt),category:category,dinner:dinner,memo:memo,members:members};
+    var btn=e.target.closest('[data-schedule-save]'); btn.textContent='저장 중...'; btn.disabled=true;
+    var promise=(_editMode&&_currentId)?window.updateSchedule(_gId,_currentId,data):window.addSchedule(_gId,data);
+    promise.then(function(){ btn.textContent='저장'; btn.disabled=false; _curYear=startDate.getFullYear(); _curMonth=startDate.getMonth(); _updateMonthLabel(); _resetForm(); var back=wrap.querySelector('[data-schedule-register-back]'); if(back) back.click(); })
+    .catch(function(err){ btn.textContent='저장'; btn.disabled=false; alert('저장 실패: '+(err.message||err)); });
+  });
+  document.addEventListener('click', function(e) {
+    var card=e.target.closest('[data-go="schedule-detail"][data-schedule-id]'); if(!card) return;
+    _currentId=card.dataset.scheduleId;
+    var s=_allSchedules.find(function(x){return x.id===_currentId;}); if(!s) return;
+    setTimeout(function(){
+      var c=CAT[s.category]||{bg:'#F2F4F6',fg:'#8B95A1'};
+      var initial=(s.authorName||'?').charAt(0);
+      /* 태그 */
+      var tagEl=document.querySelector('[data-detail-tag]');
+      if(tagEl){tagEl.textContent=s.category||'기타';tagEl.style.background=c.bg;tagEl.style.color=c.fg;}
+      /* 제목 */
+      var titleEl=document.querySelector('[data-detail-title]');
+      if(titleEl) titleEl.textContent=s.title||'';
+      /* 등록자 아바타 */
+      var avatarEl=document.querySelector('[data-detail-author-avatar]');
+      if(avatarEl){avatarEl.textContent=initial;avatarEl.style.background=s.authorColor||'#8B95A1';avatarEl.dataset.authorUid=s.authorId||'';}
+      if (typeof window._sweepMyAvatars === 'function') window._sweepMyAvatars();
+      /* 수정·삭제 버튼: 작성자 본인만 표시 */
+      var isAuthor = window._myProfile && s.authorId === window._myProfile.uid;
+      var editBtn=document.querySelector('[data-schedule-edit]');
+      var deleteBtn=document.querySelector('[data-schedule-delete]');
+      if(editBtn) editBtn.style.display = isAuthor ? '' : 'none';
+      if(deleteBtn) deleteBtn.style.display = isAuthor ? '' : 'none';
+      /* 등록자 이름 + 등록일 */
+      var authorEl=document.querySelector('[data-detail-author-name]');
+      if(authorEl) authorEl.textContent=(s.authorName||'')+(s.createdAt?' · '+_fmtDate(s.createdAt):'');
+      /* 일시 */
+      var dateEl=document.querySelector('[data-detail-date]');
+      if(dateEl){
+        var startD=_toDate(s.startDate); var endD=_toDate(s.endDate);
+        var startStr=startD?(startD.getMonth()+1)+'월 '+startD.getDate()+'일 ('+DAY_KO[startD.getDay()]+')'  :'';
+        var endStr=endD&&endD.toDateString()!==startD.toDateString()?' – '+(endD.getMonth()+1)+'월 '+endD.getDate()+'일':'';
+        var timeStr=s.isAllDay?'종일':((s.startTime||'')+(s.endTime?' – '+s.endTime:''));
+        dateEl.textContent=startStr+endStr+(timeStr?' '+timeStr:'');
+      }
+      /* 분류 */
+      var catEl=document.querySelector('[data-detail-category]');
+      if(catEl) catEl.textContent=s.category||'기타';
+      /* 참여 멤버 */
+      var membersEl=document.querySelector('[data-detail-members]');
+      if(membersEl) membersEl.innerHTML=(s.members&&s.members.length?s.members:[{name:s.authorName||'나',initial:initial,color:s.authorColor||'#8B95A1'}]).map(function(m){
+        return '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:36px;height:36px;border-radius:50%;background:'+(m.color||'#8B95A1')+';display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;">'+(m.initial||'?')+'</div><span style="font-size:11px;color:#888;">'+(m.name||'')+'</span></div>';
+      }).join('');
+      /* 저녁 여부 */
+      var dinnerBadge=document.querySelector('[data-detail-dinner-badge]');
+      if(dinnerBadge){
+        var dMap={'possible':['가능해요','#ecfdf5','#10b981'],'impossible':['어려워요','#fff1f2','#f04452']};
+        var dVal=dMap[s.dinner]||['미정','#f0f0f0','#888888'];
+        dinnerBadge.textContent=dVal[0];dinnerBadge.style.background=dVal[1];dinnerBadge.style.color=dVal[2];
+      }
+      /* 메모 */
+      var memoSec=document.querySelector('[data-detail-memo-section]');
+      var memoEl=document.querySelector('[data-detail-memo]');
+      if(memoSec) memoSec.style.display=s.memo?'':'none';
+      if(memoEl) memoEl.textContent=s.memo||'';
+    }, 30);
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('[data-schedule-edit]')) return;
+    if (!_currentId) return;
+    var s=_allSchedules.find(function(x){return x.id===_currentId;}); if(!s) return;
+    _editMode=true;
+    var wrap=document.querySelector('[data-screen-wrap="schedule-register"]'); if(!wrap) return;
+    var inp=wrap.querySelector('.form-row__input'); if(inp) inp.value=s.title;
+    var rt=wrap.querySelector('[data-register-title]'); if(rt) rt.textContent='일정 수정';
+    wrap.querySelectorAll('.category-chip').forEach(function(c){c.classList.toggle('is-selected',c.textContent.trim()===s.category);});
+    wrap.querySelectorAll('.dinner-btn').forEach(function(b){b.classList.toggle('is-selected',b.dataset.dinnerVal===s.dinner);});
+    var m=wrap.querySelector('[data-memo-input]'); if(m) m.value=s.memo||'';
+    var al=wrap.querySelector('[data-allday-check]'); if(al) al.classList.toggle('is-checked',!!s.isAllDay);
+    setTimeout(function(){ var fab=document.querySelector('[data-go="schedule-register"]'); if(fab) fab.click(); }, 50);
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('[data-confirm-ok]')) return;
+    if (!_gId||!_currentId) return;
+    var titleEl=document.querySelector('[data-detail-title]');
+    window.deleteSchedule(_gId,_currentId,titleEl?titleEl.textContent:'').then(function(){ _currentId=null; }).catch(function(err){ alert('삭제 실패: '+(err.message||err)); });
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    var fab=document.querySelector('[data-go="schedule-register"]'); if(!fab) return;
+    fab.addEventListener('click', function() {
+      if (_editMode) return;
+      setTimeout(function(){
+        var today=new Date(); var days=['일','월','화','수','목','금','토'];
+        var dateStr=today.getFullYear()+'년 '+(today.getMonth()+1)+'월 '+today.getDate()+'일 ('+days[today.getDay()]+')';
+        var startEl=document.querySelector('[data-date-display="start"]'); var endEl=document.querySelector('[data-date-display="end"]');
+        if(startEl) startEl.textContent=dateStr; if(endEl) endEl.textContent=dateStr;
+      }, 50);
+    });
+  });
+  /* ── 달력 뷰 ── */
+  var _calView = false;
+  var _selectedKey = null;
+
+  function _renderCalendar() {
+    var grid = document.querySelector('[data-cal-grid]'); if (!grid) return;
+    var myUid = window._myProfile ? window._myProfile.uid : null;
+    var list = _allSchedules.filter(function(s) {
+      var ok = _inMonth(s.startDate, _curYear, _curMonth);
+      if (_filterMine && myUid) ok = ok && (s.authorId === myUid);
+      return ok;
+    });
+    /* 날짜 → 일정 목록 맵 */
+    var dayMap = {};
+    list.forEach(function(s) { var k = _dateKey(s.startDate); if (!dayMap[k]) dayMap[k] = []; dayMap[k].push(s); });
+
+    var firstDay = new Date(_curYear, _curMonth, 1).getDay(); /* 0=일 */
+    var lastDate = new Date(_curYear, _curMonth + 1, 0).getDate();
+    var today = new Date();
+    var todayKey = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+
+    var cells = '';
+    for (var i = 0; i < firstDay; i++) cells += '<div class="cal-cell cal-cell--empty"></div>';
+    for (var d = 1; d <= lastDate; d++) {
+      var key = _curYear + '-' + String(_curMonth+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+      var dayOfWeek = (firstDay + d - 1) % 7;
+      var cls = 'cal-cell';
+      if (dayOfWeek === 0) cls += ' cal-cell--sun';
+      if (dayOfWeek === 6) cls += ' cal-cell--sat';
+      if (key === todayKey) cls += ' cal-cell--today';
+      if (key === _selectedKey) cls += ' cal-cell--selected';
+      var dots = (dayMap[key] || []).slice(0, 3).map(function(s) {
+        return '<div class="cal-cell__dot" style="background:' + (s.authorColor || '#8B95A1') + ';"></div>';
+      }).join('');
+      if ((dayMap[key] || []).length > 3) dots += '<div class="cal-cell__dot" style="background:#c4c9d2;"></div>';
+      cells += '<div class="cal-cell ' + cls.replace('cal-cell ','') + '" data-cal-key="' + key + '" data-cal-day="' + d + '">' +
+        '<div class="cal-cell__num">' + d + '</div>' +
+        (dots ? '<div class="cal-cell__dots">' + dots + '</div>' : '') +
+        '</div>';
+    }
+    grid.innerHTML = cells;
+  }
+
+  function _showCalPopup(key) {
+    var popup = document.querySelector('[data-cal-popup]');
+    var header = document.querySelector('[data-cal-popup-header]');
+    var listEl = document.querySelector('[data-cal-popup-list]');
+    if (!popup || !listEl) return;
+    _selectedKey = key;
+    _renderCalendar();
+    var d = new Date(key + 'T00:00:00');
+    var days = ['일','월','화','수','목','금','토'];
+    if (header) header.textContent = (d.getMonth()+1) + '월 ' + d.getDate() + '일 ' + days[d.getDay()] + '요일';
+    var myUid = window._myProfile ? window._myProfile.uid : null;
+    var items = _allSchedules.filter(function(s) {
+      var ok = _dateKey(s.startDate) === key;
+      if (_filterMine && myUid) ok = ok && (s.authorId === myUid);
+      return ok;
+    });
+    if (!items.length) {
+      listEl.innerHTML = '<div class="cal-day-popup__empty">이 날엔 일정이 없어요</div>';
+    } else {
+      listEl.innerHTML = items.map(function(s) {
+        var c = CAT[s.category] || {bg:'#F2F4F6', fg:'#8B95A1'};
+        var timeStr = s.isAllDay ? '종일' : ((s.startTime||'') + (s.endTime?' – '+s.endTime:''));
+        var initial = (s.authorName||'?').charAt(0);
+        return '<div class="cal-day-popup__item" data-go="schedule-detail" data-schedule-id="'+s.id+'" data-title="'+s.title.replace(/"/g,'&quot;')+'" data-dinner="'+(s.dinner||'')+'" data-memo="'+(s.memo||'').replace(/"/g,'&quot;')+'" data-author="'+(s.authorName||'')+'" data-author-initial="'+initial+'" data-author-color="'+(s.authorColor||'#8B95A1')+'" data-reg-date="'+_fmtDate(s.createdAt)+'">' +
+          '<div class="cal-day-popup__bar" style="background:'+(s.authorColor||'#8B95A1')+';"></div>' +
+          '<div class="cal-day-popup__info"><div class="cal-day-popup__title">'+s.title+'</div>' +
+          '<div class="cal-day-popup__time">'+timeStr+'</div></div>' +
+          '<div class="cal-day-popup__avatar" style="background:'+(s.authorColor||'#8B95A1')+'" data-author-uid="'+(s.authorId||'')+'">'+initial+'</div>' +
+          '</div>';
+      }).join('');
+      if (typeof window._sweepMyAvatars === 'function') window._sweepMyAvatars();
+    }
+    popup.classList.add('is-open');
+  }
+
+  function _toggleView(mode) {
+    _calView = (mode === 'cal');
+    var calEl = document.querySelector('[data-cal-view]');
+    var listEl = document.querySelector('[data-list-view]');
+    document.querySelectorAll('[data-view]').forEach(function(btn) {
+      btn.classList.toggle('is-active', btn.dataset.view === mode);
+    });
+    if (calEl) calEl.classList.toggle('is-active', _calView);
+    if (listEl) listEl.style.display = _calView ? 'none' : '';
+    var popup = document.querySelector('[data-cal-popup]');
+    if (popup) popup.classList.remove('is-open');
+    _selectedKey = null;
+    if (_calView) _renderCalendar(); else _renderList();
+  }
+
+  window._tabInit.schedule = function(group) {
+    _gId=group.id; _updateMonthLabel();
+    /* 월 이동 */
+    document.querySelector('[data-month-prev]')?.addEventListener('click', function(){
+      _curMonth--; if(_curMonth<0){_curMonth=11;_curYear--;} _updateMonthLabel();
+      var popup=document.querySelector('[data-cal-popup]'); if(popup) popup.classList.remove('is-open'); _selectedKey=null;
+      if (_calView) _renderCalendar(); else _renderList();
+    });
+    document.querySelector('[data-month-next]')?.addEventListener('click', function(){
+      _curMonth++; if(_curMonth>11){_curMonth=0;_curYear++;} _updateMonthLabel();
+      var popup=document.querySelector('[data-cal-popup]'); if(popup) popup.classList.remove('is-open'); _selectedKey=null;
+      if (_calView) _renderCalendar(); else _renderList();
+    });
+    /* 필터 */
+    document.querySelectorAll('[data-filter]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('[data-filter]').forEach(function(b){b.classList.remove('is-active');}); btn.classList.add('is-active');
+        _filterMine=btn.dataset.filter==='mine';
+        if (_calView) _renderCalendar(); else _renderList();
+      });
+    });
+    /* 뷰 토글 */
+    document.querySelectorAll('[data-view]').forEach(function(btn){
+      btn.addEventListener('click', function(){ _toggleView(btn.dataset.view); });
+    });
+    /* 달력 날짜 클릭 → 팝업 (이벤트 위임) */
+    var calGrid = document.querySelector('[data-cal-grid]');
+    if (calGrid) {
+      calGrid.addEventListener('click', function(e) {
+        var cell = e.target.closest('[data-cal-key]'); if (!cell) return;
+        var key = cell.dataset.calKey;
+        if (_selectedKey === key) {
+          var popup = document.querySelector('[data-cal-popup]');
+          if (popup) popup.classList.remove('is-open');
+          _selectedKey = null;
+          _renderCalendar();
+        } else {
+          _showCalPopup(key);
+        }
+      });
+    }
+    window.onMembers(group.id, function(members){ _populateMembers(members); if (typeof window._sweepAllAvatars === 'function') window._sweepAllAvatars(); });
+    window.onSchedules(group.id, function(list){ _allSchedules=list; if(_calView) _renderCalendar(); else _renderList(); });
+    document.querySelector('[data-schedule-register-back]')?.addEventListener('click', function(){ setTimeout(_resetForm,300); });
+  };
+  window._tabReset.schedule = function() {
+    var now = new Date();
+    _curYear  = now.getFullYear();
+    _curMonth = now.getMonth();
+    _updateMonthLabel();
+    var popup = document.querySelector('[data-cal-popup]');
+    if (popup) popup.classList.remove('is-open');
+    _selectedKey = null;
+    if (_calView) _renderCalendar(); else _renderList();
+  };
+}());
+</script>
+
+<!-- 할일 탭 인라인 스크립트 -->
+<script>
+(function () {
+  var _gId = '';
+  var _myUid = '';
+  var _todoMembers = [];
+  var _lastGroupList = [];
+  var _lastPersonalList = [];
+  var CHECK_SVG = '<svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg>';
+
+  function _memberById(uid) {
+    if (!uid) return null;
+    for (var i = 0; i < _todoMembers.length; i++) {
+      if (_todoMembers[i].uid === uid) return _todoMembers[i];
+    }
+    return null;
+  }
+  function _memberAvatar(m, uid) {
+    var bg = m ? (m.color || '#8B95A1') : '#8B95A1';
+    var style = (m && m.photoURL) ? 'background:' + bg + ' url(' + m.photoURL + ') center/cover no-repeat;' : 'background:' + bg + ';';
+    var content = (m && m.photoURL) ? '' : (m ? (m.displayName || '?').charAt(0) : '?');
+    return '<div class="todo-credit__avatar" style="' + style + '" data-author-uid="' + (uid || '') + '">' + content + '</div>';
+  }
+  function _todoCard(t) {
+    var isDone=t.status==='done'; var isDoing=t.status==='doing';
+    var initial=t.assigneeName?t.assigneeName.charAt(0):'?'; var assigneeColor=t.assigneeColor||'#8B95A1';
+    var checkCls='todo-card__check'+(isDone?' is-done':isDoing?' is-doing':'');
+    var titleCls='todo-card__title'+(isDone?' is-done':'');
+    var opacity=isDone?' style="opacity:0.6;"':'';
+    var badges='<div class="todo-badge todo-badge--'+(t.type==='personal'?'personal':'group')+'">'+(t.type==='personal'?'개인':'그룹')+'</div>';
+    if(isDoing) badges+='<div class="todo-badge todo-badge--doing">진행중</div>';
+    if(isDone)  badges+='<div class="todo-badge todo-badge--done">완료</div>';
+    if(t.dueDate&&!isDone){var _today=new Date();_today.setHours(0,0,0,0);var _due=new Date(t.dueDate+'T00:00:00');var _diff=_due-_today;var _mp=parseInt(t.dueDate.split('-')[1]);var _dp=parseInt(t.dueDate.split('-')[2]);var _dueCls=_diff<0?'todo-badge--overdue':_diff===0?'todo-badge--due-today':'todo-badge--due';var _dueLabel=_diff<0?(_mp+'월 '+_dp+'일 초과'):_diff===0?'오늘까지':(_mp+'월 '+_dp+'일까지');badges+='<div class="todo-badge '+_dueCls+'">'+_dueLabel+'</div>';}
+    var memoAttr=t.memo?' data-memo="'+t.memo.replace(/"/g,'&quot;')+'"':'';
+    var dueDateAttr=t.dueDate?' data-due-date="'+t.dueDate+'"':'';
+    var memoHtml=t.memo?'<div class="todo-card__memo">'+t.memo+'</div>':'';
+    var moreBtn = (_myUid && t.createdBy === _myUid)
+      ? '<button class="todo-card__more" aria-label="더보기"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1" fill="#c4c9d2"/><circle cx="12" cy="12" r="1" fill="#c4c9d2"/><circle cx="12" cy="19" r="1" fill="#c4c9d2"/></svg></button>'
+      : '';
+    /* 완료 카드: 등록자·완료자 표시 */
+    var creditHtml = '';
+    if (isDone) {
+      var creator   = _memberById(t.createdBy);
+      var completer = t.completedBy ? _memberById(t.completedBy) : null;
+      var creatorName   = creator   ? (creator.displayName   || '알 수 없음') : '알 수 없음';
+      var completerName = completer ? (completer.displayName || '알 수 없음') : null;
+      var isSame = !t.completedBy || t.completedBy === t.createdBy;
+      if (isSame) {
+        creditHtml = '<div class="todo-credit">' + _memberAvatar(creator, t.createdBy) +
+          '<span class="todo-credit__text">' + creatorName + ' 등록·완료</span></div>';
+      } else {
+        creditHtml = '<div class="todo-credit">' + _memberAvatar(creator, t.createdBy) +
+          '<span class="todo-credit__label">등록</span>' +
+          '<span class="todo-credit__arrow">→</span>' +
+          _memberAvatar(completer, t.completedBy) +
+          '<span class="todo-credit__label">' + (completerName || '알 수 없음') + ' 완료</span></div>';
+      }
+    }
+    return '<article class="todo-card"'+opacity+' data-todo-id="'+t.id+'" data-todo-status="'+t.status+'" data-todo-type="'+(t.type||'group')+'"'+memoAttr+dueDateAttr+'>' +
+      '<div class="'+checkCls+'">'+(isDone||isDoing?CHECK_SVG:'')+'</div>' +
+      '<div class="todo-card__body"><div class="todo-card__top"><div class="'+titleCls+'">'+t.title+'</div>' +
+      moreBtn+'</div>' +
+      memoHtml +
+      '<div class="todo-card__meta">'+badges+'<div class="todo-card__assignee"><div class="todo-card__assignee-avatar" style="background:'+assigneeColor+'" data-author-uid="'+(t.assigneeUid||'')+'">'+initial+'</div><div class="todo-card__assignee-name">'+(t.assigneeName||'미배정')+'</div></div>' +
+      creditHtml +
+      '</div></div></article>';
+  }
+  function _statusGroup(label,dotColor,list) {
+    if (!list.length) return '';
+    return '<section class="status-group"><div class="status-group__header"><div class="status-group__label"><div class="status-group__label-dot" style="background:'+dotColor+';"></div>'+label+'</div><div class="status-group__count">'+list.length+'</div></div>'+list.map(_todoCard).join('')+'</section>';
+  }
+  function _renderGroup(list) {
+    _lastGroupList = list;
+    var wrap=document.querySelector('[data-todo-content="group"]'); if(!wrap) return;
+    var pending=list.filter(function(t){return t.status==='pending'||!t.status;}); var doing=list.filter(function(t){return t.status==='doing';}); var done=list.filter(function(t){return t.status==='done';});
+    var total=list.length; var doneN=done.length; var pct=total?Math.round((doneN/total)*100):0;
+    var summary=wrap.querySelector('.progress-summary');
+    if(summary){ var lbl=summary.querySelector('.progress-summary__label'); if(lbl) lbl.textContent='그룹 할일'; summary.querySelector('.progress-summary__count').innerHTML='<span>'+doneN+'</span> / '+total+' 완료'; summary.querySelector('.progress-bar__fill').style.width=pct+'%'; }
+    wrap.querySelectorAll('.status-group').forEach(function(el){el.remove();});
+    var empty=wrap.querySelector('.todo-empty'); if(empty) empty.remove();
+    if(!list.length){ wrap.insertAdjacentHTML('beforeend','<div class="todo-empty" style="padding:32px 0;text-align:center;color:#8B95A1;font-size:14px;">그룹 할일이 없어요</div>'); return; }
+    wrap.insertAdjacentHTML('beforeend',_statusGroup('진행전','#c4c9d2',pending)+_statusGroup('진행중','#f59e0b',doing)+_statusGroup('완료','#10b981',done));
+    if (typeof window._sweepMyAvatars === 'function') window._sweepMyAvatars();
+  }
+  function _renderPersonal(list) {
+    _lastPersonalList = list;
+    var wrap=document.querySelector('[data-todo-content="personal"]'); if(!wrap) return;
+    wrap.querySelectorAll('.status-group').forEach(function(el){el.remove();});
+    var done=list.filter(function(t){return t.status==='done';}); var total=list.length; var doneN=done.length; var pct=total?Math.round((doneN/total)*100):0;
+    var summary=wrap.querySelector('.progress-summary');
+    if(summary){ summary.querySelector('.progress-summary__count').innerHTML='<span>'+doneN+'</span> / '+total+' 완료'; summary.querySelector('.progress-bar__fill').style.width=pct+'%'; }
+    var empty=wrap.querySelector('.todo-empty'); if(empty) empty.remove();
+    if (!list.length) { wrap.insertAdjacentHTML('beforeend','<div class="todo-empty" style="padding:32px 0;text-align:center;color:#8B95A1;font-size:14px;">내 할일이 없어요</div>'); return; }
+    var pending=list.filter(function(t){return t.status==='pending'||!t.status;}); var doing=list.filter(function(t){return t.status==='doing';});
+    wrap.insertAdjacentHTML('beforeend',_statusGroup('진행전','#c4c9d2',pending)+_statusGroup('진행중','#f59e0b',doing)+_statusGroup('완료','#10b981',done));
+    if (typeof window._sweepMyAvatars === 'function') window._sweepMyAvatars();
+  }
+  document.addEventListener('click', function(e) {
+    var check=e.target.closest('.todo-card__check'); if(!check||!_gId) return;
+    var card=check.closest('[data-todo-id]'); if(!card) return;
+    var tid=card.dataset.todoId; var cur=card.dataset.todoStatus||'pending';
+    var next=cur==='done'?'pending':'done';
+    window.updateTodo(_gId,tid,{status:next},card.dataset.todoType);
+  });
+  window._tabInit.todo = function(group) {
+    _gId=group.id;
+    var filterBtn = document.querySelector('[data-tab-screen="todo"] .header__btn[aria-label="필터"]');
+    document.querySelectorAll('[data-tab-screen="todo"] .segment__tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        if (filterBtn) filterBtn.style.visibility = tab.dataset.todo === 'personal' ? 'hidden' : 'visible';
+      });
+    });
+    var myUid=window._myProfile?window._myProfile.uid:null;
+    _myUid = myUid || '';
+    window.onTodos(group.id, function(list) {
+      var groupList=list.filter(function(t){return t.type!=='personal';}); var personalList=list.filter(function(t){return t.type==='personal'&&t.createdBy===myUid;});
+      _renderGroup(groupList); _renderPersonal(personalList);
+      /* 탭 잔여 갯수 뱃지 */
+      ['group','personal'].forEach(function(type) {
+        var subList = type==='group' ? groupList : personalList;
+        var remaining = subList.filter(function(t){ return t.status !== 'done'; }).length;
+        var badge = document.querySelector('[data-todo-tab-count="'+type+'"]');
+        if (!badge) return;
+        if (remaining > 0) { badge.textContent = remaining; badge.style.display = ''; }
+        else { badge.style.display = 'none'; }
+      });
+      if(typeof window._todoApplyFilter==='function') window._todoApplyFilter();
+    });
+    window.onMembers(group.id, function(members) {
+      _todoMembers = members;
+      if (_lastGroupList.length || _lastPersonalList.length) {
+        _renderGroup(_lastGroupList);
+        _renderPersonal(_lastPersonalList);
+      }
+      var row=document.querySelector('[data-todo-assignee-row]'); if(!row) return;
+      var myUid2=window._myProfile?window._myProfile.uid:null;
+      /* 아바타 style 헬퍼: photoURL 있으면 사진, 없으면 색상+이니셜 */
+      function _avatarStyle(m){ return m.photoURL?'background:'+(m.color||'#8B95A1')+' url('+m.photoURL+') center/cover no-repeat;':'background:'+(m.color||'#8B95A1')+';'; }
+      row.innerHTML=members.map(function(m){
+        var isMe=m.uid===myUid2;
+        var style=_avatarStyle(m);
+        var content=m.photoURL?'':(m.displayName||'?').charAt(0);
+        return '<button class="assignee-avatar'+(isMe?' is-selected':'')+'" style="'+style+'" title="'+(m.displayName||'')+'" data-member-uid="'+m.uid+'">'+content+'</button>';
+      }).join('');
+      /* 담당자 필터 목록도 멤버 기준으로 업데이트 */
+      var filterList=document.querySelector('[data-todo-filter-list]');
+      if(filterList){
+        filterList.innerHTML='<button class="filter-assignee-item is-selected" data-filter-assignee="all"><div class="filter-assignee-item__avatar filter-assignee-item__avatar--all">전</div><div class="filter-assignee-item__name">전체</div></button>'+
+          members.map(function(m){
+            var style=_avatarStyle(m);
+            var content=m.photoURL?'':(m.displayName||'?').charAt(0);
+            return '<button class="filter-assignee-item" data-filter-assignee="'+(m.displayName||'')+'"><div class="filter-assignee-item__avatar" style="'+style+'">'+content+'</div><div class="filter-assignee-item__name">'+(m.displayName||'')+'</div></button>';
+          }).join('');
+      }
+    });
+  };
+}());
+</script>
+
+<!-- 알림장 탭 인라인 스크립트 -->
+<script>
+(function () {
+  var TYPE_META = {
+    schedule_create:{ cls:'action-badge--create',label:'등록',action:'일정을 등록했어요',icon:'<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>' },
+    schedule_update:{ cls:'action-badge--edit',  label:'수정',action:'일정을 수정했어요',icon:'<svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>' },
+    schedule_delete:{ cls:'action-badge--delete',label:'삭제',action:'일정을 삭제했어요',icon:'<svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>' },
+    todo_create:    { cls:'action-badge--create',label:'추가',action:'할일을 추가했어요',icon:'<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>' },
+    todo_done:      { cls:'action-badge--done',  label:'완료',action:'할일을 완료했어요 🎉',icon:'<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' },
+  };
+  /* 클라이언트 확인 캐시: Firestore 업데이트 전 스냅샷 race condition 방지 */
+  var _confirmedIds = {};
+  window._addConfirmedActivityIds = function(ids) {
+    ids.forEach(function(id){ if(id) _confirmedIds[id] = true; });
+  };
+  /* 멤버 캐시: 아바타 렌더링에 사용 */
+  var _members = [];
+  var _lastList = [];
+  function _toDate(ts) { if(!ts) return null; try{ return ts.toDate?ts.toDate():new Date(ts); }catch(e){ return null; } }
+  function _relTime(ts) { var d=_toDate(ts); if(!d) return '방금 전'; var diff=Date.now()-d.getTime(); if(diff<60000) return '방금 전'; if(diff<3600000) return Math.floor(diff/60000)+'분 전'; if(diff<86400000) return Math.floor(diff/3600000)+'시간 전'; return Math.floor(diff/86400000)+'일 전'; }
+  function _dayLabel(ts) { var d=_toDate(ts); if(!d) return ''; var now=new Date(); var isToday=d.toDateString()===now.toDateString(); var days=['일','월','화','수','목','금','토']; return (isToday?'오늘 · ':'')+( d.getMonth()+1)+'월 '+d.getDate()+'일 '+days[d.getDay()]+'요일'; }
+  var REACTION_EMOJIS = ['❤️','👍','✅','😄','🤔'];
+
+  function _avatarHtml(uid) {
+    var m = null;
+    for (var i = 0; i < _members.length; i++) { if (_members[i].uid === uid) { m = _members[i]; break; } }
+    var bg = m ? (m.color || '#8B95A1') : '#8B95A1';
+    var style = (m && m.photoURL)
+      ? 'background:' + bg + ' url(' + m.photoURL + ') center/cover no-repeat;'
+      : 'background:' + bg + ';';
+    var content = (m && m.photoURL) ? '' : (m ? (m.displayName||'?').charAt(0) : '?');
+    return '<div class="reaction-avatar" style="' + style + '">' + content + '</div>';
+  }
+
+  function _reactionBar(a) {
+    var myUid = window._myProfile ? window._myProfile.uid : null;
+    var isMyPost = !!(myUid && a.actorId === myUid);
+    var reacts = a.reactions || {};
+
+    if (isMyPost) {
+      /* 내 글: 반응 없으면 영역 숨김, 있으면 이모지+아바타 읽기 전용 */
+      var hasAny = REACTION_EMOJIS.some(function(e){ return (reacts[e]||[]).length > 0; });
+      if (!hasAny) return '';
+      var html = '<div class="reaction-bar reaction-bar--readonly">';
+      REACTION_EMOJIS.forEach(function(e) {
+        var users = reacts[e] || [];
+        if (!users.length) return;
+        html += '<div class="reaction-chip"><span class="reaction-chip__emoji">' + e + '</span>';
+        users.forEach(function(uid) { html += _avatarHtml(uid); });
+        html += '</div>';
+      });
+      return html + '</div>';
+    }
+
+    /* 다른 사람 글: 내가 이미 반응했는지 확인 */
+    var myReaction = null;
+    REACTION_EMOJIS.forEach(function(e) {
+      if (myUid && (reacts[e]||[]).indexOf(myUid) >= 0) myReaction = e;
+    });
+
+    if (myReaction) {
+      /* 이미 반응: 선택한 이모지 1개만 (탭하면 취소) */
+      return '<div class="reaction-bar reaction-bar--selected">' +
+        '<button class="reaction-btn is-mine" data-reaction-emoji="' + myReaction + '" data-activity-id="' + (a.id||'') + '" aria-label="' + myReaction + ' 반응 취소" aria-pressed="true">' +
+        myReaction + '</button></div>';
+    }
+
+    /* 반응 전: 5개 버튼 모두 표시 */
+    return '<div class="reaction-bar">' + REACTION_EMOJIS.map(function(e){
+      return '<button class="reaction-btn" data-reaction-emoji="' + e + '" data-activity-id="' + (a.id||'') + '" aria-label="' + e + ' 반응" aria-pressed="false">' + e + '</button>';
+    }).join('') + '</div>';
+  }
+  function _itemHtml(a, showLine) {
+    var meta=TYPE_META[a.type]||{cls:'action-badge--create',label:'변경',action:a.content,icon:''};
+    var initial=(a.actorName||'?').charAt(0);
+    var logType=a.type&&a.type.indexOf('schedule')===0?'schedule':a.type&&a.type.indexOf('todo')===0?'todo':'system';
+    return '<article class="log-item" data-log-item data-activity-id="'+(a.id||'')+'" data-actor="'+(a.actorName||'')+'" data-log-type="'+logType+'">' +
+      '<div class="log-item__timeline"><div class="log-item__avatar" style="background:'+(a.actorColor||'#8B95A1')+'" data-author-uid="'+(a.actorId||'')+'">'+initial+'</div>'+(showLine?'<div class="log-item__line"></div>':'')+'</div>' +
+      '<div class="log-item__body"><div class="log-item__header"><span class="log-item__name">'+(a.actorName||'멤버')+'</span><span class="log-item__action">'+meta.action+'</span>' +
+      '<div class="action-badge '+meta.cls+'">'+meta.icon+meta.label+'</div><span class="log-item__time">'+_relTime(a.createdAt)+'</span></div>' +
+      (function(){ var dash=(a.content||'').indexOf(' — '); return dash>=0?'<div class="log-card"><div class="log-card__title">'+(a.content).slice(dash+3)+'</div></div>':''; })()+
+      _reactionBar(a)+
+      '</div></article>';
+  }
+  function _groupHtml(list) {
+    var groups={},keys=[];
+    list.forEach(function(a){ var d=_toDate(a.createdAt); var key=d?d.toDateString():'unknown'; if(!groups[key]){groups[key]={ts:a.createdAt,items:[]};keys.push(key);} groups[key].items.push(a); });
+    return keys.map(function(key){
+      var g=groups[key];
+      var divider='<div class="day-divider"><div class="day-divider__label">'+_dayLabel(g.ts)+'</div><div class="day-divider__line"></div></div>';
+      return divider+g.items.map(function(a,ai){ return _itemHtml(a, ai<g.items.length-1); }).join('');
+    }).join('');
+  }
+  function _render(list) {
+    var newSec=document.querySelector('[data-activity-section="new"]');
+    var oldSec=document.querySelector('[data-activity-section="old"]');
+    if(!newSec||!oldSec) return;
+    /* 계정별 readBy 또는 클라이언트 캐시에 확인된 항목은 이전 알림으로 분류 */
+    var myUid = window._myProfile ? window._myProfile.uid : null;
+    var unread=list.filter(function(a){ return !(myUid && a.readBy && a.readBy[myUid]) && !_confirmedIds[a.id]; });
+    var read=list.filter(function(a){ return !!(myUid && a.readBy && a.readBy[myUid]) || !!_confirmedIds[a.id]; });
+    /* 새 알림 섹션 */
+    var newCountEl=newSec.querySelector('[data-new-count]');
+    var newEmptyEl=newSec.querySelector('[data-new-empty]');
+    var existingNewItems=newSec.querySelectorAll('[data-log-item]');
+    existingNewItems.forEach(function(el){el.remove();});
+    if(unread.length){
+      var frag=document.createDocumentFragment();
+      unread.forEach(function(a,i){
+        var tmp=document.createElement('div'); tmp.innerHTML=_itemHtml(a,i<unread.length-1); frag.appendChild(tmp.firstChild);
+      });
+      newSec.insertBefore(frag, newEmptyEl);
+      if(newCountEl){newCountEl.textContent=unread.length;newCountEl.style.display='';}
+      if(newEmptyEl) newEmptyEl.style.display='none';
+    } else {
+      if(newCountEl) newCountEl.style.display='none';
+      if(newEmptyEl) newEmptyEl.style.display='';
+    }
+    /* 이전 알림 섹션 */
+    var oldHeader=oldSec.querySelector('.activity-section__header');
+    while(oldHeader.nextSibling) oldSec.removeChild(oldHeader.nextSibling);
+    if(read.length){
+      var tmp2=document.createElement('div'); tmp2.innerHTML=_groupHtml(read); while(tmp2.firstChild) oldSec.appendChild(tmp2.firstChild);
+    }
+    if (typeof window._sweepMyAvatars === 'function') window._sweepMyAvatars();
+  }
+  /* 이모지 반응 클릭 */
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-reaction-emoji]');
+    if (!btn) return;
+    var emoji = btn.dataset.reactionEmoji;
+    var activityId = btn.dataset.activityId;
+    if (!emoji || !activityId || !window._currentGroup) return;
+    var isMine = btn.classList.contains('is-mine');
+    if (isMine) {
+      /* 취소: 시각 피드백 후 Firestore re-render가 5개 버튼으로 복원 */
+      btn.style.opacity = '0.4';
+      btn.disabled = true;
+    } else {
+      /* 선택: 같은 reaction-bar 내 다른 버튼 숨기고 is-mine 적용 */
+      var bar = btn.closest('.reaction-bar');
+      if (bar) bar.querySelectorAll('.reaction-btn').forEach(function(b) {
+        if (b !== btn) b.style.display = 'none';
+      });
+      btn.classList.add('is-mine');
+      btn.setAttribute('aria-pressed', 'true');
+    }
+    if (typeof window.toggleReaction === 'function') window.toggleReaction(window._currentGroup.id, activityId, emoji, isMine);
+  });
+
+  window._tabInit.activity = function(group) {
+    window.onActivities(group.id, function(list){ _lastList = list; _render(list); });
+    /* 멤버 캐시 업데이트 — 아바타 렌더 및 필터 리스트 공유 */
+    var memberList = document.querySelector('[data-activity-member-list]');
+    window.onMembers(group.id, function(members) {
+      _members = members;
+      if (_lastList.length) _render(_lastList); // 멤버 데이터 준비 후 아바타 반영
+      if (!memberList) return;
+      memberList.querySelectorAll('[data-activity-filter-member]:not([data-activity-filter-member="all"])').forEach(function(el){ el.remove(); });
+      members.forEach(function(m) {
+        var style = m.photoURL ? 'background:'+(m.color||'#8B95A1')+' url('+m.photoURL+') center/cover no-repeat;' : 'background:'+(m.color||'#8B95A1')+';';
+        var content = m.photoURL ? '' : (m.displayName||'?').charAt(0);
+        var btn = document.createElement('button');
+        btn.className = 'filter-member-item';
+        btn.dataset.activityFilterMember = m.displayName || '';
+        btn.innerHTML = '<div class="filter-member-item__avatar" style="'+style+'">'+content+'</div><div class="filter-member-item__name">'+(m.displayName||'멤버')+'</div>';
+        memberList.appendChild(btn);
+      });
+    });
+  };
+}());
+</script>
+
+<!-- 내정보 탭 인라인 스크립트 -->
+<script>
+(function () {
+  /* ── Google 캘린더 연동 상태 UI 갱신 ── */
+  function _gcalUpdateUI() {
+    var statusEl = document.querySelector('[data-gcal-status]');
+    var btn      = document.querySelector('[data-gcal-btn]');
+    var connected = typeof window.gcalIsConnected === 'function' && window.gcalIsConnected();
+    if (statusEl) statusEl.textContent = connected ? '연동됨' : '연동되지 않음';
+    if (btn)      { btn.textContent = connected ? '연동 해제' : '연동하기'; btn.classList.toggle('gcal-connect-btn--active', connected); }
+  }
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-gcal-btn]'); if (!btn) return;
+    var connected = typeof window.gcalIsConnected === 'function' && window.gcalIsConnected();
+    if (connected) {
+      if (typeof window.gcalDisconnect === 'function') window.gcalDisconnect();
+      _gcalUpdateUI();
+    } else {
+      if (typeof window.gcalConnect === 'function') {
+        window.gcalConnect(function(ok) { if (ok) _gcalUpdateUI(); });
+      }
+    }
+  });
+  /* 탭 진입 시 연동 상태 반영 */
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('[data-app-tab="myinfo"]')) setTimeout(_gcalUpdateUI, 50);
+  });
+
+  /* 로그아웃 */
+  document.addEventListener('click', function(e) {
+    var btn=e.target.closest('.logout-btn'); if(!btn) return;
+    if (IS_FIREBASE_READY && typeof window.signOut === 'function') { e.stopPropagation(); window.signOut(); }
+    else location.href='01_auth.html';
+  }, true);
+
+  /* 프로필 편집 저장 */
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('[data-profile-edit-save]')) return;
+    if (!IS_FIREBASE_READY||typeof window.updateMyProfile!=='function') return;
+    var nameEl=document.querySelector('[data-profile-name-input]'); var statusEl=document.querySelector('[data-profile-status-input]'); var colorEl=document.querySelector('.profile-color-chip.is-selected');
+    var data={};
+    if(nameEl&&nameEl.value.trim()) data.displayName=nameEl.value.trim();
+    if(statusEl&&statusEl.value.trim()) data.status=statusEl.value.trim();
+    if(colorEl&&colorEl.dataset.color) data.color=colorEl.dataset.color;
+    /* _pendingPhotoURL: null=변경없음, ''=삭제, 'data:...'=새사진 */
+    if(window._pendingPhotoURL!==null&&window._pendingPhotoURL!==undefined) data.photoURL=window._pendingPhotoURL;
+    if(Object.keys(data).length) window.updateMyProfile(data);
+  });
+
+  /* 초대코드 복사 */
+  document.addEventListener('click', function(e) {
+    var btn=e.target.closest('[data-copy-code]'); if(!btn) return;
+    var code=btn.dataset.copyCode; if(!code) return;
+    navigator.clipboard.writeText(code).then(function(){ btn.textContent='복사됨!'; setTimeout(function(){ btn.textContent='복사'; }, 1500); });
+  });
+
+  /* 초대코드 재생성 */
+  document.addEventListener('click', function(e) {
+    var btn=e.target.closest('[data-refresh-code]'); if(!btn) return;
+    if(!window._currentGroup||!window._currentGroup.id) return;
+    if(!IS_FIREBASE_READY||!db) return;
+    if(!confirm('초대 코드를 재생성하면 기존 코드는 더 이상 사용할 수 없어요.\n계속할까요?')) return;
+    var newCode=Math.random().toString(36).slice(2,10).toUpperCase();
+    btn.style.pointerEvents='none'; btn.style.opacity='0.4';
+    db.collection('groups').doc(window._currentGroup.id).update({inviteCode:newCode})
+      .then(function(){
+        window._currentGroup.inviteCode=newCode;
+        var codeEl=document.querySelector('[data-invite-code]');
+        if(codeEl) codeEl.textContent=newCode;
+        var copyBtn=document.querySelector('[data-copy-code]');
+        if(copyBtn) copyBtn.dataset.copyCode=newCode;
+        btn.style.color='#10b981';
+        setTimeout(function(){ btn.style.color=''; btn.style.pointerEvents=''; btn.style.opacity=''; }, 1500);
+      })
+      .catch(function(err){
+        btn.style.pointerEvents=''; btn.style.opacity='';
+        alert('재생성 실패: '+(err.message||err));
+      });
+  });
+
+  function _applyAvatarPhoto(el, photoURL, initial, color) {
+    if (!el) return;
+    var span = el.querySelector('[data-avatar-initial]');
+    if (photoURL) {
+      el.style.background = (color || '#4f7cff') + ' url(' + photoURL + ') center/cover no-repeat';
+      if (span) { span.style.display = 'none'; }
+      else { el.textContent = ''; }
+    } else {
+      el.style.background = color || '#4f7cff';
+      if (span) { span.style.display = ''; span.textContent = initial || '?'; }
+      else { el.textContent = initial || '?'; }
+    }
+  }
+  window._applyTabAvatar = function(photoURL) {
+    var tabIcon = document.querySelector('[data-my-tab-avatar]');
+    if (!tabIcon) return;
+    var svg = tabIcon.querySelector('svg');
+    if (photoURL) {
+      tabIcon.style.background = 'url(' + photoURL + ') center/cover no-repeat';
+      tabIcon.style.borderRadius = '50%';
+      if (svg) svg.style.display = 'none';
+    } else {
+      tabIcon.style.background = '';
+      tabIcon.style.borderRadius = '';
+      if (svg) svg.style.display = '';
+    }
+  };
+  window._membersMap = window._membersMap || {};
+  window._sweepAllAvatars = function() {
+    var map = window._membersMap;
+    document.querySelectorAll('[data-author-uid]').forEach(function(el) {
+      var uid = el.dataset.authorUid;
+      if (!uid || !map[uid]) return;
+      var m = map[uid];
+      var color = m.color || '#8B95A1';
+      var initial = (m.displayName || '?').charAt(0);
+      if (m.photoURL) {
+        el.style.background = color + ' url(' + m.photoURL + ') center/cover no-repeat';
+        el.textContent = '';
+      } else {
+        el.style.background = color;
+        el.textContent = initial;
+      }
+    });
+  };
+  window._sweepMyAvatars = function() {
+    var profile = window._myProfile;
+    if (!profile || !profile.uid) return;
+    var uid = profile.uid;
+    var photoURL = profile.photoURL || '';
+    var color = profile.color || '#4f7cff';
+    var initial = (profile.displayName || '?').charAt(0);
+    document.querySelectorAll('[data-author-uid="' + uid + '"]').forEach(function(el) {
+      if (photoURL) {
+        el.style.background = color + ' url(' + photoURL + ') center/cover no-repeat';
+        el.textContent = '';
+      } else {
+        el.style.background = color;
+        el.textContent = initial;
+      }
+    });
+    /* 내 아바타 업데이트 후 다른 멤버 아바타도 함께 갱신 */
+    window._sweepAllAvatars();
+  };
+  function _populateProfile(profile) {
+    var avatarEl=document.querySelector('[data-my-avatar]'); var nameEl=document.querySelector('[data-my-name]'); var statusEl=document.querySelector('[data-my-status]');
+    var initial=(profile.displayName||'?').charAt(0);
+    _applyAvatarPhoto(avatarEl, profile.photoURL||'', initial, profile.color);
+    if(nameEl) nameEl.textContent=profile.displayName||''; if(statusEl) statusEl.textContent=profile.status||'';
+    var mAvatar=document.querySelector('[data-my-member-avatar]'); var mName=document.querySelector('[data-my-member-name]'); var mStatus=document.querySelector('[data-my-member-status]');
+    _applyAvatarPhoto(mAvatar, profile.photoURL||'', initial, profile.color);
+    window._applyTabAvatar(profile.photoURL||'');
+    if(mName) mName.innerHTML=(profile.displayName||'')+' <span style="font-size:11px;color:#888;font-weight:400;">(나)</span>';
+    if(mStatus) mStatus.textContent=profile.status||'';
+    var editName=document.querySelector('[data-profile-name-input]'); var editStatus=document.querySelector('[data-profile-status-input]');
+    if(editName) editName.value=profile.displayName||''; if(editStatus) editStatus.value=profile.status||'';
+    document.querySelectorAll('.profile-color-chip').forEach(function(chip){ chip.classList.toggle('is-selected',chip.dataset.color===profile.color); });
+    /* 오너 배지: 현재 그룹에서 내가 owner인 경우만 표시 */
+    var roleEl=document.querySelector('[data-my-role]');
+    if(roleEl){
+      var isOwner=window._currentGroup&&window._currentGroup.ownerId===profile.uid;
+      roleEl.style.display=isOwner?'':'none';
+    }
+  }
+
+  function _renderMembers(members,myUid,group) {
+    var list=document.querySelector('.members-card'); if(!list) return;
+    var titleEl=list.previousElementSibling;
+    if(titleEl&&titleEl.classList.contains('section-title')) titleEl.textContent=(group.emoji||'')+' '+group.name+' 멤버';
+    var ownerId=group.ownerId||(window._currentGroup&&window._currentGroup.ownerId)||'';
+    var sorted=members.slice().sort(function(a,b){
+      var aO=(a.uid===ownerId||a.role==='owner')?0:1; var bO=(b.uid===ownerId||b.role==='owner')?0:1; return aO-bO;
+    });
+    list.innerHTML=sorted.map(function(m){
+      var isMe=m.uid===myUid; var initial=(m.displayName||'?').charAt(0);
+      var nameHtml=m.displayName+(isMe?' <span style="font-size:11px;color:#888;font-weight:400;">(나)</span>':'');
+      var avatarStyle=m.photoURL?'background:'+(m.color||'#8B95A1')+' url('+m.photoURL+') center/cover no-repeat;':'background:'+(m.color||'#8B95A1')+';';
+      var avatarContent=m.photoURL?'':initial;
+      /* ownerId 일치 OR role==='owner' 두 가지로 판단 (기존 문서에 ownerId 필드 없어도 동작) */
+      var isOwner=(ownerId&&m.uid===ownerId)||m.role==='owner';
+      var roleBadge=isOwner?'<div class="member-item__role member-item__role--owner">👑 Owner</div>':'';
+      return '<li class="member-item" data-go="myinfo-member">' +
+        '<div class="member-item__avatar" style="'+avatarStyle+'"'+(isMe?' data-my-member-avatar':'')+'>'+avatarContent+'</div>' +
+        '<div class="member-item__info"><div class="member-item__name"'+(isMe?' data-my-member-name':'')+'>'+nameHtml+'</div>' +
+        '<div class="member-item__status"'+(isMe?' data-my-member-status':'')+'>'+(m.status||'')+'</div></div>' +
+        roleBadge+'</li>';
+    }).join('');
+  }
+
+  window._tabInit.myinfo = function(group) {
+    var codeEl=document.querySelector('[data-invite-code]');
+    if(codeEl&&group.inviteCode){ codeEl.textContent=group.inviteCode; var copyBtn=document.querySelector('[data-copy-code]'); if(copyBtn) copyBtn.dataset.copyCode=group.inviteCode; }
+    var ownerSection=document.querySelector('[data-owner-section]');
+    if(ownerSection) ownerSection.style.display=(group.ownerId&&window._myProfile&&group.ownerId===window._myProfile.uid)?'':'none';
+    var toggle=document.querySelector('.menu-item__toggle');
+    if(toggle) toggle.classList.toggle('is-off', localStorage.getItem('notif_enabled')==='0');
+    if(window._myProfile) _populateProfile(window._myProfile);
+    var myUid=window._myProfile?window._myProfile.uid:null;
+    window.onMembers(group.id, function(members){ _renderMembers(members,myUid,group); if(window._myProfile) _populateProfile(window._myProfile); });
+
+    /* 통계 카드 */
+    var statSchedule=document.querySelector('[data-stat-schedule]');
+    var statTodo=document.querySelector('[data-stat-todo]');
+    var statGroup=document.querySelector('[data-stat-group]');
+    if(statGroup&&window._myProfile&&window._myProfile.groups) statGroup.textContent=window._myProfile.groups.length;
+
+    window.onSchedules(group.id, function(schedules) {
+      if(!statSchedule) return;
+      var now=new Date();
+      statSchedule.textContent=schedules.filter(function(s){
+        if(!s.startDate) return false;
+        var d=s.startDate.toDate?s.startDate.toDate():new Date(s.startDate);
+        return d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth();
+      }).length;
+    });
+
+    window.onTodos(group.id, function(todos) {
+      if(!statTodo) return;
+      statTodo.textContent=todos.filter(function(t){ return t.status!=='done'; }).length;
+    });
+  };
+}());
+</script>
+
+<!-- 그룹 관리 인라인 스크립트 -->
+<script>
+(function () {
+  var manageNameInput = document.querySelector('[data-group-manage-name]');
+  var manageMemberList = document.querySelector('[data-group-manage-member-list]');
+  var manageEmojiBtns = document.querySelectorAll('[data-manage-emoji]');
+  var manageSaveBtn = document.querySelector('[data-group-manage-save]');
+  var _manageEmoji = '';
+
+  /* 이모지 선택 */
+  manageEmojiBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      manageEmojiBtns.forEach(function(b) { b.classList.remove('is-selected'); });
+      btn.classList.add('is-selected');
+      _manageEmoji = btn.dataset.manageEmoji;
+    });
+  });
+
+  /* 그룹 관리 화면 진입 시 폼 채우기 */
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('[data-go="myinfo-group-manage"]')) return;
+    var group = window._currentGroup;
+    if (!group) return;
+    if (manageNameInput) manageNameInput.value = group.name || '';
+    _manageEmoji = group.emoji || '👨‍👩‍👧‍👦';
+    manageEmojiBtns.forEach(function(b) { b.classList.toggle('is-selected', b.dataset.manageEmoji === _manageEmoji); });
+    _renderManageMembers();
+  });
+
+  /* 멤버 목록 렌더링 */
+  function _renderManageMembers() {
+    if (!manageMemberList) return;
+    var group = window._currentGroup;
+    var myUid = window._myProfile ? window._myProfile.uid : '';
+    var ownerId = group ? (group.ownerId || '') : '';
+    var members = Object.values(window._membersMap || {});
+    if (!members.length) {
+      manageMemberList.innerHTML = '<li style="list-style:none;padding:20px;color:#8B95A1;font-size:14px;text-align:center;">멤버 정보를 불러오는 중...</li>';
+      return;
+    }
+    manageMemberList.innerHTML = members.sort(function(a, b) {
+      var aO = (a.uid === ownerId || a.role === 'owner') ? 0 : 1;
+      var bO = (b.uid === ownerId || b.role === 'owner') ? 0 : 1;
+      return aO - bO;
+    }).map(function(m) {
+      var isMe = m.uid === myUid;
+      var isOwner = m.uid === ownerId || m.role === 'owner';
+      var avatarStyle = m.photoURL ? 'background:' + (m.color || '#8B95A1') + ' url(' + m.photoURL + ') center/cover no-repeat;' : 'background:' + (m.color || '#8B95A1') + ';';
+      var avatarContent = m.photoURL ? '' : (m.displayName || '?').charAt(0);
+      var rightEl = isOwner
+        ? '<div class="member-item__role member-item__role--owner">👑 Owner</div>'
+        : '<button class="manage-kick-btn" data-kick-uid="' + m.uid + '" data-kick-name="' + (m.displayName || '멤버').replace(/"/g, '&quot;') + '">강퇴</button>';
+      return '<li class="member-item">' +
+        '<div class="member-item__avatar" style="' + avatarStyle + '">' + avatarContent + '</div>' +
+        '<div class="member-item__info"><div class="member-item__name">' + (m.displayName || '멤버') + (isMe ? ' <span style="font-size:11px;color:#888;font-weight:400;">(나)</span>' : '') + '</div>' +
+        '<div class="member-item__status">' + (m.status || '') + '</div></div>' +
+        rightEl + '</li>';
+    }).join('');
+  }
+
+  /* 저장 */
+  if (manageSaveBtn) {
+    manageSaveBtn.addEventListener('click', function() {
+      var group = window._currentGroup;
+      if (!group || !group.id) return;
+      var newName = manageNameInput ? manageNameInput.value.trim() : '';
+      if (!newName) { if (manageNameInput) manageNameInput.focus(); return; }
+      manageSaveBtn.textContent = '저장 중...';
+      manageSaveBtn.disabled = true;
+      window.updateGroup(group.id, { name: newName, emoji: _manageEmoji }).then(function() {
+        /* 내정보 탭의 멤버 섹션 제목 갱신 */
+        var membersTitle = document.querySelector('.members-card') ? document.querySelector('.members-card').previousElementSibling : null;
+        if (membersTitle && membersTitle.classList.contains('section-title')) membersTitle.textContent = _manageEmoji + ' ' + newName + ' 멤버';
+        manageSaveBtn.textContent = '저장됨';
+        setTimeout(function() { manageSaveBtn.textContent = '저장'; manageSaveBtn.disabled = false; }, 1500);
+      }).catch(function() {
+        manageSaveBtn.textContent = '저장';
+        manageSaveBtn.disabled = false;
+      });
+    });
+  }
+
+  /* 멤버 강퇴 */
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-kick-uid]');
+    if (!btn) return;
+    var uid = btn.dataset.kickUid;
+    var name = btn.dataset.kickName;
+    if (!uid || !window._currentGroup) return;
+    if (!confirm('"' + name + '" 멤버를 그룹에서 강퇴할까요?')) return;
+    btn.textContent = '처리 중...';
+    btn.disabled = true;
+    window.kickMember(window._currentGroup.id, uid).then(function() {
+      delete window._membersMap[uid];
+      _renderManageMembers();
+    }).catch(function() {
+      btn.textContent = '강퇴';
+      btn.disabled = false;
+    });
+  });
+
+  /* 그룹 삭제 */
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('[data-delete-group]')) return;
+    var group = window._currentGroup;
+    if (!group || !group.id) return;
+    if (!confirm('그룹을 삭제하면 모든 일정·할일·알림 내역이 사라지며 복구할 수 없어요.\n정말 삭제할까요?')) return;
+    var memberIds = group.memberIds || [];
+    window.deleteGroup(group.id, memberIds).then(function() {
+      location.href = 'app.html';
+    });
+  });
+}());
+</script>
+
+</body>
+</html>

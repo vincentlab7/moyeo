@@ -4,184 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>모여 - 일정</title>
-<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-* {margin: 0; padding: 0; box-sizing: border-box;}
-body {font-family: 'Pretendard', -apple-system, sans-serif; font-size: 14px; color: #111111; background: #f0f0f0; display: flex; align-items: flex-start; justify-content: center; min-height: 100vh; padding: 40px 20px; gap: 24px; flex-wrap: wrap;}
-
-/* 공통 폰 프레임 */
-.phone-frame {width: 390px; background: #f8f9fa; position: relative; box-shadow: 0 0 0 1px #e5e8eb, 0 24px 64px rgba(0,0,0,0.12); border-radius: 48px; overflow: hidden;}
-.phone-label {text-align: center; margin-bottom: 12px; font-size: 13px; font-weight: 600; color: #888;}
-
-/* 상태바 */
-.status-bar {height: 44px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; background: #ffffff;}
-.status-bar__time {font-size: 15px; font-weight: 600; color: #111;}
-
-/* 헤더 */
-.header {background: #ffffff; padding: 12px 20px 14px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #f0f0f0;}
-.header__title {font-size: 18px; font-weight: 700; color: #111; letter-spacing: -0.4px;}
-.header__actions {display: flex; gap: 4px;}
-.header__btn {width: 36px; height: 36px; border: none; background: none; cursor: pointer; border-radius: 8px; display: flex; align-items: center; justify-content: center;}
-.header__btn svg {width: 22px; height: 22px; stroke: #333; stroke-width: 1.8; fill: none;}
-
-/* 필터 탭 */
-.filter-tabs {background: #ffffff; padding: 0 20px; display: flex; gap: 0; border-bottom: 1px solid #f0f0f0;}
-.filter-tab {padding: 10px 14px; font-size: 13px; font-weight: 500; color: #888; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap;}
-.filter-tab.is-active {color: #111; font-weight: 700; border-bottom-color: #111;}
-
-/* 스크롤 */
-.scroll-area {overflow-y: auto; max-height: 680px; padding-bottom: 80px;}
-.scroll-area::-webkit-scrollbar {display: none;}
-
-/* 날짜 그룹 */
-.date-group {padding: 20px 20px 0;}
-.date-group__header {display: flex; align-items: center; gap: 8px; margin-bottom: 12px;}
-.date-group__date {font-size: 14px; font-weight: 700; color: #111;}
-.date-group__day {font-size: 13px; color: #888;}
-.date-group__today {font-size: 11px; font-weight: 700; background: #111; color: #fff; border-radius: 20px; padding: 2px 8px;}
-.date-group__line {flex: 1; height: 1px; background: #f0f0f0;}
-
-/* 일정 카드 */
-.schedule-card {background: #ffffff; border-radius: 12px; padding: 14px 16px; margin-bottom: 8px; display: flex; gap: 12px; align-items: flex-start; cursor: pointer;}
-.schedule-card:active {background: #f8f9fa;}
-.schedule-card__bar {width: 3px; border-radius: 2px; min-height: 44px; align-self: stretch; flex-shrink: 0;}
-.schedule-card__body {flex: 1;}
-.schedule-card__top {display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;}
-.schedule-card__title {font-size: 15px; font-weight: 600; color: #111; letter-spacing: -0.2px;}
-.schedule-card__tag {font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 20px; flex-shrink: 0; margin-top: 1px;}
-.schedule-card__meta {display: flex; align-items: center; gap: 8px; margin-top: 4px; flex-wrap: wrap;}
-.schedule-card__time {font-size: 12px; color: #888; display: flex; align-items: center; gap: 3px;}
-.schedule-card__time svg {width: 12px; height: 12px; stroke: #c4c9d2; stroke-width: 2; fill: none;}
-.schedule-card__members {display: flex; margin-top: 8px; gap: -4px;}
-.schedule-card__avatar {width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #fff; margin-right: -6px;}
-.schedule-card__dinner {display: flex; align-items: center; gap: 4px; margin-top: 8px; font-size: 12px; color: #888;}
-.schedule-card__dinner svg {width: 13px; height: 13px; stroke-width: 1.8; fill: none;}
-
-/* 빈 상태 */
-.empty-state {padding: 40px 20px; text-align: center;}
-.empty-state__icon {width: 56px; height: 56px; background: #f0f0f0; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;}
-.empty-state__icon svg {width: 28px; height: 28px; stroke: #c4c9d2; stroke-width: 1.5; fill: none;}
-.empty-state__text {font-size: 15px; font-weight: 600; color: #333; margin-bottom: 6px;}
-.empty-state__sub {font-size: 13px; color: #888;}
-
-/* FAB */
-.fab {position: absolute; bottom: 84px; right: 20px; width: 52px; height: 52px; background: #111; border-radius: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.2);}
-.fab svg {width: 22px; height: 22px; stroke: #fff; stroke-width: 2; fill: none;}
-
-/* 하단 탭바 */
-.tabbar {position: absolute; bottom: 0; left: 0; right: 0; height: 72px; background: #ffffff; border-top: 1px solid #f0f0f0; display: flex; align-items: flex-start; padding-top: 10px;}
-.tab-item {flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer;}
-.tab-item__icon {width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;}
-.tab-item__icon svg {width: 22px; height: 22px; stroke: #c4c9d2; stroke-width: 1.8; fill: none;}
-.tab-item__label {font-size: 10px; color: #c4c9d2; font-weight: 500;}
-.tab-item.is-active .tab-item__icon svg {stroke: #111;}
-.tab-item.is-active .tab-item__label {color: #111; font-weight: 700;}
-
-/* ── 등록 화면 ── */
-.register-screen {background: #ffffff;}
-.register-header {padding: 12px 20px 14px; display: flex; align-items: center; gap: 4px; border-bottom: 1px solid #f0f0f0;}
-.register-header__back {width: 36px; height: 36px; border: none; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center;}
-.register-header__back svg {width: 22px; height: 22px; stroke: #111; stroke-width: 2; fill: none;}
-.register-header__title {font-size: 17px; font-weight: 700; color: #111; flex: 1; text-align: center;}
-.register-header__save {font-size: 15px; font-weight: 700; color: #111; background: none; border: none; cursor: pointer; font-family: inherit; padding: 0 4px;}
-
-.form-area {padding: 20px;}
-.form-row {padding: 16px 0; border-bottom: 1px solid #f8f9fa; display: flex; align-items: flex-start; gap: 16px;}
-.form-row:last-child {border-bottom: none;}
-.form-row__icon {width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;}
-.form-row__icon svg {width: 18px; height: 18px; stroke: #888; stroke-width: 1.8; fill: none;}
-.form-row__content {flex: 1;}
-.form-row__label {font-size: 12px; color: #888; margin-bottom: 4px;}
-.form-row__value {font-size: 15px; color: #111; font-weight: 500;}
-.form-row__value--placeholder {color: #c4c9d2; font-weight: 400;}
-.form-row__input {width: 100%; border: none; outline: none; font-size: 18px; font-weight: 700; font-family: inherit; color: #111; background: transparent; letter-spacing: -0.3px;}
-.form-row__input::placeholder {color: #d4d8de; font-weight: 600;}
-
-/* 분류 칩 */
-.category-chips {display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px;}
-.category-chip {padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e5e8eb; font-size: 13px; font-weight: 500; color: #888; cursor: pointer; background: #fff;}
-.category-chip.is-selected {border-color: #111; background: #111; color: #fff; font-weight: 600;}
-
-/* 저녁 토글 */
-.dinner-toggle {display: flex; gap: 8px; margin-top: 4px;}
-.dinner-btn {flex: 1; height: 40px; border-radius: 8px; border: 1.5px solid #e5e8eb; background: #fff; font-size: 13px; font-weight: 500; font-family: inherit; color: #888; cursor: pointer;}
-.dinner-btn.is-selected {border-color: #111; background: #111; color: #fff; font-weight: 600;}
-.dinner-btn.is-selected.possible {border-color: #10b981; background: #10b981;}
-.dinner-btn.is-selected.impossible {border-color: #E52E2E; background: #E52E2E;}
-
-/* ── 상세 화면 ── */
-.detail-screen {background: #ffffff;}
-.detail-header {padding: 12px 20px 14px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #f0f0f0;}
-.detail-header__back {width: 36px; height: 36px; border: none; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center;}
-.detail-header__back svg {width: 22px; height: 22px; stroke: #111; stroke-width: 2; fill: none;}
-.detail-header__actions {display: flex; gap: 4px;}
-.detail-header__btn {width: 36px; height: 36px; border: none; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center;}
-.detail-header__btn svg {width: 20px; height: 20px; stroke: #333; stroke-width: 1.8; fill: none;}
-
-.detail-hero {padding: 24px 20px 20px;}
-.detail-tag {font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px; display: inline-block; margin-bottom: 12px;}
-.detail-title {font-size: 24px; font-weight: 700; color: #111; letter-spacing: -0.5px; line-height: 1.3; margin-bottom: 8px;}
-.detail-author {display: flex; align-items: center; gap: 8px;}
-.detail-author__avatar {width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #fff;}
-.detail-author__name {font-size: 13px; color: #888;}
-
-.detail-info {padding: 0 20px;}
-.detail-info-item {display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid #f8f9fa;}
-.detail-info-item:last-child {border-bottom: none;}
-.detail-info-item__icon {width: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;}
-.detail-info-item__icon svg {width: 16px; height: 16px; stroke: #888; stroke-width: 1.8; fill: none;}
-.detail-info-item__label {font-size: 12px; color: #888; margin-bottom: 3px;}
-.detail-info-item__value {font-size: 14px; color: #111; font-weight: 500; line-height: 1.5;}
-
-.detail-dinner {margin: 16px 20px; background: #f8f9fa; border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;}
-.detail-dinner__label {font-size: 13px; color: #333; font-weight: 500;}
-.detail-dinner__badge {font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 20px;}
-
-.detail-memo {margin: 0 20px 24px; padding: 14px 16px; background: #f8f9fa; border-radius: 10px;}
-.detail-memo__label {font-size: 12px; color: #888; margin-bottom: 6px;}
-.detail-memo__text {font-size: 14px; color: #333; line-height: 1.6;}
-</style>
+<link rel="stylesheet" href="resource/css/font.css">
+<link rel="stylesheet" href="resource/css/reset.css">
+<link rel="stylesheet" href="resource/css/pc.css">
+<link rel="stylesheet" href="resource/css/mobile.css">
 </head>
 <body>
 
-<!-- ① 일정 리스트 화면 -->
-<div>
-  <div class="phone-label">① 일정 리스트</div>
-  <div class="phone-frame">
-    <div class="status-bar">
-      <span class="status-bar__time">9:41</span>
-      <div style="display:flex;gap:6px;align-items:center;">
-        <svg width="16" height="16" viewBox="0 0 24 24" stroke="#111" stroke-width="2" fill="none"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
-        <svg width="16" height="16" viewBox="0 0 24 24" stroke="#111" stroke-width="2" fill="none"><rect x="1" y="6" width="15" height="12" rx="2"/><path d="M16 10h2a2 2 0 0 1 0 4h-2"/><rect x="3" y="9" width="9" height="6" rx="1" fill="#111" stroke="none"/></svg>
-      </div>
-    </div>
+<div class="phone-frame">
+  <div class="page-loading" id="page-loading"><div class="page-loading__spinner"></div></div>
 
-    <div class="header">
+  <!-- ① 일정 리스트 화면 -->
+  <div class="screen-wrap is-active" data-screen-wrap="schedule-list">
+
+    <header class="header">
       <div class="header__title">일정</div>
       <div class="header__actions">
-        <button class="header__btn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+        <button class="header__btn" aria-label="검색" data-go="schedule-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
       </div>
+    </header>
+
+    <nav class="filter-tabs" aria-label="일정 필터">
+      <button class="filter-tab is-active" data-filter="all">전체</button>
+      <button class="filter-tab" data-filter="mine">내 일정</button>
+    </nav>
+
+    <div class="month-nav">
+      <button class="month-nav__btn" data-month-prev aria-label="이전 달"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="month-nav__label" data-month-label>2026년 6월</span>
+      <button class="month-nav__btn" data-month-next aria-label="다음 달"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
     </div>
 
-    <!-- 필터 탭 -->
-    <div class="filter-tabs">
-      <div class="filter-tab is-active">전체</div>
-      <div class="filter-tab">내 일정</div>
-      <div class="filter-tab">그룹 일정</div>
-    </div>
-
-    <div class="scroll-area">
-
-      <!-- 오늘 -->
-      <div class="date-group">
+    <section class="scroll-area">
+      <section class="date-group" data-date="2026-06-18">
         <div class="date-group__header">
           <span class="date-group__date">6월 18일</span>
           <span class="date-group__day">수</span>
-          <span class="date-group__today">오늘</span>
           <div class="date-group__line"></div>
         </div>
-
-        <div class="schedule-card">
+        <article class="schedule-card" data-go="schedule-detail" data-schedule-type="other" data-title="부산 출장" data-dinner="impossible" data-memo="" data-author="아빠" data-author-initial="아" data-author-color="#4f7cff" data-reg-date="6월 15일">
           <div class="schedule-card__bar" style="background:#4f7cff;"></div>
           <div class="schedule-card__body">
             <div class="schedule-card__top">
@@ -199,9 +60,8 @@ body {font-family: 'Pretendard', -apple-system, sans-serif; font-size: 14px; col
               저녁 불가능
             </div>
           </div>
-        </div>
-
-        <div class="schedule-card">
+        </article>
+        <article class="schedule-card" data-go="schedule-detail" data-schedule-type="mine" data-title="친구 모임" data-dinner="impossible" data-memo="" data-author="엄마" data-author-initial="엄" data-author-color="#f97316" data-reg-date="6월 16일">
           <div class="schedule-card__bar" style="background:#f97316;"></div>
           <div class="schedule-card__body">
             <div class="schedule-card__top">
@@ -219,9 +79,8 @@ body {font-family: 'Pretendard', -apple-system, sans-serif; font-size: 14px; col
               저녁 불가능
             </div>
           </div>
-        </div>
-
-        <div class="schedule-card">
+        </article>
+        <article class="schedule-card" data-go="schedule-detail" data-schedule-type="other" data-title="사진 동아리" data-dinner="none" data-memo="" data-author="딸" data-author-initial="딸" data-author-color="#a855f7" data-reg-date="6월 15일">
           <div class="schedule-card__bar" style="background:#a855f7;"></div>
           <div class="schedule-card__body">
             <div class="schedule-card__top">
@@ -235,18 +94,16 @@ body {font-family: 'Pretendard', -apple-system, sans-serif; font-size: 14px; col
               <div class="schedule-card__avatar" style="background:#a855f7;">딸</div>
             </div>
           </div>
-        </div>
-      </div>
+        </article>
+      </section>
 
-      <!-- 내일 -->
-      <div class="date-group">
+      <section class="date-group" data-date="2026-06-19">
         <div class="date-group__header">
           <span class="date-group__date">6월 19일</span>
           <span class="date-group__day">목</span>
           <div class="date-group__line"></div>
         </div>
-
-        <div class="schedule-card">
+        <article class="schedule-card" data-go="schedule-detail" data-schedule-type="other" data-title="중간고사" data-dinner="none" data-memo="" data-author="아빠" data-author-initial="아" data-author-color="#4f7cff" data-reg-date="6월 17일">
           <div class="schedule-card__bar" style="background:#10b981;"></div>
           <div class="schedule-card__body">
             <div class="schedule-card__top">
@@ -260,9 +117,8 @@ body {font-family: 'Pretendard', -apple-system, sans-serif; font-size: 14px; col
               <div class="schedule-card__avatar" style="background:#10b981;">아</div>
             </div>
           </div>
-        </div>
-
-        <div class="schedule-card">
+        </article>
+        <article class="schedule-card" data-go="schedule-detail" data-schedule-type="mine" data-title="팀 주간 회의" data-dinner="possible" data-memo="" data-author="아빠" data-author-initial="아" data-author-color="#4f7cff" data-reg-date="6월 17일">
           <div class="schedule-card__bar" style="background:#4f7cff;"></div>
           <div class="schedule-card__body">
             <div class="schedule-card__top">
@@ -281,17 +137,16 @@ body {font-family: 'Pretendard', -apple-system, sans-serif; font-size: 14px; col
               저녁 가능
             </div>
           </div>
-        </div>
-      </div>
+        </article>
+      </section>
 
-      <!-- 20일 -->
-      <div class="date-group">
+      <section class="date-group" data-date="2026-06-20">
         <div class="date-group__header">
           <span class="date-group__date">6월 20일</span>
           <span class="date-group__day">금</span>
           <div class="date-group__line"></div>
         </div>
-        <div class="schedule-card">
+        <article class="schedule-card" data-go="schedule-detail" data-schedule-type="mine" data-title="가족 외식" data-dinner="possible" data-memo="중간고사 끝나고 수고한 아들 축하 겸 오랜만에 온 가족이 함께 외식하기로 했어요 🍽️ 장소는 강남역 근처 한식당 예약 완료!" data-author="엄마" data-author-initial="엄" data-author-color="#f97316" data-reg-date="6월 17일">
           <div class="schedule-card__bar" style="background:#f59e0b;"></div>
           <div class="schedule-card__body">
             <div class="schedule-card__top">
@@ -312,116 +167,227 @@ body {font-family: 'Pretendard', -apple-system, sans-serif; font-size: 14px; col
               전원 저녁 가능 🎉
             </div>
           </div>
+        </article>
+      </section>
+
+      <!-- 5월 샘플 데이터 -->
+      <section class="date-group" data-date="2026-05-10">
+        <div class="date-group__header">
+          <span class="date-group__date">5월 10일</span>
+          <span class="date-group__day">일</span>
+          <div class="date-group__line"></div>
         </div>
-      </div>
-
-    </div><!-- /scroll-area -->
-
-    <!-- FAB -->
-    <div class="fab">
-      <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-    </div>
-
-    <!-- 탭바 -->
-    <div class="tabbar">
-      <div class="tab-item"><div class="tab-item__icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="tab-item__label">홈</div></div>
-      <div class="tab-item is-active"><div class="tab-item__icon"><svg viewBox="0 0 24 24" stroke="#111"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="tab-item__label">일정</div></div>
-      <div class="tab-item"><div class="tab-item__icon"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><div class="tab-item__label">할일</div></div>
-      <div class="tab-item"><div class="tab-item__icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="tab-item__label">알림장</div></div>
-      <div class="tab-item"><div class="tab-item__icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="tab-item__label">내정보</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ② 일정 등록 화면 -->
-<div>
-  <div class="phone-label">② 일정 등록</div>
-  <div class="phone-frame">
-    <div class="status-bar">
-      <span class="status-bar__time">9:41</span>
-      <div style="display:flex;gap:6px;align-items:center;">
-        <svg width="16" height="16" viewBox="0 0 24 24" stroke="#111" stroke-width="2" fill="none"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
-        <svg width="16" height="16" viewBox="0 0 24 24" stroke="#111" stroke-width="2" fill="none"><rect x="1" y="6" width="15" height="12" rx="2"/><path d="M16 10h2a2 2 0 0 1 0 4h-2"/><rect x="3" y="9" width="9" height="6" rx="1" fill="#111" stroke="none"/></svg>
-      </div>
-    </div>
-
-    <div class="register-screen">
-      <div class="register-header">
-        <button class="register-header__back"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        <div class="register-header__title">일정 등록</div>
-        <button class="register-header__save">저장</button>
-      </div>
-
-      <div class="scroll-area" style="max-height:730px;">
-        <div class="form-area">
-
-          <!-- 제목 -->
-          <div class="form-row" style="padding-top:8px;">
-            <div class="form-row__icon"><svg viewBox="0 0 24 24"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg></div>
-            <div class="form-row__content">
-              <input class="form-row__input" type="text" placeholder="어떤 일정인가요?">
+        <article class="schedule-card" data-go="schedule-detail" data-schedule-type="mine" data-title="어버이날 가족 모임" data-dinner="possible" data-memo="오랜만에 온 가족이 모여 부모님께 감사 인사를 드리기로 했어요 🌸" data-author="엄마" data-author-initial="엄" data-author-color="#f97316" data-reg-date="5월 7일">
+          <div class="schedule-card__bar" style="background:#f97316;"></div>
+          <div class="schedule-card__body">
+            <div class="schedule-card__top">
+              <div class="schedule-card__title">어버이날 가족 모임</div>
+              <div class="schedule-card__tag" style="background:#fff7ed;color:#f97316;">약속</div>
+            </div>
+            <div class="schedule-card__meta">
+              <div class="schedule-card__time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>오후 6:00</div>
+            </div>
+            <div class="schedule-card__members">
+              <div class="schedule-card__avatar" style="background:#4f7cff;">아</div>
+              <div class="schedule-card__avatar" style="background:#f97316;">엄</div>
+              <div class="schedule-card__avatar" style="background:#a855f7;">딸</div>
+              <div class="schedule-card__avatar" style="background:#10b981;">아</div>
+            </div>
+            <div class="schedule-card__dinner" style="color:#10b981;">
+              <svg viewBox="0 0 24 24" stroke="#10b981"><polyline points="20 6 9 17 4 12"/></svg>
+              전원 저녁 가능 🎉
             </div>
           </div>
+        </article>
+      </section>
 
-          <!-- 날짜/시간 -->
+      <section class="date-group" data-date="2026-05-28">
+        <div class="date-group__header">
+          <span class="date-group__date">5월 28일</span>
+          <span class="date-group__day">목</span>
+          <div class="date-group__line"></div>
+        </div>
+        <article class="schedule-card" data-go="schedule-detail" data-schedule-type="other" data-title="아들 학예회" data-dinner="none" data-memo="" data-author="아빠" data-author-initial="아" data-author-color="#4f7cff" data-reg-date="5월 20일">
+          <div class="schedule-card__bar" style="background:#a855f7;"></div>
+          <div class="schedule-card__body">
+            <div class="schedule-card__top">
+              <div class="schedule-card__title">아들 학예회</div>
+              <div class="schedule-card__tag" style="background:#faf5ff;color:#a855f7;">학교</div>
+            </div>
+            <div class="schedule-card__meta">
+              <div class="schedule-card__time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>오후 2:00 – 4:00</div>
+            </div>
+            <div class="schedule-card__members">
+              <div class="schedule-card__avatar" style="background:#f97316;">엄</div>
+              <div class="schedule-card__avatar" style="background:#10b981;">아</div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- 7월 샘플 데이터 -->
+      <section class="date-group" data-date="2026-07-11">
+        <div class="date-group__header">
+          <span class="date-group__date">7월 11일</span>
+          <span class="date-group__day">토</span>
+          <div class="date-group__line"></div>
+        </div>
+        <article class="schedule-card" data-go="schedule-detail" data-schedule-type="mine" data-title="제주도 가족 여행" data-dinner="possible" data-memo="숙소: 서귀포 풀빌라 예약 완료 ✅ 렌터카도 신청했어요 🚗" data-author="아빠" data-author-initial="아" data-author-color="#4f7cff" data-reg-date="6월 10일">
+          <div class="schedule-card__bar" style="background:#0ea5e9;"></div>
+          <div class="schedule-card__body">
+            <div class="schedule-card__top">
+              <div class="schedule-card__title">제주도 가족 여행</div>
+              <div class="schedule-card__tag" style="background:#f0f9ff;color:#0ea5e9;">여행</div>
+            </div>
+            <div class="schedule-card__meta">
+              <div class="schedule-card__time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>종일 (3박 4일)</div>
+            </div>
+            <div class="schedule-card__members">
+              <div class="schedule-card__avatar" style="background:#4f7cff;">아</div>
+              <div class="schedule-card__avatar" style="background:#f97316;">엄</div>
+              <div class="schedule-card__avatar" style="background:#a855f7;">딸</div>
+              <div class="schedule-card__avatar" style="background:#10b981;">아</div>
+            </div>
+            <div class="schedule-card__dinner" style="color:#10b981;">
+              <svg viewBox="0 0 24 24" stroke="#10b981"><polyline points="20 6 9 17 4 12"/></svg>
+              전원 저녁 가능 🎉
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="date-group" data-date="2026-07-22">
+        <div class="date-group__header">
+          <span class="date-group__date">7월 22일</span>
+          <span class="date-group__day">수</span>
+          <div class="date-group__line"></div>
+        </div>
+        <article class="schedule-card" data-go="schedule-detail" data-schedule-type="other" data-title="엄마 치과 정기검진" data-dinner="none" data-memo="" data-author="엄마" data-author-initial="엄" data-author-color="#f97316" data-reg-date="6월 18일">
+          <div class="schedule-card__bar" style="background:#f97316;"></div>
+          <div class="schedule-card__body">
+            <div class="schedule-card__top">
+              <div class="schedule-card__title">엄마 치과 정기검진</div>
+              <div class="schedule-card__tag" style="background:#fff7ed;color:#f97316;">기타</div>
+            </div>
+            <div class="schedule-card__meta">
+              <div class="schedule-card__time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>오전 10:00 – 11:00</div>
+            </div>
+            <div class="schedule-card__members">
+              <div class="schedule-card__avatar" style="background:#f97316;">엄</div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- 월 빈 상태 -->
+      <div class="empty-month" data-empty-month style="display:none;">
+        <div class="empty-month__icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <p class="empty-month__text">이 달엔 일정이 없어요</p>
+        <p class="empty-month__sub">일정 추가 버튼으로 등록해보세요</p>
+      </div>
+
+    </section>
+
+    <button class="fab" aria-label="일정 추가" data-go="schedule-register">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </button>
+
+    <nav class="tabbar" aria-label="하단 탭바">
+      <button class="tab-item" data-href="02_home.html"><span class="tab-item__icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span class="tab-item__label">홈</span></button>
+      <button class="tab-item is-active"><span class="tab-item__icon"><svg viewBox="0 0 24 24" stroke="#111"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><span class="tab-item__label" style="color:#111;font-weight:700;">일정</span></button>
+      <button class="tab-item" data-href="04_todo.html"><span class="tab-item__icon"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><span class="tab-item__label">할일</span></button>
+      <button class="tab-item" data-href="05_activity.html"><span class="tab-item__icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><span class="tab-item__label">알림장</span></button>
+      <button class="tab-item" data-href="06_myinfo.html"><span class="tab-item__icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><span class="tab-item__label">내정보</span></button>
+    </nav>
+  </div>
+
+  <!-- ② 일정 등록 화면 -->
+  <div class="screen-wrap" data-screen-wrap="schedule-register">
+    <div class="register-screen">
+      <header class="register-header">
+        <button class="register-header__back" aria-label="닫기" data-schedule-register-back><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <h1 class="register-header__title" data-register-title>일정 등록</h1>
+        <button class="register-header__save" data-schedule-save>저장</button>
+      </header>
+      <section class="scroll-area">
+        <div class="form-area">
+          <div class="form-row">
+            <div class="form-row__icon"><svg viewBox="0 0 24 24"><line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/></svg></div>
+            <div class="form-row__content"><input class="form-row__input" type="text" placeholder="어떤 일정인가요?"></div>
+          </div>
           <div class="form-row">
             <div class="form-row__icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
             <div class="form-row__content">
-              <div class="form-row__label">시작</div>
-              <div class="form-row__value">2026년 6월 20일 (토) 오후 7:00</div>
-              <div style="margin-top:10px;">
+              <button class="date-field" data-date-picker="start" aria-label="시작일 선택">
+                <div class="form-row__label">시작</div>
+                <div class="form-row__value" data-date-display="start">2026년 6월 20일 (토)</div>
+              </button>
+              <button class="date-field" data-date-picker="end" aria-label="종료일 선택">
                 <div class="form-row__label">종료</div>
-                <div class="form-row__value">2026년 6월 20일 (토) 오후 9:00</div>
-              </div>
-              <div style="display:flex;align-items:center;gap:8px;margin-top:12px;">
-                <div style="width:18px;height:18px;border-radius:4px;border:1.5px solid #111;background:#111;display:flex;align-items:center;justify-content:center;">
+                <div class="form-row__value" data-date-display="end">2026년 6월 20일 (토)</div>
+              </button>
+              <div class="allday-row" data-allday-row>
+                <div class="allday-check is-checked" data-allday-check>
                   <svg width="11" height="11" viewBox="0 0 10 10" stroke="#fff" stroke-width="2.5" fill="none"><polyline points="1,5 3.5,8 9,1"/></svg>
                 </div>
-                <span style="font-size:14px;color:#111;font-weight:500;">종일</span>
+                <span class="allday-row__label">종일</span>
               </div>
             </div>
           </div>
-
-          <!-- 분류 -->
           <div class="form-row">
             <div class="form-row__icon"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
             <div class="form-row__content">
               <div class="form-row__label">분류</div>
               <div class="category-chips">
-                <div class="category-chip">업무</div>
-                <div class="category-chip">학교</div>
-                <div class="category-chip is-selected">약속</div>
-                <div class="category-chip">시험</div>
-                <div class="category-chip">여행</div>
-                <div class="category-chip">운동</div>
-                <div class="category-chip">기타</div>
+                <button class="category-chip">업무</button>
+                <button class="category-chip">학교</button>
+                <button class="category-chip is-selected">약속</button>
+                <button class="category-chip">시험</button>
+                <button class="category-chip">여행</button>
+                <button class="category-chip">운동</button>
+                <button class="category-chip">기타</button>
               </div>
             </div>
           </div>
-
-          <!-- 저녁 가능 여부 -->
           <div class="form-row">
             <div class="form-row__icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
             <div class="form-row__content">
               <div class="form-row__label">저녁 식사 가능 여부</div>
               <div class="dinner-toggle">
-                <button class="dinner-btn is-selected possible">가능</button>
-                <button class="dinner-btn">불가능</button>
-                <button class="dinner-btn">미정</button>
+                <button class="dinner-btn is-selected possible" data-dinner-val="possible">가능</button>
+                <button class="dinner-btn impossible" data-dinner-val="impossible">불가능</button>
+                <button class="dinner-btn" data-dinner-val="none">미정</button>
               </div>
             </div>
           </div>
-
-          <!-- 메모 -->
           <div class="form-row">
             <div class="form-row__icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <div class="form-row__content"><div class="form-row__label">메모</div><textarea class="form-row__memo" data-memo-input placeholder="추가 내용을 입력하세요" rows="3"></textarea></div>
+          </div>
+          <div class="form-row">
+            <div class="form-row__icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <div class="form-row__content">
-              <div class="form-row__label">메모</div>
-              <div class="form-row__value--placeholder" style="font-size:15px;color:#c4c9d2;">추가 내용을 입력하세요</div>
+              <div class="form-row__label">참여자</div>
+              <div class="member-select" data-member-select>
+                <button class="member-select__item is-selected" data-member="아빠" data-member-initial="아" data-member-color="#4f7cff" aria-pressed="true">
+                  <div class="member-select__avatar" style="background:#4f7cff; --av-color:#4f7cff;">아</div>
+                  <span class="member-select__name">아빠</span>
+                </button>
+                <button class="member-select__item is-selected" data-member="엄마" data-member-initial="엄" data-member-color="#f97316" aria-pressed="true">
+                  <div class="member-select__avatar" style="background:#f97316; --av-color:#f97316;">엄</div>
+                  <span class="member-select__name">엄마</span>
+                </button>
+                <button class="member-select__item" data-member="딸" data-member-initial="딸" data-member-color="#a855f7" aria-pressed="false">
+                  <div class="member-select__avatar" style="background:#a855f7; --av-color:#a855f7;">딸</div>
+                  <span class="member-select__name">딸</span>
+                </button>
+                <button class="member-select__item" data-member="아들" data-member-initial="아" data-member-color="#10b981" aria-pressed="false">
+                  <div class="member-select__avatar" style="background:#10b981; --av-color:#10b981;">아</div>
+                  <span class="member-select__name">아들</span>
+                </button>
+              </div>
             </div>
           </div>
-
-          <!-- 작성자 -->
           <div class="form-row">
             <div class="form-row__icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
             <div class="form-row__content">
@@ -432,106 +398,511 @@ body {font-family: 'Pretendard', -apple-system, sans-serif; font-size: 14px; col
               </div>
             </div>
           </div>
-
         </div>
-      </div>
+      </section>
     </div>
   </div>
-</div>
 
-<!-- ③ 일정 상세 화면 -->
-<div>
-  <div class="phone-label">③ 일정 상세</div>
-  <div class="phone-frame">
-    <div class="status-bar">
-      <span class="status-bar__time">9:41</span>
-      <div style="display:flex;gap:6px;align-items:center;">
-        <svg width="16" height="16" viewBox="0 0 24 24" stroke="#111" stroke-width="2" fill="none"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
-        <svg width="16" height="16" viewBox="0 0 24 24" stroke="#111" stroke-width="2" fill="none"><rect x="1" y="6" width="15" height="12" rx="2"/><path d="M16 10h2a2 2 0 0 1 0 4h-2"/><rect x="3" y="9" width="9" height="6" rx="1" fill="#111" stroke="none"/></svg>
-      </div>
-    </div>
-
+  <!-- ③ 일정 상세 화면 -->
+  <div class="screen-wrap" data-screen-wrap="schedule-detail">
     <div class="detail-screen">
-      <div class="detail-header">
-        <button class="detail-header__back"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-        <div style="font-size:16px;font-weight:700;color:#111;flex:1;text-align:center;">일정 상세</div>
+      <header class="detail-header">
+        <button class="detail-header__back" aria-label="뒤로가기" data-go="schedule-list"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <h1 style="font-size:16px;font-weight:700;color:#111;flex:1;text-align:center;">일정 상세</h1>
         <div class="detail-header__actions">
-          <button class="detail-header__btn"><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
-          <button class="detail-header__btn"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
+          <button class="detail-header__btn" aria-label="수정" data-schedule-edit><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
+          <button class="detail-header__btn" aria-label="삭제" data-schedule-delete><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
         </div>
-      </div>
-
-      <div class="scroll-area" style="max-height:730px;">
-
+      </header>
+      <section class="scroll-area">
         <div class="detail-hero">
-          <div class="detail-tag" style="background:#fffbeb;color:#f59e0b;">약속</div>
-          <div class="detail-title">가족 외식</div>
+          <div class="detail-tag" data-detail-tag style="background:#fffbeb;color:#f59e0b;">약속</div>
+          <h2 class="detail-title" data-detail-title>가족 외식</h2>
           <div class="detail-author">
-            <div class="detail-author__avatar" style="background:#f97316;">엄</div>
-            <div class="detail-author__name">엄마가 등록 · 6월 17일</div>
+            <div class="detail-author__avatar" data-detail-author-avatar style="background:#f97316;">엄</div>
+            <div class="detail-author__name" data-detail-author-name>엄마가 등록 · 6월 17일</div>
           </div>
         </div>
-
         <div style="height:1px;background:#f0f0f0;margin:0 20px;"></div>
-
         <div class="detail-info">
           <div class="detail-info-item">
             <div class="detail-info-item__icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-            <div>
-              <div class="detail-info-item__label">일시</div>
-              <div class="detail-info-item__value">2026년 6월 20일 (금)<br>오후 7:00 – 9:00</div>
-            </div>
+            <div><div class="detail-info-item__label">일시</div><div class="detail-info-item__value" data-detail-date>2026년 6월 20일 (금)<br>오후 7:00 – 9:00</div></div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-item__icon"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
-            <div>
-              <div class="detail-info-item__label">분류</div>
-              <div class="detail-info-item__value">약속</div>
-            </div>
+            <div><div class="detail-info-item__label">분류</div><div class="detail-info-item__value" data-detail-category>약속</div></div>
           </div>
           <div class="detail-info-item">
             <div class="detail-info-item__icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <div>
               <div class="detail-info-item__label">참여 멤버</div>
-              <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;">
-                <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
-                  <div style="width:36px;height:36px;border-radius:50%;background:#4f7cff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;">아</div>
-                  <span style="font-size:11px;color:#888;">아빠</span>
-                </div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
-                  <div style="width:36px;height:36px;border-radius:50%;background:#f97316;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;">엄</div>
-                  <span style="font-size:11px;color:#888;">엄마</span>
-                </div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
-                  <div style="width:36px;height:36px;border-radius:50%;background:#a855f7;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;">딸</div>
-                  <span style="font-size:11px;color:#888;">딸</span>
-                </div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
-                  <div style="width:36px;height:36px;border-radius:50%;background:#10b981;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;">아</div>
-                  <span style="font-size:11px;color:#888;">아들</span>
-                </div>
+              <div data-detail-members style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:36px;height:36px;border-radius:50%;background:#4f7cff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;">아</div><span style="font-size:11px;color:#888;">아빠</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:36px;height:36px;border-radius:50%;background:#f97316;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;">엄</div><span style="font-size:11px;color:#888;">엄마</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:36px;height:36px;border-radius:50%;background:#a855f7;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;">딸</div><span style="font-size:11px;color:#888;">딸</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:36px;height:36px;border-radius:50%;background:#10b981;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;">아</div><span style="font-size:11px;color:#888;">아들</span></div>
               </div>
             </div>
           </div>
         </div>
-
         <div class="detail-dinner">
-          <div style="display:flex;align-items:center;gap:8px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" stroke="#333" stroke-width="1.8" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-            <div class="detail-dinner__label">저녁 식사 여부</div>
-          </div>
-          <div class="detail-dinner__badge" style="background:#f0fdf4;color:#10b981;">가능 ✓</div>
+          <div style="display:flex;align-items:center;gap:8px;"><svg width="16" height="16" viewBox="0 0 24 24" stroke="#333" stroke-width="1.8" fill="none"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg><div class="detail-dinner__label">저녁 식사 여부</div></div>
+          <div class="detail-dinner__badge" data-detail-dinner-badge style="background:#f0fdf4;color:#10b981;">가능 ✓</div>
         </div>
-
-        <div class="detail-memo">
+        <div class="detail-memo" data-detail-memo-section>
           <div class="detail-memo__label">메모</div>
-          <div class="detail-memo__text">중간고사 끝나고 수고한 아들 축하 겸 오랜만에 온 가족이 함께 외식하기로 했어요 🍽️<br>장소는 강남역 근처 한식당 예약 완료!</div>
+          <p class="detail-memo__text" data-detail-memo>중간고사 끝나고 수고한 아들 축하 겸 오랜만에 온 가족이 함께 외식하기로 했어요 🍽️<br>장소는 강남역 근처 한식당 예약 완료!</p>
         </div>
+      </section>
+    </div>
+  </div>
 
+  <!-- ④ 검색 화면 -->
+  <div class="screen-wrap" data-screen-wrap="schedule-search">
+
+    <div class="search-header">
+      <button class="search-header__back" aria-label="뒤로가기" data-go="schedule-list">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="search-header__input-wrap">
+        <svg class="search-header__icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="search-header__input" type="search" placeholder="일정 검색" aria-label="일정 검색" data-search-input>
+        <button class="search-header__clear" aria-label="지우기" data-search-clear hidden>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <section class="scroll-area" data-search-panel="empty">
+      <div class="search-recent">
+        <div class="search-recent__header">
+          <span class="search-recent__title">최근 검색</span>
+          <button class="search-recent__clear-all" data-search-clear-all>전체 삭제</button>
+        </div>
+        <div class="search-recent__chips" data-recent-chips>
+          <button class="search-recent__chip" data-recent-keyword>부산 출장</button>
+          <button class="search-recent__chip" data-recent-keyword>친구 모임</button>
+          <button class="search-recent__chip" data-recent-keyword>중간고사</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="scroll-area" data-search-panel="results" hidden>
+      <div class="search-result-count" data-search-count></div>
+      <div data-search-results></div>
+      <div class="search-no-result" data-search-no-result hidden>
+        <svg viewBox="0 0 24 24" width="40" height="40" stroke="#cdd1d5" stroke-width="1.5" fill="none"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <p>검색 결과가 없습니다</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ⑤ 삭제 확인 오버레이 -->
+  <div class="confirm-overlay" data-confirm-overlay>
+    <div class="confirm-sheet" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+      <p class="confirm-sheet__text" id="confirm-title">이 일정을 삭제하시겠습니까?</p>
+      <div class="confirm-sheet__btns">
+        <button class="confirm-btn confirm-btn--cancel" data-confirm-cancel>취소</button>
+        <button class="confirm-btn confirm-btn--danger" data-confirm-ok>삭제</button>
       </div>
     </div>
   </div>
+
+  <!-- 날짜 선택 바텀 시트 -->
+  <div class="date-picker-overlay" data-date-picker-overlay>
+    <div class="date-picker-sheet" role="dialog" aria-modal="true" aria-labelledby="picker-title">
+      <div class="date-picker-handle"></div>
+      <div class="date-picker-header">
+        <span class="date-picker-title" id="picker-title" data-picker-title>시작일 선택</span>
+        <button class="date-picker-done" data-picker-done>완료</button>
+      </div>
+      <div class="date-picker-nav">
+        <button class="date-picker-nav__btn" data-date-prev aria-label="이전 달">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <span class="date-picker-nav__label" data-date-month></span>
+        <button class="date-picker-nav__btn" data-date-next aria-label="다음 달">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+      <div class="date-picker-weekdays" aria-hidden="true">
+        <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+      </div>
+      <div class="date-picker-grid" data-date-grid role="grid"></div>
+      <div class="time-picker" data-time-picker>
+        <div class="time-picker__ampm">
+          <button class="time-picker__ampm-btn" data-ampm="am">오전</button>
+          <button class="time-picker__ampm-btn" data-ampm="pm">오후</button>
+        </div>
+        <div class="time-picker__hours" data-time-hours></div>
+        <div class="time-picker__mins">
+          <button class="time-picker__min" data-min="0">:00</button>
+          <button class="time-picker__min" data-min="10">:10</button>
+          <button class="time-picker__min" data-min="20">:20</button>
+          <button class="time-picker__min" data-min="30">:30</button>
+          <button class="time-picker__min" data-min="40">:40</button>
+          <button class="time-picker__min" data-min="50">:50</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="resource/js/firebase-config.js"></script>
+<script src="resource/js/auth.js"></script>
+<script src="resource/js/db.js"></script>
+<script src="resource/js/ai.js"></script>
+<script src="resource/js/main.js"></script>
+<script>
+(function () {
+  var _allSchedules = [];
+  var _curYear      = new Date().getFullYear();
+  var _curMonth     = new Date().getMonth();
+  var _filterMine   = false;
+  var _gId          = '';
+  var _currentId    = null; /* 현재 열린 일정 id (삭제·수정용) */
+  var _editMode     = false;
+
+  var CAT = {
+    '업무':   { bg: '#eff2ff', fg: '#4f7cff' },
+    '약속':   { bg: '#fff7ed', fg: '#f97316' },
+    '동아리': { bg: '#faf5ff', fg: '#a855f7' },
+    '가족':   { bg: '#ecfdf5', fg: '#10b981' },
+    '개인':   { bg: '#F2F4F6', fg: '#8B95A1' },
+  };
+  var MON_KO = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+  var DAY_KO = ['일','월','화','수','목','금','토'];
+
+  /* ── 날짜 유틸 ── */
+  function _toDate(ts) {
+    if (!ts) return null;
+    try { return ts.toDate ? ts.toDate() : new Date(ts); } catch (e) { return null; }
+  }
+  function _inMonth(ts, y, m) {
+    var d = _toDate(ts); if (!d) return false;
+    return d.getFullYear() === y && d.getMonth() === m;
+  }
+  function _fmtDate(ts) {
+    var d = _toDate(ts); if (!d) return '';
+    return (d.getMonth() + 1) + '월 ' + d.getDate() + '일';
+  }
+  function _dateKey(ts) {
+    var d = _toDate(ts); if (!d) return '';
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+
+  /* 날짜 피커 표시 텍스트 → Date ("2026년 6월 20일 (토)" 또는 "… 오후 2:00") */
+  function _parseDisplayDate(text) {
+    if (!text) return null;
+    var m = text.match(/(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/);
+    if (!m) return null;
+    var h = 0, min = 0;
+    var tm = text.match(/(오전|오후)\s*(\d{1,2}):(\d{2})/);
+    if (tm) {
+      h = parseInt(tm[2]); min = parseInt(tm[3]);
+      if (tm[1] === '오후' && h !== 12) h += 12;
+      if (tm[1] === '오전' && h === 12) h = 0;
+    }
+    return new Date(parseInt(m[1]), parseInt(m[2]) - 1, parseInt(m[3]), h, min);
+  }
+  function _parseTimeStr(text) {
+    if (!text) return '';
+    var tm = text.match(/(오전|오후)\s*(\d{1,2}):(\d{2})/);
+    if (!tm) return '';
+    return tm[1] + ' ' + tm[2] + ':' + tm[3];
+  }
+
+  /* ── 리스트 렌더 ── */
+  function _renderList() {
+    var scroll = document.querySelector('[data-screen-wrap="schedule-list"] .scroll-area');
+    if (!scroll) return;
+    var myUid = window._myProfile ? window._myProfile.uid : null;
+    var list  = _allSchedules.filter(function (s) {
+      var ok = _inMonth(s.startDate, _curYear, _curMonth);
+      if (_filterMine && myUid) ok = ok && (s.authorId === myUid);
+      return ok;
+    });
+    var groups = {}, keys = [];
+    list.forEach(function (s) {
+      var k = _dateKey(s.startDate);
+      if (!groups[k]) { groups[k] = []; keys.push(k); }
+      groups[k].push(s);
+    });
+    keys.sort();
+    if (!keys.length) {
+      scroll.innerHTML = '<div style="padding:48px 16px;text-align:center;color:#8B95A1;font-size:14px;">' + MON_KO[_curMonth] + '에 등록된 일정이 없어요</div>';
+      return;
+    }
+    scroll.innerHTML = keys.map(function (key) {
+      var d      = new Date(key + 'T00:00:00');
+      var header = '<div class="date-group__header"><span class="date-group__date">' + (d.getMonth()+1) + '월 ' + d.getDate() + '일</span><span class="date-group__day">' + DAY_KO[d.getDay()] + '</span><div class="date-group__line"></div></div>';
+      var cards  = groups[key].map(function (s) {
+        var c       = CAT[s.category] || { bg:'#F2F4F6', fg:'#8B95A1' };
+        var initial = (s.authorName || '?').charAt(0);
+        var timeStr = s.isAllDay ? '종일' : ((s.startTime||'') + (s.endTime?' – '+s.endTime:''));
+        return '<article class="schedule-card" data-go="schedule-detail"' +
+          ' data-schedule-id="' + s.id + '"' +
+          ' data-title="' + s.title.replace(/"/g,'&quot;') + '"' +
+          ' data-dinner="' + (s.dinner||'') + '"' +
+          ' data-memo="' + (s.memo||'').replace(/"/g,'&quot;') + '"' +
+          ' data-author="' + (s.authorName||'') + '"' +
+          ' data-author-initial="' + initial + '"' +
+          ' data-author-color="' + (s.authorColor||'#8B95A1') + '"' +
+          ' data-reg-date="' + _fmtDate(s.createdAt) + '">' +
+          '<div class="schedule-card__bar" style="background:' + (s.authorColor||'#8B95A1') + ';"></div>' +
+          '<div class="schedule-card__body">' +
+            '<div class="schedule-card__top"><div class="schedule-card__title">' + s.title + '</div><div class="schedule-card__tag" style="background:' + c.bg + ';color:' + c.fg + ';">' + (s.category||'기타') + '</div></div>' +
+            '<div class="schedule-card__meta"><div class="schedule-card__time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' + timeStr + '</div></div>' +
+            '<div class="schedule-card__members"><div class="schedule-card__avatar" style="background:' + (s.authorColor||'#8B95A1') + ';">' + initial + '</div></div>' +
+          '</div></article>';
+      }).join('');
+      return '<section class="date-group" data-date="' + key + '">' + header + cards + '</section>';
+    }).join('');
+  }
+
+  function _updateMonthLabel() {
+    var el = document.querySelector('[data-month-label]');
+    if (el) el.textContent = _curYear + '년 ' + MON_KO[_curMonth];
+  }
+
+  /* ── 멤버 선택 칩 동적 생성 ── */
+  function _populateMembers(members) {
+    var wrap = document.querySelector('[data-member-select]');
+    if (!wrap) return;
+    var myUid = window._myProfile ? window._myProfile.uid : null;
+    wrap.innerHTML = members.map(function (m) {
+      var isMe  = m.uid === myUid;
+      var color = m.color || '#8B95A1';
+      var init  = (m.displayName || '?').charAt(0);
+      return '<button class="member-select__item' + (isMe ? ' is-selected' : '') + '"' +
+        ' data-member="' + (m.displayName||'') + '"' +
+        ' data-member-uid="' + m.uid + '"' +
+        ' data-member-initial="' + init + '"' +
+        ' data-member-color="' + color + '"' +
+        ' aria-pressed="' + isMe + '">' +
+        '<div class="member-select__avatar" style="background:' + color + ';">' + init + '</div>' +
+        '<span class="member-select__name">' + (m.displayName||'') + '</span>' +
+      '</button>';
+    }).join('');
+
+    /* 작성자 표시 업데이트 */
+    var me = members.find(function (m) { return m.uid === myUid; });
+    if (me) {
+      var authorWrap = document.querySelector('[data-screen-wrap="schedule-register"] .form-row:last-child div[style]');
+      if (authorWrap) {
+        authorWrap.style.background = me.color || '#4f7cff';
+        authorWrap.textContent = (me.displayName||'?').charAt(0);
+        var nameEl = authorWrap.nextElementSibling;
+        if (nameEl) nameEl.textContent = me.displayName || '';
+      }
+    }
+  }
+
+  /* ── 폼 초기화 ── */
+  function _resetForm() {
+    var wrap = document.querySelector('[data-screen-wrap="schedule-register"]');
+    if (!wrap) return;
+    wrap.querySelector('.form-row__input').value = '';
+    var memo = wrap.querySelector('[data-memo-input]');
+    if (memo) memo.value = '';
+    wrap.querySelectorAll('.category-chip').forEach(function (c) { c.classList.remove('is-selected'); });
+    var first = wrap.querySelector('.category-chip');
+    if (first) first.classList.add('is-selected');
+    wrap.querySelectorAll('.dinner-btn').forEach(function (b) { b.classList.remove('is-selected'); });
+    var poss = wrap.querySelector('[data-dinner-val="none"]');
+    if (poss) poss.classList.add('is-selected');
+    var allday = wrap.querySelector('[data-allday-check]');
+    if (allday) allday.classList.add('is-checked');
+    var title = wrap.querySelector('[data-register-title]');
+    if (title) title.textContent = '일정 등록';
+    _editMode = false;
+    _currentId = null;
+  }
+
+  /* ── 저장 버튼 ── */
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('[data-schedule-save]')) return;
+    if (!_gId) return;
+    var wrap  = document.querySelector('[data-screen-wrap="schedule-register"]');
+    var title = (wrap.querySelector('.form-row__input') || {}).value;
+    if (!title || !title.trim()) { alert('제목을 입력해주세요'); return; }
+
+    var isAllDay   = !!(wrap.querySelector('[data-allday-check]') || {}).classList?.contains('is-checked');
+    var startTxt   = (wrap.querySelector('[data-date-display="start"]') || {}).textContent || '';
+    var endTxt     = (wrap.querySelector('[data-date-display="end"]')   || {}).textContent || '';
+    var startDate  = _parseDisplayDate(startTxt) || new Date();
+    var endDate    = _parseDisplayDate(endTxt)   || startDate;
+    var startTime  = isAllDay ? '' : _parseTimeStr(startTxt);
+    var endTime    = isAllDay ? '' : _parseTimeStr(endTxt);
+    var category   = (wrap.querySelector('.category-chip.is-selected') || {}).textContent || '기타';
+    var dinner     = (wrap.querySelector('.dinner-btn.is-selected') || {}).dataset?.dinnerVal || 'none';
+    var memo       = (wrap.querySelector('[data-memo-input]') || {}).value || '';
+    var members    = [];
+    wrap.querySelectorAll('.member-select__item.is-selected').forEach(function (btn) {
+      members.push({ name: btn.dataset.member, initial: btn.dataset.memberInitial, color: btn.dataset.memberColor });
+    });
+
+    var data = {
+      title: title.trim(), isAllDay: isAllDay,
+      startDate: startDate, endDate: endDate,
+      startTime: startTime, endTime: endTime,
+      category: category, dinner: dinner, memo: memo, members: members,
+    };
+
+    var btn = e.target.closest('[data-schedule-save]');
+    btn.textContent = '저장 중...'; btn.disabled = true;
+
+    var promise = (_editMode && _currentId)
+      ? window.updateSchedule(_gId, _currentId, data)
+      : window.addSchedule(_gId, data);
+
+    promise.then(function () {
+      btn.textContent = '저장'; btn.disabled = false;
+      /* 저장된 일정의 달로 월 뷰 이동 */
+      _curYear  = startDate.getFullYear();
+      _curMonth = startDate.getMonth();
+      _updateMonthLabel();
+      _resetForm();
+      var backBtn = wrap.querySelector('[data-schedule-register-back]');
+      if (backBtn) backBtn.click();
+    }).catch(function (err) {
+      btn.textContent = '저장'; btn.disabled = false;
+      alert('저장 실패: ' + (err.message || err));
+    });
+  });
+
+  /* ── 일정 카드 클릭 → 현재 id 기록 + 상세 멤버 업데이트 ── */
+  document.addEventListener('click', function (e) {
+    var card = e.target.closest('[data-go="schedule-detail"][data-schedule-id]');
+    if (!card) return;
+    _currentId = card.dataset.scheduleId;
+    /* 상세 화면 멤버 섹션 업데이트 */
+    var s = _allSchedules.find(function (x) { return x.id === _currentId; });
+    if (!s || !s.members) return;
+    setTimeout(function () {
+      var membersEl = document.querySelector('[data-detail-members]');
+      if (!membersEl) return;
+      membersEl.innerHTML = s.members.map(function (m) {
+        return '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;">' +
+          '<div style="width:36px;height:36px;border-radius:50%;background:' + (m.color||'#8B95A1') + ';display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;">' + (m.initial||'?') + '</div>' +
+          '<span style="font-size:11px;color:#888;">' + (m.name||'') + '</span></div>';
+      }).join('');
+    }, 30);
+  });
+
+  /* ── 수정 버튼 → 폼 미리채우기 ── */
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('[data-schedule-edit]')) return;
+    if (!_currentId) return;
+    var s = _allSchedules.find(function (x) { return x.id === _currentId; });
+    if (!s) return;
+    _editMode = true;
+    var wrap = document.querySelector('[data-screen-wrap="schedule-register"]');
+    if (!wrap) return;
+    /* 제목 */
+    var inp = wrap.querySelector('.form-row__input');
+    if (inp) inp.value = s.title;
+    /* 타이틀 변경 */
+    var registerTitle = wrap.querySelector('[data-register-title]');
+    if (registerTitle) registerTitle.textContent = '일정 수정';
+    /* 카테고리 */
+    wrap.querySelectorAll('.category-chip').forEach(function (c) {
+      c.classList.toggle('is-selected', c.textContent.trim() === s.category);
+    });
+    /* 저녁 */
+    wrap.querySelectorAll('.dinner-btn').forEach(function (b) {
+      b.classList.toggle('is-selected', b.dataset.dinnerVal === s.dinner);
+    });
+    /* 메모 */
+    var memo = wrap.querySelector('[data-memo-input]');
+    if (memo) memo.value = s.memo || '';
+    /* 종일 */
+    var allday = wrap.querySelector('[data-allday-check]');
+    if (allday) allday.classList.toggle('is-checked', !!s.isAllDay);
+    /* 화면 전환 */
+    setTimeout(function () {
+      var fab = document.querySelector('[data-go="schedule-register"]');
+      if (fab) fab.click();
+    }, 50);
+  });
+
+  /* ── 삭제: confirm-ok 가로채기 ── */
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('[data-confirm-ok]')) return;
+    if (!_gId || !_currentId) return;
+    var titleEl = document.querySelector('[data-detail-title]');
+    var title   = titleEl ? titleEl.textContent : '';
+    window.deleteSchedule(_gId, _currentId, title).then(function () {
+      _currentId = null;
+    }).catch(function (err) {
+      alert('삭제 실패: ' + (err.message || err));
+    });
+  });
+
+  /* ── FAB 클릭 시 오늘 날짜 자동 설정 (main.js 이후 실행 보장) ── */
+  document.addEventListener('DOMContentLoaded', function () {
+    var fab = document.querySelector('[data-go="schedule-register"]');
+    if (!fab) return;
+    fab.addEventListener('click', function () {
+      if (_editMode) return;
+      setTimeout(function () {
+        var today   = new Date();
+        var days    = ['일','월','화','수','목','금','토'];
+        var dateStr = today.getFullYear() + '년 ' + (today.getMonth()+1) + '월 ' + today.getDate() + '일 (' + days[today.getDay()] + ')';
+        var startEl = document.querySelector('[data-date-display="start"]');
+        var endEl   = document.querySelector('[data-date-display="end"]');
+        if (startEl) startEl.textContent = dateStr;
+        if (endEl)   endEl.textContent   = dateStr;
+      }, 50);
+    });
+  });
+
+  /* ── onGroupLoaded ── */
+  window.onGroupLoaded = function (group) {
+    _gId = group.id;
+    _updateMonthLabel();
+
+    /* 월 이동 */
+    document.querySelector('[data-month-prev]')?.addEventListener('click', function () {
+      _curMonth--; if (_curMonth < 0) { _curMonth = 11; _curYear--; }
+      _updateMonthLabel(); _renderList();
+    });
+    document.querySelector('[data-month-next]')?.addEventListener('click', function () {
+      _curMonth++; if (_curMonth > 11) { _curMonth = 0; _curYear++; }
+      _updateMonthLabel(); _renderList();
+    });
+
+    /* 필터 탭 */
+    document.querySelectorAll('[data-filter]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('[data-filter]').forEach(function (b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+        _filterMine = btn.dataset.filter === 'mine';
+        _renderList();
+      });
+    });
+
+    /* 멤버 리스너 → 참여자 칩 동적 생성 */
+    window.onMembers(group.id, function (members) { _populateMembers(members); });
+
+    /* 실시간 일정 리스너 */
+    window.onSchedules(group.id, function (list) {
+      _allSchedules = list;
+      _renderList();
+    });
+
+    /* 등록 화면 닫을 때 폼 초기화 */
+    document.querySelector('[data-schedule-register-back]')?.addEventListener('click', function () {
+      setTimeout(_resetForm, 300);
+    });
+
+  };
+}());
+</script>
 </body>
 </html>

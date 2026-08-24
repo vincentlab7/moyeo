@@ -4,386 +4,173 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>모여 - 로그인</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-* {margin: 0; padding: 0; box-sizing: border-box;}
-body {font-family: 'Pretendard', -apple-system, sans-serif; font-size: 14px; color: #111111; background: #ffffff; min-height: 100vh; display: flex; align-items: center; justify-content: center;}
-
-/* 모바일 프레임 */
-.phone-frame {width: 390px; min-height: 844px; background: #ffffff; position: relative; overflow: hidden; box-shadow: 0 0 0 1px #e5e8eb, 0 24px 64px rgba(0,0,0,0.12); border-radius: 48px;}
-
-/* 상태바 */
-.status-bar {height: 44px; padding: 0 24px; display: flex; align-items: center; justify-content: space-between;}
-.status-bar__time {font-size: 15px; font-weight: 600; color: #111111;}
-.status-bar__icons {display: flex; gap: 6px; align-items: center;}
-.status-bar__icons svg {width: 16px; height: 16px; fill: #111111;}
-
-/* 화면 전환 탭 */
-.screen-tabs {display: flex; border-bottom: 1px solid #f0f0f0; margin: 0 24px;}
-.screen-tab {flex: 1; padding: 12px 0; font-size: 14px; font-weight: 500; color: #888888; text-align: center; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s;}
-.screen-tab.is-active {color: #111111; font-weight: 700; border-bottom-color: #111111;}
-
-/* 화면 컨테이너 */
-.screen {display: none; padding: 0 24px;}
-.screen.is-active {display: block;}
-
-/* 로그인 화면 */
-.auth-logo {padding: 48px 0 40px; text-align: center;}
-.auth-logo__symbol {width: 56px; height: 56px; background: #111111; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;}
-.auth-logo__symbol svg {width: 32px; height: 32px; fill: #ffffff;}
-.auth-logo__name {font-size: 22px; font-weight: 700; color: #111111; letter-spacing: -0.5px;}
-.auth-logo__desc {font-size: 13px; color: #888888; margin-top: 6px; line-height: 1.5;}
-
-/* 폼 */
-.form-group {margin-bottom: 12px;}
-.form-label {font-size: 13px; font-weight: 500; color: #333333; margin-bottom: 6px; display: block;}
-.form-input {width: 100%; height: 50px; border: 1px solid #e5e8eb; border-radius: 8px; padding: 0 16px; font-size: 15px; font-family: inherit; color: #111111; background: #ffffff; outline: none; transition: border-color 0.2s;}
-.form-input::placeholder {color: #c4c9d2;}
-.form-input:focus {border-color: #111111;}
-.form-input--error {border-color: #E52E2E;}
-.form-error {font-size: 12px; color: #E52E2E; margin-top: 4px; display: none;}
-.form-error.is-visible {display: block;}
-
-/* 버튼 */
-.btn-primary {width: 100%; height: 52px; background: #111111; color: #ffffff; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; font-family: inherit; cursor: pointer; margin-top: 8px; letter-spacing: -0.2px;}
-.btn-primary:active {background: #333333;}
-
-/* 구분선 */
-.divider {display: flex; align-items: center; gap: 12px; margin: 24px 0;}
-.divider__line {flex: 1; height: 1px; background: #f0f0f0;}
-.divider__text {font-size: 12px; color: #c4c9d2; white-space: nowrap;}
-
-/* 소셜 로그인 */
-.social-btns {display: flex; flex-direction: column; gap: 10px;}
-.btn-social {width: 100%; height: 50px; border-radius: 10px; border: 1px solid #e5e8eb; background: #ffffff; font-size: 14px; font-weight: 500; font-family: inherit; color: #333333; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;}
-.btn-social--kakao {background: #FEE500; border-color: #FEE500; color: #191919;}
-.btn-social--naver {background: #03C75A; border-color: #03C75A; color: #ffffff;}
-.btn-social__icon {width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;}
-
-/* 하단 링크 */
-.auth-footer {text-align: center; padding: 24px 0 32px; font-size: 13px; color: #888888;}
-.auth-footer a {color: #111111; font-weight: 600; text-decoration: none;}
-
-/* 회원가입 추가 필드 */
-.form-row {display: flex; gap: 8px;}
-.form-row .form-group {flex: 1;}
-.form-row .btn-verify {height: 50px; white-space: nowrap; padding: 0 16px; background: #f8f9fa; border: 1px solid #e5e8eb; border-radius: 8px; font-size: 13px; font-weight: 500; font-family: inherit; color: #333333; cursor: pointer; margin-top: 0; width: auto; flex-shrink: 0; margin-top: 21px;}
-.form-row .btn-verify.is-sent {color: #111111; border-color: #111111; background: #ffffff;}
-
-/* 비밀번호 토글 */
-.input-wrap {position: relative;}
-.input-wrap .form-input {padding-right: 48px;}
-.btn-toggle-pw {position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 4px; color: #888888;}
-.btn-toggle-pw svg {width: 20px; height: 20px; display: block;}
-
-/* 약관 동의 */
-.terms-wrap {margin: 20px 0 4px;}
-.terms-all {display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: #f8f9fa; border-radius: 8px; cursor: pointer;}
-.terms-all__label {font-size: 14px; font-weight: 600; color: #111111;}
-.terms-list {margin-top: 8px; display: flex; flex-direction: column; gap: 4px;}
-.terms-item {display: flex; align-items: center; justify-content: space-between; padding: 10px 4px;}
-.terms-item__left {display: flex; align-items: center; gap: 10px; cursor: pointer;}
-.terms-item__badge {font-size: 11px; font-weight: 600; color: #ffffff; background: #111111; border-radius: 3px; padding: 2px 5px; flex-shrink: 0;}
-.terms-item__badge--optional {background: #c4c9d2;}
-.terms-item__label {font-size: 13px; color: #333333;}
-.terms-item__arrow {color: #c4c9d2;}
-.terms-item__arrow svg {width: 16px; height: 16px;}
-
-/* 체크박스 */
-.custom-check {width: 20px; height: 20px; border: 1.5px solid #d4d8de; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s;}
-.custom-check.is-checked {background: #111111; border-color: #111111;}
-.custom-check.is-checked svg {display: block;}
-.custom-check svg {display: none; width: 12px; height: 12px; stroke: #ffffff; stroke-width: 2.5; fill: none;}
-
-/* 프로필 설정 */
-.profile-setup {padding-top: 32px;}
-.profile-avatar {width: 80px; height: 80px; border-radius: 50%; background: #f0f0f0; margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; position: relative; cursor: pointer;}
-.profile-avatar__icon {color: #c4c9d2;}
-.profile-avatar__icon svg {width: 32px; height: 32px;}
-.profile-avatar__edit {position: absolute; bottom: 0; right: 0; width: 26px; height: 26px; background: #111111; border-radius: 50%; display: flex; align-items: center; justify-content: center;}
-.profile-avatar__edit svg {width: 14px; height: 14px; stroke: #ffffff; stroke-width: 2; fill: none;}
-.profile-avatar-label {font-size: 13px; color: #888888; text-align: center; margin-bottom: 28px;}
-
-/* 진행 단계 */
-.step-indicator {display: flex; align-items: center; justify-content: center; gap: 6px; padding: 20px 0 28px;}
-.step-dot {width: 6px; height: 6px; border-radius: 50%; background: #e5e8eb;}
-.step-dot.is-active {width: 20px; border-radius: 3px; background: #111111;}
-.step-dot.is-done {background: #111111;}
-
-/* 그룹 생성 초기 */
-.group-type-grid {display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 8px 0 24px;}
-.group-type-item {padding: 14px 4px 12px; border: 1.5px solid #e5e8eb; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.15s;}
-.group-type-item.is-selected {border-color: #111111; background: #f8f9fa;}
-.group-type-item__emoji {font-size: 24px; display: block; margin-bottom: 6px;}
-.group-type-item__label {font-size: 11px; color: #333333; font-weight: 500;}
-.group-type-item.is-selected .group-type-item__label {font-weight: 700; color: #111111;}
-</style>
+<link rel="stylesheet" href="resource/css/font.css">
+<link rel="stylesheet" href="resource/css/reset.css">
+<link rel="stylesheet" href="resource/css/pc.css">
+<link rel="stylesheet" href="resource/css/mobile.css">
 </head>
 <body>
 
 <div class="phone-frame">
-  <!-- 상태바 -->
-  <div class="status-bar">
-    <span class="status-bar__time">9:41</span>
-    <div class="status-bar__icons">
-      <svg viewBox="0 0 24 24"><path d="M1 1l22 22M16.72 11.06A10.94 10.94 0 0 1 19 12.55M5 12.55a10.94 10.94 0 0 1 5.17-2.39M10.71 5.05A16 16 0 0 1 22.56 9M1.42 9a15.91 15.91 0 0 1 4.7-2.88M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" stroke="#111" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
-      <svg viewBox="0 0 24 24"><rect x="1" y="6" width="15" height="12" rx="2" stroke="#111" stroke-width="2" fill="none"/><path d="M16 10h2a2 2 0 0 1 0 4h-2" stroke="#111" stroke-width="2" fill="none"/><rect x="3" y="9" width="9" height="6" rx="1" fill="#111"/></svg>
-    </div>
-  </div>
 
-  <!-- 탭 (화면 전환용) -->
-  <div class="screen-tabs">
-    <div class="screen-tab is-active" data-tab="login">로그인</div>
-    <div class="screen-tab" data-tab="signup">회원가입</div>
-    <div class="screen-tab" data-tab="profile">프로필 설정</div>
-    <div class="screen-tab" data-tab="group">그룹 생성</div>
-  </div>
+    <!-- 로그인 화면 -->
+    <section class="screen is-active" data-screen="login">
+        <div class="auth-logo">
+            <div class="auth-logo__symbol">
+                <svg viewBox="0 0 32 32"><circle cx="12" cy="12" r="4"/><circle cx="22" cy="10" r="3"/><circle cx="22" cy="22" r="3"/><path d="M16 12 L22 10 M16 12 L22 22 M12 16 L22 22" stroke="#fff" stroke-width="1.5" fill="none"/></svg>
+            </div>
+            <div class="auth-logo__name">모여</div>
+            <div class="auth-logo__desc">우리 그룹의 일정을 한곳에</div>
+        </div>
 
-  <!-- 로그인 화면 -->
-  <div class="screen is-active" data-screen="login">
-    <div class="auth-logo">
-      <div class="auth-logo__symbol">
-        <svg viewBox="0 0 32 32"><circle cx="12" cy="12" r="4"/><circle cx="22" cy="10" r="3"/><circle cx="22" cy="22" r="3"/><path d="M16 12 L22 10 M16 12 L22 22 M12 16 L22 22" stroke="#fff" stroke-width="1.5" fill="none"/></svg>
-      </div>
-      <div class="auth-logo__name">모여</div>
-      <div class="auth-logo__desc">우리 그룹의 일정을 한곳에</div>
-    </div>
+        <p class="form-error" data-google-error role="alert"></p>
 
-    <div class="form-group">
-      <label class="form-label">이메일</label>
-      <input class="form-input" type="email" placeholder="이메일을 입력하세요">
-    </div>
-    <div class="form-group">
-      <label class="form-label">비밀번호</label>
-      <div class="input-wrap">
-        <input class="form-input" type="password" placeholder="비밀번호를 입력하세요">
-        <button class="btn-toggle-pw">
-          <svg viewBox="0 0 24 24" stroke="#888" stroke-width="2" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <button class="btn-social btn-social--google" data-google-login>
+            <div class="btn-social__icon" style="background:#ffffff; border:1px solid #e0e0e0; font-size:13px; font-weight:900; color:#4285F4;">G</div>
+            Google로 시작하기
         </button>
-      </div>
-      <div class="form-error">이메일 또는 비밀번호가 올바르지 않습니다.</div>
-    </div>
 
-    <button class="btn-primary">로그인</button>
+        <p class="auth-footer" style="color:#c4c9d2; font-size:12px; padding-top:20px; padding-bottom:0;">로그인 시 서비스 이용약관 및 개인정보 처리방침에 동의합니다.</p>
+    </section>
 
-    <div class="divider">
-      <div class="divider__line"></div>
-      <div class="divider__text">또는 소셜 계정으로 로그인</div>
-      <div class="divider__line"></div>
-    </div>
+    <!-- 그룹 생성 화면 (신규 사용자 전용) -->
+    <section class="screen" data-screen="group">
+        <div style="padding-top:28px;">
+            <h2 style="font-size:22px; font-weight:700; color:#111; letter-spacing:-0.5px; margin-bottom:4px;">첫 번째 그룹을 만들어요</h2>
+            <p style="font-size:14px; color:#888; margin-bottom:28px;">나중에 더 만들거나 참여할 수 있어요</p>
 
-    <div class="social-btns">
-      <button class="btn-social btn-social--kakao">
-        <div class="btn-social__icon" style="background:#3C1E1E; color:#FEE500; font-size:14px; font-weight:900;">K</div>
-        카카오로 로그인
-      </button>
-      <button class="btn-social btn-social--naver">
-        <div class="btn-social__icon" style="color:#ffffff; font-size:14px; font-weight:900;">N</div>
-        네이버로 로그인
-      </button>
-    </div>
-
-    <div class="auth-footer">
-      아직 계정이 없으신가요? <a href="#">회원가입</a>
-    </div>
-  </div>
-
-  <!-- 회원가입 화면 -->
-  <div class="screen" data-screen="signup">
-    <div style="padding-top: 28px;">
-      <div style="font-size: 22px; font-weight: 700; color: #111; letter-spacing: -0.5px; margin-bottom: 4px;">계정 만들기</div>
-      <div style="font-size: 14px; color: #888; margin-bottom: 28px;">이메일로 가입하세요</div>
-
-      <div class="form-group">
-        <label class="form-label">이름</label>
-        <input class="form-input" type="text" placeholder="실명을 입력하세요">
-      </div>
-      <div class="form-group">
-        <label class="form-label">이메일</label>
-        <div class="form-row" style="display:flex; gap:8px;">
-          <div style="flex:1;">
-            <input class="form-input" type="email" placeholder="이메일을 입력하세요">
-          </div>
-          <button class="btn-verify" style="height:50px; padding: 0 14px; background:#f8f9fa; border:1px solid #e5e8eb; border-radius:8px; font-size:13px; font-weight:500; font-family:inherit; color:#333; cursor:pointer; flex-shrink:0; white-space:nowrap;">인증 발송</button>
-        </div>
-        <div style="margin-top:8px;">
-          <input class="form-input" type="text" placeholder="인증번호 6자리" style="letter-spacing: 4px; font-size: 18px; font-weight:600; text-align:center;">
-        </div>
-        <div style="font-size:12px; color:#888; margin-top:6px; text-align:right;">유효시간 <span style="color:#111; font-weight:600;">4:59</span></div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">비밀번호</label>
-        <div class="input-wrap">
-          <input class="form-input" type="password" placeholder="영문·숫자·특수문자 포함 8자 이상">
-          <button class="btn-toggle-pw"><svg viewBox="0 0 24 24" stroke="#888" stroke-width="2" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">비밀번호 확인</label>
-        <div class="input-wrap">
-          <input class="form-input" type="password" placeholder="비밀번호를 한 번 더 입력하세요">
-          <button class="btn-toggle-pw"><svg viewBox="0 0 24 24" stroke="#888" stroke-width="2" fill="none"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
-        </div>
-        <div class="form-error is-visible">비밀번호가 일치하지 않습니다.</div>
-      </div>
-
-      <!-- 약관 동의 -->
-      <div class="terms-wrap">
-        <div class="terms-all">
-          <div class="custom-check is-checked"><svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg></div>
-          <span class="terms-all__label">전체 동의하기</span>
-        </div>
-        <div class="terms-list">
-          <div class="terms-item">
-            <div class="terms-item__left">
-              <div class="custom-check is-checked"><svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg></div>
-              <span class="terms-item__badge">필수</span>
-              <span class="terms-item__label">서비스 이용약관 동의</span>
+            <div class="form-group">
+                <label class="form-label">그룹 유형</label>
+                <div class="group-type-grid">
+                    <div class="group-type-item is-selected">
+                        <span class="group-type-item__emoji">👨‍👩‍👧‍👦</span>
+                        <span class="group-type-item__label">가족</span>
+                    </div>
+                    <div class="group-type-item">
+                        <span class="group-type-item__emoji">💑</span>
+                        <span class="group-type-item__label">커플</span>
+                    </div>
+                    <div class="group-type-item">
+                        <span class="group-type-item__emoji">💼</span>
+                        <span class="group-type-item__label">회사팀</span>
+                    </div>
+                    <div class="group-type-item">
+                        <span class="group-type-item__emoji">🎯</span>
+                        <span class="group-type-item__label">프로젝트</span>
+                    </div>
+                    <div class="group-type-item">
+                        <span class="group-type-item__emoji">📚</span>
+                        <span class="group-type-item__label">스터디</span>
+                    </div>
+                    <div class="group-type-item">
+                        <span class="group-type-item__emoji">🎉</span>
+                        <span class="group-type-item__label">동아리</span>
+                    </div>
+                    <div class="group-type-item">
+                        <span class="group-type-item__emoji">✨</span>
+                        <span class="group-type-item__label">기타</span>
+                    </div>
+                </div>
             </div>
-            <div class="terms-item__arrow"><svg viewBox="0 0 24 24" stroke="#ccc" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"/></svg></div>
-          </div>
-          <div class="terms-item">
-            <div class="terms-item__left">
-              <div class="custom-check is-checked"><svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg></div>
-              <span class="terms-item__badge">필수</span>
-              <span class="terms-item__label">개인정보 처리방침 동의</span>
+
+            <div class="form-group">
+                <label class="form-label" for="group-name">그룹 이름</label>
+                <input class="form-input" id="group-name" type="text" placeholder="예: 우리 가족, 마케팅팀">
             </div>
-            <div class="terms-item__arrow"><svg viewBox="0 0 24 24" stroke="#ccc" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"/></svg></div>
-          </div>
-          <div class="terms-item">
-            <div class="terms-item__left">
-              <div class="custom-check"><svg viewBox="0 0 12 12"><polyline points="1,6 4.5,10 11,2"/></svg></div>
-              <span class="terms-item__badge terms-item__badge--optional">선택</span>
-              <span class="terms-item__label">마케팅 정보 수신 동의</span>
-            </div>
-            <div class="terms-item__arrow"><svg viewBox="0 0 24 24" stroke="#ccc" stroke-width="2" fill="none"><polyline points="9 18 15 12 9 6"/></svg></div>
-          </div>
+
+            <button class="btn-primary" data-create-group>그룹 만들고 시작하기</button>
+            <p style="text-align:center; padding:16px 0 32px;">
+                <span style="font-size:13px; color:#888;">이미 초대코드가 있어요 → </span>
+                <a href="#" data-join-code style="font-size:13px; color:#111; font-weight:600; text-decoration:none;">코드 입력하기</a>
+            </p>
         </div>
-      </div>
+    </section>
 
-      <button class="btn-primary" style="margin-top:20px;">다음</button>
-      <div class="auth-footer">이미 계정이 있으신가요? <a href="#">로그인</a></div>
-    </div>
-  </div>
-
-  <!-- 프로필 설정 화면 -->
-  <div class="screen" data-screen="profile">
-    <div class="step-indicator">
-      <div class="step-dot is-done"></div>
-      <div class="step-dot is-active"></div>
-      <div class="step-dot"></div>
-    </div>
-
-    <div style="font-size: 22px; font-weight: 700; color: #111; letter-spacing: -0.5px; margin-bottom: 4px;">프로필을 설정하세요</div>
-    <div style="font-size: 14px; color: #888; margin-bottom: 32px;">그룹 멤버들에게 표시되는 정보예요</div>
-
-    <div class="profile-setup">
-      <div class="profile-avatar">
-        <div class="profile-avatar__icon">
-          <svg viewBox="0 0 32 32" stroke="#c4c9d2" stroke-width="1.5" fill="none"><circle cx="16" cy="12" r="5"/><path d="M6 26c0-5.523 4.477-10 10-10s10 4.477 10 10"/></svg>
-        </div>
-        <div class="profile-avatar__edit">
-          <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-        </div>
-      </div>
-      <div class="profile-avatar-label">사진 추가</div>
-
-      <div class="form-group">
-        <label class="form-label">닉네임</label>
-        <input class="form-input" type="text" placeholder="그룹에서 불릴 이름" value="민준">
-        <div style="font-size:12px; color:#888; margin-top:4px; text-align:right;">3 / 10자</div>
-      </div>
-
-      <div class="form-group" style="margin-top:8px;">
-        <label class="form-label">상태 메시지 <span style="color:#c4c9d2; font-weight:400;">(선택)</span></label>
-        <input class="form-input" type="text" placeholder="나를 소개해보세요">
-      </div>
-    </div>
-
-    <button class="btn-primary" style="margin-top:32px;">다음</button>
-  </div>
-
-  <!-- 그룹 생성 화면 -->
-  <div class="screen" data-screen="group">
-    <div class="step-indicator">
-      <div class="step-dot is-done"></div>
-      <div class="step-dot is-done"></div>
-      <div class="step-dot is-active"></div>
-    </div>
-
-    <div style="font-size: 22px; font-weight: 700; color: #111; letter-spacing: -0.5px; margin-bottom: 4px;">첫 번째 그룹을 만들어요</div>
-    <div style="font-size: 14px; color: #888; margin-bottom: 28px;">나중에 더 만들거나 참여할 수 있어요</div>
-
-    <div class="form-group">
-      <label class="form-label">그룹 유형</label>
-      <div class="group-type-grid">
-        <div class="group-type-item is-selected">
-          <span class="group-type-item__emoji">👨‍👩‍👧‍👦</span>
-          <span class="group-type-item__label">가족</span>
-        </div>
-        <div class="group-type-item">
-          <span class="group-type-item__emoji">💑</span>
-          <span class="group-type-item__label">커플</span>
-        </div>
-        <div class="group-type-item">
-          <span class="group-type-item__emoji">💼</span>
-          <span class="group-type-item__label">회사팀</span>
-        </div>
-        <div class="group-type-item">
-          <span class="group-type-item__emoji">🎯</span>
-          <span class="group-type-item__label">프로젝트</span>
-        </div>
-        <div class="group-type-item">
-          <span class="group-type-item__emoji">📚</span>
-          <span class="group-type-item__label">스터디</span>
-        </div>
-        <div class="group-type-item">
-          <span class="group-type-item__emoji">🎉</span>
-          <span class="group-type-item__label">동아리</span>
-        </div>
-        <div class="group-type-item">
-          <span class="group-type-item__emoji">✨</span>
-          <span class="group-type-item__label">기타</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label">그룹 이름</label>
-      <input class="form-input" type="text" placeholder="예: 우리 가족, 마케팅팀" value="우리 가족">
-    </div>
-
-    <div style="background:#f8f9fa; border-radius:10px; padding:16px; margin-top:4px; margin-bottom:24px;">
-      <div style="font-size:13px; font-weight:600; color:#111; margin-bottom:12px;">초대 코드 미리보기</div>
-      <div style="display:flex; align-items:center; justify-content:space-between;">
-        <div style="font-size:22px; font-weight:700; color:#111; letter-spacing:6px;">FMLY8392</div>
-        <button style="height:36px; padding:0 14px; background:#111; color:#fff; border:none; border-radius:6px; font-size:12px; font-weight:600; font-family:inherit; cursor:pointer;">복사</button>
-      </div>
-      <div style="font-size:12px; color:#888; margin-top:8px;">그룹 생성 후 멤버에게 공유하세요</div>
-    </div>
-
-    <button class="btn-primary">그룹 만들고 시작하기</button>
-    <div style="text-align:center; padding:16px 0 32px;">
-      <span style="font-size:13px; color:#888;">이미 초대코드가 있어요 → </span>
-      <a href="#" style="font-size:13px; color:#111; font-weight:600; text-decoration:none;">코드 입력하기</a>
-    </div>
-  </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="resource/js/firebase-config.js"></script>
+<script src="resource/js/auth.js"></script>
+<script src="resource/js/db.js"></script>
+<script src="resource/js/main.js"></script>
 <script>
-  const tabs = document.querySelectorAll('[data-tab]');
-  const screens = document.querySelectorAll('[data-screen]');
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.dataset.tab;
-      tabs.forEach(t => t.classList.remove('is-active'));
-      screens.forEach(s => s.classList.remove('is-active'));
-      tab.classList.add('is-active');
-      document.querySelector('[data-screen="' + target + '"]').classList.add('is-active');
+/* ── 화면 전환 헬퍼 ── */
+function _showScreen(name) {
+    document.querySelectorAll('.screen').forEach(function (s) {
+        s.classList.toggle('is-active', s.dataset.screen === name);
     });
-  });
+}
+
+/* ── auth.js 콜백: 그룹 있는 기존 사용자 → 홈으로 ── */
+function onGroupLoaded() {
+    location.href = 'app.html';
+}
+
+/* ── auth.js 콜백: 그룹 없는 신규 사용자 → 그룹 생성 화면으로 ── */
+function onGroupRequired() {
+    _showScreen('group');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    /* Google 로그인 */
+    var googleBtn = document.querySelector('[data-google-login]');
+    if (googleBtn) {
+        googleBtn.addEventListener('click', function () {
+            if (typeof window.signInWithGoogle === 'function') window.signInWithGoogle();
+        });
+    }
+
+    /* 그룹 유형 선택 */
+    document.addEventListener('click', function (e) {
+        var item = e.target.closest('.group-type-item');
+        if (!item) return;
+        document.querySelectorAll('.group-type-item').forEach(function (el) {
+            el.classList.remove('is-selected');
+        });
+        item.classList.add('is-selected');
+    });
+
+    /* 그룹 만들기 */
+    var createBtn = document.querySelector('[data-create-group]');
+    if (createBtn) {
+        createBtn.addEventListener('click', function () {
+            var nameInput = document.getElementById('group-name');
+            var name = nameInput ? nameInput.value.trim() : '';
+            name = name || '우리 그룹';
+            var emojiEl = document.querySelector('.group-type-item.is-selected .group-type-item__emoji');
+            var emoji = emojiEl ? emojiEl.textContent.trim() : '👨‍👩‍👧‍👦';
+            createBtn.disabled = true;
+            createBtn.textContent = '생성 중...';
+            if (IS_FIREBASE_READY && typeof window.createGroup === 'function') {
+                window.createGroup(name, emoji).catch(function (err) {
+                    createBtn.disabled = false;
+                    createBtn.textContent = '그룹 만들고 시작하기';
+                    alert(err.message || '그룹 생성에 실패했습니다.');
+                });
+            } else {
+                location.href = 'app.html';
+            }
+        });
+    }
+
+    /* 초대 코드로 참여 */
+    var joinLink = document.querySelector('[data-join-code]');
+    if (joinLink) {
+        joinLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (!IS_FIREBASE_READY) { location.href = 'app.html'; return; }
+            var code = window.prompt('초대 코드를 입력해주세요 (예: FMLY8392)');
+            if (!code) return;
+            window.joinGroup(code).catch(function (err) {
+                alert(err.message || '그룹 참여에 실패했습니다.');
+            });
+        });
+    }
+
+});
 </script>
 </body>
 </html>

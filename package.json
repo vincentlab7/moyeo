@@ -1,0 +1,9 @@
+{
+  "name": "moyeo",
+  "version": "1.0.0",
+  "description": "가족 일정 공유 앱",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

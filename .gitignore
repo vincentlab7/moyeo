@@ -1,0 +1,5 @@
+.env
+node_modules/
+service-account.json
+.playwright-mcp/
+auth_bak.html
