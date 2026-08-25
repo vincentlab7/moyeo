@@ -1,7 +1,7 @@
 /* ── 목업 레이아웃 ── */
 body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; color: #111111; background: #f0f0f0; display: flex; align-items: flex-start; justify-content: center; min-height: 100vh; gap: 24px; flex-wrap: wrap;}
 .phone-wrap {display: flex; flex-direction: column; align-items: center;}
-.phone-label {margin-bottom: 12px; font-size: 14px; font-weight: 600; color: #888888;}
+.phone-label {margin-bottom: 12px; font-size: 15px; font-weight: 600; color: #888888;}
 .phone-frame {width: 390px; height: 844px; background: #f8f9fa; position: relative; box-shadow: 0 0 0 1px #e5e8eb, 0 24px 64px rgba(0,0,0,0.12); overflow: hidden;}
 
 /* ── 화면 전환 래퍼 (03~06 공통) ── */
@@ -40,7 +40,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .tab-item {flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; border: none; background: none; padding: 0;}
 .tab-item__icon {width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;}
 .tab-item__icon svg {width: 22px; height: 22px; stroke: #c4c9d2; stroke-width: 1.8; fill: none;}
-.tab-item__label {font-size: 11px; color: #c4c9d2; font-weight: 500;}
+.tab-item__label {font-size: 12px; color: #c4c9d2; font-weight: 500;}
 .tab-item.is-active .tab-item__icon svg {stroke: #111111;}
 .tab-item.is-active .tab-item__label {color: #111111; font-weight: 700;}
 
@@ -68,11 +68,11 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .auth-logo__symbol {width: 56px; height: 56px; background: #111111; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;}
 .auth-logo__symbol svg {width: 32px; height: 32px; fill: #ffffff;}
 .auth-logo__name {font-size: 23px; font-weight: 700; color: #111111; letter-spacing: -0.5px;}
-.auth-logo__desc {font-size: 14px; color: #888888; margin-top: 6px; line-height: 1.5;}
+.auth-logo__desc {font-size: 15px; color: #888888; margin-top: 6px; line-height: 1.5;}
 
 /* 폼 */
 .form-group {margin-bottom: 12px;}
-.form-label {font-size: 14px; font-weight: 500; color: #333333; margin-bottom: 6px; display: block;}
+.form-label {font-size: 15px; font-weight: 500; color: #333333; margin-bottom: 6px; display: block;}
 .form-input {width: 100%; height: 50px; border: 1px solid #e5e8eb; border-radius: 8px; padding: 0 16px; font-size: 16px; font-family: inherit; color: #111111; background: #ffffff; outline: none; transition: border-color 0.2s;}
 .form-input::placeholder {color: #c4c9d2;}
 .form-input:focus {border-color: #111111;}
@@ -95,16 +95,16 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .btn-social {width: 100%; height: 50px; border-radius: 10px; border: 1px solid #e5e8eb; background: #ffffff; font-size: 15px; font-weight: 500; font-family: inherit; color: #333333; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;}
 .btn-social--kakao {background: #FEE500; border-color: #FEE500; color: #191919;}
 .btn-social--naver {background: #03C75A; border-color: #03C75A; color: #ffffff;}
-.btn-social__icon {width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700;}
+.btn-social__icon {width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700;}
 
 /* 하단 링크 */
-.auth-footer {text-align: center; padding: 24px 0 32px; font-size: 14px; color: #888888;}
+.auth-footer {text-align: center; padding: 24px 0 32px; font-size: 15px; color: #888888;}
 .auth-footer a {color: #111111; font-weight: 600; text-decoration: none;}
 
 /* 회원가입 폼 행 */
 .form-row {display: flex; gap: 8px;}
 .form-row .form-group {flex: 1;}
-.form-row .btn-verify {height: 50px; white-space: nowrap; padding: 0 16px; background: #f8f9fa; border: 1px solid #e5e8eb; border-radius: 8px; font-size: 14px; font-weight: 500; font-family: inherit; color: #333333; cursor: pointer; width: auto; flex-shrink: 0; margin-top: 21px;}
+.form-row .btn-verify {height: 50px; white-space: nowrap; padding: 0 16px; background: #f8f9fa; border: 1px solid #e5e8eb; border-radius: 8px; font-size: 15px; font-weight: 500; font-family: inherit; color: #333333; cursor: pointer; width: auto; flex-shrink: 0; margin-top: 21px;}
 .form-row .btn-verify.is-sent {color: #111111; border-color: #111111; background: #ffffff;}
 
 /* 비밀번호 토글 */
@@ -122,7 +122,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .terms-item__left {display: flex; align-items: center; gap: 10px; cursor: pointer;}
 .terms-item__badge {font-size: 12px; font-weight: 600; color: #ffffff; background: #111111; border-radius: 3px; padding: 2px 5px; flex-shrink: 0;}
 .terms-item__badge--optional {background: #c4c9d2;}
-.terms-item__label {font-size: 14px; color: #333333;}
+.terms-item__label {font-size: 15px; color: #333333;}
 .terms-item__arrow {color: #c4c9d2;}
 .terms-item__arrow svg {width: 16px; height: 16px;}
 .custom-check {width: 20px; height: 20px; border: 1.5px solid #d4d8de; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s;}
@@ -137,7 +137,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .profile-avatar__icon svg {width: 32px; height: 32px;}
 .profile-avatar__edit {position: absolute; bottom: 0; right: 0; width: 26px; height: 26px; background: #111111; border-radius: 50%; display: flex; align-items: center; justify-content: center;}
 .profile-avatar__edit svg {width: 14px; height: 14px; stroke: #ffffff; stroke-width: 2; fill: none;}
-.profile-avatar-label {font-size: 14px; color: #888888; text-align: center; margin-bottom: 28px;}
+.profile-avatar-label {font-size: 15px; color: #888888; text-align: center; margin-bottom: 28px;}
 .step-indicator {display: flex; align-items: center; justify-content: center; gap: 6px; padding: 20px 0 28px;}
 .step-dot {width: 6px; height: 6px; border-radius: 50%; background: #e5e8eb;}
 .step-dot.is-active {width: 20px; border-radius: 3px; background: #111111;}
@@ -169,9 +169,9 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .ai-card__label {font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 5px;}
 .ai-card__label-dot {width: 5px; height: 5px; background: #4ade80; border-radius: 50%;}
 .ai-card__title {font-size: 16px; font-weight: 700; color: #ffffff; margin-bottom: 10px; line-height: 1.4;}
-.ai-card__body {font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.7;}
+.ai-card__body {font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.7;}
 .ai-card__body strong {color: #ffffff; font-weight: 600;}
-.ai-card__highlight {margin-top: 12px; padding: 10px 12px; background: rgba(255,255,255,0.1); border-radius: 8px; font-size: 14px; color: #ffffff; line-height: 1.5; font-weight: 500;}
+.ai-card__highlight {margin-top: 12px; padding: 10px 12px; background: rgba(255,255,255,0.1); border-radius: 8px; font-size: 15px; color: #ffffff; line-height: 1.5; font-weight: 500;}
 .ai-card__highlight svg {width: 14px; height: 14px; display: inline; vertical-align: middle; margin-right: 4px; fill: #fbbf24;}
 
 /* 섹션 */
@@ -185,7 +185,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 /* 오늘 날짜 바 */
 .today-bar {padding: 14px 16px 12px; display: flex; align-items: baseline; gap: 6px;}
 .today-bar__date {font-size: 23px; font-weight: 700; color: #111111; letter-spacing: -0.5px;}
-.today-bar__day {font-size: 14px; color: #888888;}
+.today-bar__day {font-size: 15px; color: #888888;}
 .today-bar__badge {margin-left: auto; font-size: 12px; font-weight: 600; color: #ffffff; background: #111111; border-radius: 20px; padding: 3px 10px;}
 
 /* 일정 리스트 */
@@ -193,7 +193,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .schedule-item {display: flex; align-items: flex-start; gap: 12px; padding: 10px 4px; border-bottom: 1px solid #f8f9fa; cursor: pointer; border-radius: 8px; transition: background 0.12s;}
 .schedule-item:active {background: #f4f5f6;}
 .schedule-item:last-child {border-bottom: none;}
-.schedule-item__avatar {width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; color: #ffffff;}
+.schedule-item__avatar {width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex-shrink: 0; color: #ffffff;}
 .schedule-item__info {flex: 1;}
 .schedule-item__name {font-size: 13px; color: #888888; margin-bottom: 2px;}
 .schedule-item__title {font-size: 15px; font-weight: 600; color: #111111;}
@@ -206,7 +206,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .dinner-col__label svg {width: 13px; height: 13px;}
 .dinner-member {display: flex; align-items: center; gap: 8px; padding: 6px 0;}
 .dinner-member__avatar {width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #ffffff; flex-shrink: 0;}
-.dinner-member__name {font-size: 14px; color: #333333;}
+.dinner-member__name {font-size: 15px; color: #333333;}
 
 /* 할일 미니 */
 .todo-mini {padding: 12px 16px 16px;}
@@ -230,9 +230,9 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .noti-item {display: flex; gap: 10px; padding: 8px 4px; border-bottom: 1px solid #f8f9fa; cursor: pointer; border-radius: 8px; transition: background 0.12s;}
 .noti-item:last-child {border-bottom: none;}
 .noti-item:active {background: #f4f5f6;}
-.noti-item__avatar {width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #ffffff; flex-shrink: 0;}
+.noti-item__avatar {width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: #ffffff; flex-shrink: 0;}
 .noti-item__body {flex: 1;}
-.noti-item__text {font-size: 14px; color: #333333; line-height: 1.5;}
+.noti-item__text {font-size: 15px; color: #333333; line-height: 1.5;}
 .noti-item__text strong {color: #111111; font-weight: 600;}
 .noti-item__time {font-size: 12px; color: #c4c9d2; margin-top: 2px;}
 
@@ -247,7 +247,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .home-quick-sheet__title {font-size: 22px; font-weight: 700; color: #111111; letter-spacing: -0.5px; margin-bottom: 12px; line-height: 1.3;}
 .home-quick-sheet__author {display: flex; align-items: center; gap: 8px;}
 .home-quick-sheet__avatar {width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #ffffff; flex-shrink: 0;}
-.home-quick-sheet__author-name {font-size: 14px; color: #464c53; font-weight: 500;}
+.home-quick-sheet__author-name {font-size: 15px; color: #464c53; font-weight: 500;}
 .home-quick-sheet__divider {height: 1px; background: #f0f0f0; margin: 0 20px;}
 .home-quick-sheet__info {padding: 18px 20px; display: flex; flex-direction: column; gap: 16px; list-style: none; margin: 0;}
 .home-quick-sheet__info-item {display: flex; align-items: center; gap: 14px;}
@@ -264,7 +264,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .group-sheet.is-open {display: flex;}
 .group-sheet__panel {background: #ffffff; border-radius: 20px 20px 0 0; width: 100%; padding: 8px 0 40px;}
 .group-sheet__handle {width: 36px; height: 4px; background: #e5e8eb; border-radius: 2px; margin: 12px auto 20px;}
-.group-sheet__title {font-size: 14px; font-weight: 600; color: #888888; padding: 0 20px 12px; border-bottom: 1px solid #f0f0f0;}
+.group-sheet__title {font-size: 15px; font-weight: 600; color: #888888; padding: 0 20px 12px; border-bottom: 1px solid #f0f0f0;}
 .group-item {display: flex; align-items: center; gap: 12px; padding: 14px 20px; cursor: pointer;}
 .group-item:active {background: #f8f9fa;}
 .group-item__emoji {width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 21px;}
@@ -307,14 +307,14 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
    ════════════════════════════════════════════════ */
 /* 필터 탭 */
 .filter-tabs {background: #ffffff; padding: 0 20px; display: flex; gap: 0; border-bottom: 1px solid #f0f0f0;}
-.filter-tab {padding: 10px 14px; font-size: 14px; font-weight: 500; color: #888888; cursor: pointer; border: none; background: none; font-family: inherit; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap;}
+.filter-tab {padding: 10px 14px; font-size: 15px; font-weight: 500; color: #888888; cursor: pointer; border: none; background: none; font-family: inherit; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap;}
 .filter-tab.is-active {color: #111111; font-weight: 700; border-bottom-color: #111111;}
 
 /* 날짜 그룹 */
 .date-group {padding: 20px 20px 0;}
 .date-group__header {display: flex; align-items: center; gap: 8px; margin-bottom: 12px;}
 .date-group__date {font-size: 15px; font-weight: 700; color: #111111;}
-.date-group__day {font-size: 14px; color: #888888;}
+.date-group__day {font-size: 15px; color: #888888;}
 .date-group__today {font-size: 12px; font-weight: 700; background: #111111; color: #ffffff; border-radius: 20px; padding: 2px 8px;}
 .date-group__line {flex: 1; height: 1px; background: #f0f0f0;}
 
@@ -330,7 +330,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .schedule-card__time {font-size: 13px; color: #888888; display: flex; align-items: center; gap: 3px;}
 .schedule-card__time svg {width: 12px; height: 12px; stroke: #c4c9d2; stroke-width: 2; fill: none;}
 .schedule-card__members {display: flex; flex-shrink: 0;}
-.schedule-card__avatar {width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #ffffff; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #ffffff; margin-right: -6px;}
+.schedule-card__avatar {width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #ffffff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #ffffff; margin-right: -6px;}
 .schedule-card__dinner {display: flex; align-items: center; gap: 4px; margin-top: 8px; font-size: 13px; color: #888888;}
 .schedule-card__dinner svg {width: 13px; height: 13px; stroke-width: 1.8; fill: none;}
 
@@ -339,7 +339,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .empty-state__icon {width: 56px; height: 56px; background: #f0f0f0; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;}
 .empty-state__icon svg {width: 28px; height: 28px; stroke: #c4c9d2; stroke-width: 1.5; fill: none;}
 .empty-state__text {font-size: 16px; font-weight: 600; color: #333333; margin-bottom: 6px;}
-.empty-state__sub {font-size: 14px; color: #888888;}
+.empty-state__sub {font-size: 15px; color: #888888;}
 
 /* 등록 화면 */
 .register-screen {background: #ffffff;}
@@ -373,12 +373,12 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 
 /* 분류 칩 */
 .category-chips {display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px;}
-.category-chip {padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e5e8eb; font-size: 14px; font-weight: 500; color: #888888; cursor: pointer; background: #ffffff;}
+.category-chip {padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e5e8eb; font-size: 15px; font-weight: 500; color: #888888; cursor: pointer; background: #ffffff;}
 .category-chip.is-selected {border-color: #111111; background: #111111; color: #ffffff; font-weight: 600;}
 
 /* 저녁 토글 */
 .dinner-toggle {display: flex; gap: 8px; margin-top: 4px;}
-.dinner-btn {flex: 1; height: 40px; border-radius: 8px; border: 1.5px solid #e5e8eb; background: #ffffff; font-size: 14px; font-weight: 500; font-family: inherit; color: #888888; cursor: pointer;}
+.dinner-btn {flex: 1; height: 40px; border-radius: 8px; border: 1.5px solid #e5e8eb; background: #ffffff; font-size: 15px; font-weight: 500; font-family: inherit; color: #888888; cursor: pointer;}
 .dinner-btn.is-selected {border-color: #111111; background: #111111; color: #ffffff; font-weight: 600;}
 .dinner-btn.is-selected.possible {border-color: #10b981; background: #10b981;}
 .dinner-btn.is-selected.impossible {border-color: #E52E2E; background: #E52E2E;}
@@ -395,8 +395,8 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .detail-tag {font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 20px; display: inline-block; margin-bottom: 12px;}
 .detail-title {font-size: 25px; font-weight: 700; color: #111111; letter-spacing: -0.5px; line-height: 1.3; margin-bottom: 8px;}
 .detail-author {display: flex; align-items: center; gap: 8px;}
-.detail-author__avatar {width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #ffffff;}
-.detail-author__name {font-size: 14px; color: #888888;}
+.detail-author__avatar {width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #ffffff;}
+.detail-author__name {font-size: 15px; color: #888888;}
 .detail-info {padding: 0 20px;}
 .detail-info-item {display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid #f8f9fa;}
 .detail-info-item:last-child {border-bottom: none;}
@@ -405,8 +405,8 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .detail-info-item__label {font-size: 13px; color: #888888; margin-bottom: 3px;}
 .detail-info-item__value {font-size: 15px; color: #111111; font-weight: 500; line-height: 1.5;}
 .detail-dinner {margin: 16px 20px; background: #f8f9fa; border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;}
-.detail-dinner__label {font-size: 14px; color: #333333; font-weight: 500;}
-.detail-dinner__badge {font-size: 14px; font-weight: 700; padding: 4px 12px; border-radius: 20px;}
+.detail-dinner__label {font-size: 15px; color: #333333; font-weight: 500;}
+.detail-dinner__badge {font-size: 15px; font-weight: 700; padding: 4px 12px; border-radius: 20px;}
 .detail-memo {margin: 0 20px 24px; padding: 14px 16px; background: #f8f9fa; border-radius: 10px;}
 .detail-memo__label {font-size: 13px; color: #888888; margin-bottom: 6px;}
 .detail-memo__text {font-size: 15px; color: #333333; line-height: 1.6;}
@@ -424,11 +424,11 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .search-recent {padding: 20px 20px 0;}
 .search-recent__header {display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;}
 .search-recent__title {font-size: 15px; font-weight: 600; color: #111111;}
-.search-recent__clear-all {font-size: 14px; color: #888888; border: none; background: none; cursor: pointer; padding: 0;}
+.search-recent__clear-all {font-size: 15px; color: #888888; border: none; background: none; cursor: pointer; padding: 0;}
 .search-recent__chips {display: flex; flex-wrap: wrap; gap: 8px;}
-.search-recent__chip {padding: 6px 14px; background: #f4f5f6; border: none; border-radius: 20px; font-size: 14px; color: #333333; cursor: pointer; font-family: inherit;}
+.search-recent__chip {padding: 6px 14px; background: #f4f5f6; border: none; border-radius: 20px; font-size: 15px; color: #333333; cursor: pointer; font-family: inherit;}
 .search-recent__chip:hover {background: #e8eaec;}
-.search-result-count {padding: 16px 20px 8px; font-size: 14px; color: #888888;}
+.search-result-count {padding: 16px 20px 8px; font-size: 15px; color: #888888;}
 .search-result-count strong {color: #256ef4;}
 .search-no-result {display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 0; gap: 12px;}
 .search-no-result[hidden] {display: none;}
@@ -492,14 +492,14 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 /* 시간 선택 */
 .time-picker {padding: 12px 20px 20px; border-top: 1px solid #f0f0f0;}
 .time-picker__ampm {display: flex; gap: 6px; margin-bottom: 10px;}
-.time-picker__ampm-btn {flex: 1; height: 36px; border: 1.5px solid #e5e8eb; border-radius: 8px; background: #ffffff; font-size: 14px; font-weight: 500; color: #888888; cursor: pointer; font-family: inherit; transition: all 0.15s;}
+.time-picker__ampm-btn {flex: 1; height: 36px; border: 1.5px solid #e5e8eb; border-radius: 8px; background: #ffffff; font-size: 15px; font-weight: 500; color: #888888; cursor: pointer; font-family: inherit; transition: all 0.15s;}
 .time-picker__ampm-btn.is-active {border-color: #111111; background: #111111; color: #ffffff; font-weight: 700;}
 .time-picker__hours {display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 10px;}
 .time-picker__hours::-webkit-scrollbar {display: none;}
 .time-picker__hour {flex-shrink: 0; width: 40px; height: 40px; border: 1.5px solid #e5e8eb; border-radius: 8px; background: #ffffff; font-size: 15px; color: #888888; cursor: pointer; font-family: inherit; transition: all 0.15s;}
 .time-picker__hour.is-selected {border-color: #111111; background: #111111; color: #ffffff; font-weight: 700;}
 .time-picker__mins {display: flex; gap: 6px;}
-.time-picker__min {flex: 1; height: 36px; border: 1.5px solid #e5e8eb; border-radius: 8px; background: #ffffff; font-size: 14px; color: #888888; cursor: pointer; font-family: inherit; white-space: nowrap; transition: all 0.15s;}
+.time-picker__min {flex: 1; height: 36px; border: 1.5px solid #e5e8eb; border-radius: 8px; background: #ffffff; font-size: 15px; color: #888888; cursor: pointer; font-family: inherit; white-space: nowrap; transition: all 0.15s;}
 .time-picker__min.is-selected {border-color: #111111; background: #111111; color: #ffffff; font-weight: 700;}
 
 /* 월 네비게이터 */
@@ -523,7 +523,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .empty-month__icon {width: 48px; height: 48px; background: #f4f5f6; border-radius: 12px; display: flex; align-items: center; justify-content: center;}
 .empty-month__icon svg {width: 24px; height: 24px; stroke: #cdd1d5; stroke-width: 1.5; fill: none;}
 .empty-month__text {font-size: 16px; font-weight: 600; color: #464c53;}
-.empty-month__sub {font-size: 14px; color: #8a949e; margin-top: -4px;}
+.empty-month__sub {font-size: 15px; color: #8a949e; margin-top: -4px;}
 
 /* ── 뷰 토글 (리스트/달력) ── */
 .view-toggle {display: flex; gap: 2px; background: #f4f5f6; border-radius: 8px; padding: 2px;}
@@ -565,23 +565,23 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .cal-day-popup__info {flex: 1;}
 .cal-day-popup__title {font-size: 15px; font-weight: 600; color: #111111; letter-spacing: -0.2px;}
 .cal-day-popup__time {font-size: 13px; color: #8a949e; margin-top: 1px;}
-.cal-day-popup__avatar {width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #ffffff; flex-shrink: 0;}
+.cal-day-popup__avatar {width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #ffffff; flex-shrink: 0;}
 
 /* ════════════════════════════════════════════════
    04 할일
    ════════════════════════════════════════════════ */
 /* 세그먼트 컨트롤 */
 .segment {display: flex; gap: 0; background: #f8f9fa; border-radius: 10px; padding: 3px; margin: 0 20px 14px;}
-.segment__tab {flex: 1; height: 34px; padding: 0 12px; border: none; background: none; font-size: 14px; font-weight: 500; color: #888888; cursor: pointer; border-radius: 8px; font-family: inherit; transition: all 0.15s; white-space: nowrap;}
+.segment__tab {flex: 1; height: 34px; padding: 0 12px; border: none; background: none; font-size: 15px; font-weight: 500; color: #888888; cursor: pointer; border-radius: 8px; font-family: inherit; transition: all 0.15s; white-space: nowrap;}
 .segment__tab.is-active {background: #ffffff; color: #111111; font-weight: 700; box-shadow: 0 1px 4px rgba(0,0,0,0.1);}
-.segment__tab-count {display: inline-flex; align-items: center; justify-content: center; min-width: 16px; height: 16px; padding: 0 4px; margin-left: 5px; border-radius: 8px; background: #E8F0FE; color: #3182F6; font-size: 11px; font-weight: 700; vertical-align: middle;}
+.segment__tab-count {display: inline-flex; align-items: center; justify-content: center; min-width: 16px; height: 16px; padding: 0 4px; margin-left: 5px; border-radius: 8px; background: #E8F0FE; color: #3182F6; font-size: 12px; font-weight: 700; vertical-align: middle;}
 .segment__tab.is-active .segment__tab-count {background: #3182F6; color: #ffffff;}
 
 /* 진행 요약 바 */
 .progress-summary {margin: 12px 20px; background: #ffffff; border-radius: 12px; padding: 14px 16px;}
 .progress-summary__top {display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;}
-.progress-summary__label {font-size: 14px; font-weight: 600; color: #111111;}
-.progress-summary__count {font-size: 14px; color: #888888;}
+.progress-summary__label {font-size: 15px; font-weight: 600; color: #111111;}
+.progress-summary__count {font-size: 15px; color: #888888;}
 .progress-summary__count span {color: #111111; font-weight: 700;}
 .progress-bar {height: 6px; background: #f0f0f0; border-radius: 3px; overflow: hidden;}
 .progress-bar__fill {height: 100%; background: #111111; border-radius: 3px; transition: width 0.3s;}
@@ -621,7 +621,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .todo-badge--due {background: #f4f5f6; color: #464c53;}
 .todo-badge--due-today {background: #fff8e6; color: #b45309; font-weight: 700;}
 .todo-badge--overdue {background: #fef2f2; color: #e11d48; font-weight: 700;}
-.add-due-date {border: 1px solid #e5e8eb; border-radius: 8px; background: #f8f9fa; font-size: 14px; color: #111111; font-weight: 500; cursor: pointer; font-family: inherit; padding: 6px 10px; outline: none;}
+.add-due-date {border: 1px solid #e5e8eb; border-radius: 8px; background: #f8f9fa; font-size: 15px; color: #111111; font-weight: 500; cursor: pointer; font-family: inherit; padding: 6px 10px; outline: none;}
 .add-due-date:focus {border-color: #3182F6; background: #ffffff;}
 .add-due-date::-webkit-calendar-picker-indicator {cursor: pointer; opacity: 0.5;}
 .todo-card__assignee {display: flex; align-items: center; gap: 4px;}
@@ -651,7 +651,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .filter-assignee-item__avatar {width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 700; color: #ffffff; border: 2.5px solid transparent; transition: border-color 0.2s ease;}
 .filter-assignee-item__avatar--all {background: #464c53;}
 .filter-assignee-item.is-selected .filter-assignee-item__avatar {border-color: #256ef4; box-shadow: 0 0 0 2px rgba(37,110,244,0.15);}
-.filter-assignee-item__name {font-size: 14px; color: #6d7882; font-weight: 500; transition: color 0.2s ease;}
+.filter-assignee-item__name {font-size: 15px; color: #6d7882; font-weight: 500; transition: color 0.2s ease;}
 .filter-assignee-item.is-selected .filter-assignee-item__name {color: #256ef4; font-weight: 700;}
 .filter-sheet__footer {padding: 8px 20px 0;}
 .filter-sheet__apply {width: 100%; height: 48px; background: #256ef4; color: #ffffff; font-size: 17px; font-weight: 700; border: none; border-radius: 6px; cursor: pointer; font-family: inherit;}
@@ -670,16 +670,16 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .add-input::placeholder {color: #d4d8de; font-weight: 600;}
 .add-row {display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-top: 1px solid #f8f9fa;}
 .add-row--memo {align-items: flex-start; padding-top: 14px;}
-.add-row__label {font-size: 14px; color: #888888; display: flex; align-items: center; gap: 8px; white-space: nowrap; padding-top: 2px;}
+.add-row__label {font-size: 15px; color: #888888; display: flex; align-items: center; gap: 8px; white-space: nowrap; padding-top: 2px;}
 .add-row__label svg {width: 16px; height: 16px; stroke: #888888; stroke-width: 1.8; fill: none;}
-.add-row__value {font-size: 14px; font-weight: 600; color: #111111; display: flex; align-items: center; gap: 4px;}
+.add-row__value {font-size: 15px; font-weight: 600; color: #111111; display: flex; align-items: center; gap: 4px;}
 .add-row__value svg {width: 14px; height: 14px; stroke: #888888; stroke-width: 2; fill: none;}
-.add-memo {flex: 1; margin-left: 12px; border: none; outline: none; resize: none; font-size: 14px; color: #1e2124; font-family: inherit; line-height: 1.6; background: none; min-height: 64px;}
+.add-memo {flex: 1; margin-left: 12px; border: none; outline: none; resize: none; font-size: 15px; color: #1e2124; font-family: inherit; line-height: 1.6; background: none; min-height: 64px;}
 .add-memo::placeholder {color: #c4c9d2;}
 
 /* 타입 / 상태 칩 */
 .type-chips {display: flex; gap: 6px;}
-.type-chip {padding: 6px 14px; border-radius: 20px; border: 1.5px solid #e5e8eb; font-size: 14px; font-weight: 500; color: #888888; cursor: pointer; background: #ffffff;}
+.type-chip {padding: 6px 14px; border-radius: 20px; border: 1.5px solid #e5e8eb; font-size: 15px; font-weight: 500; color: #888888; cursor: pointer; background: #ffffff;}
 .type-chip.is-selected {border-color: #111111; background: #111111; color: #ffffff; font-weight: 600;}
 .state-chips {display: flex; gap: 6px;}
 .state-chip {padding: 6px 12px; border-radius: 20px; border: 1.5px solid #e5e8eb; font-size: 13px; font-weight: 500; color: #888888; cursor: pointer; background: #ffffff;}
@@ -714,13 +714,13 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 /* 로그 아이템 */
 .log-item {display: flex; gap: 12px; padding: 10px 20px; background: #ffffff;}
 .log-item__timeline {display: flex; flex-direction: column; align-items: center; flex-shrink: 0; padding-top: 2px;}
-.log-item__avatar {width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #ffffff; flex-shrink: 0;}
+.log-item__avatar {width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: #ffffff; flex-shrink: 0;}
 .log-item__line {width: 1px; background: #f0f0f0; flex: 1; min-height: 12px; margin-top: 4px;}
 .activity-section article:last-of-type .log-item__line {display: none;}
 .log-item__body {flex: 1; padding-bottom: 8px;}
 .log-item__header {display: flex; align-items: baseline; gap: 6px; margin-bottom: 4px;}
-.log-item__name {font-size: 14px; font-weight: 700; color: #111111;}
-.log-item__action {font-size: 14px; color: #888888;}
+.log-item__name {font-size: 15px; font-weight: 700; color: #111111;}
+.log-item__action {font-size: 15px; color: #888888;}
 .log-item__time {font-size: 12px; color: #c4c9d2; margin-left: auto; flex-shrink: 0;}
 
 /* 로그 카드 */
@@ -743,7 +743,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .log-item--system .log-item__avatar {background: #f8f9fa; border: 1px solid #f0f0f0;}
 .log-item--system .log-item__avatar svg {width: 16px; height: 16px; stroke: #888888; stroke-width: 1.8; fill: none;}
 .system-bubble {background: #f8f9fa; border-radius: 10px; padding: 12px 14px; margin-top: 4px;}
-.system-bubble__text {font-size: 14px; color: #333333; line-height: 1.6;}
+.system-bubble__text {font-size: 15px; color: #333333; line-height: 1.6;}
 .system-bubble__text strong {color: #111111; font-weight: 700;}
 
 /* 이모지 반응 */
@@ -792,9 +792,9 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .profile-hero__badge svg {width: 11px; height: 11px; stroke: #ffffff; stroke-width: 2.5; fill: none;}
 .profile-hero__info {flex: 1;}
 .profile-hero__name {font-size: 21px; font-weight: 700; color: #111111; letter-spacing: -0.4px;}
-.profile-hero__status {font-size: 14px; color: #888888; margin-top: 3px;}
+.profile-hero__status {font-size: 15px; color: #888888; margin-top: 3px;}
 .profile-hero__role {display: inline-flex; align-items: center; gap: 4px; margin-top: 6px; font-size: 12px; font-weight: 700; background: #f0f0f0; color: #888888; padding: 3px 10px; border-radius: 20px;}
-.profile-hero__edit {font-size: 14px; font-weight: 600; color: #111111; background: #f8f9fa; border: 1px solid #e5e8eb; border-radius: 8px; padding: 8px 14px; cursor: pointer; white-space: nowrap; font-family: inherit;}
+.profile-hero__edit {font-size: 15px; font-weight: 600; color: #111111; background: #f8f9fa; border: 1px solid #e5e8eb; border-radius: 8px; padding: 8px 14px; cursor: pointer; white-space: nowrap; font-family: inherit;}
 
 /* 통계 카드 */
 .stats-row {display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 12px 16px;}
@@ -816,7 +816,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .menu-item__label {font-size: 16px; font-weight: 500; color: #111111;}
 .menu-item__sub {font-size: 13px; color: #888888; margin-top: 1px;}
 .menu-item__right {display: flex; align-items: center; gap: 6px;}
-.menu-item__value {font-size: 14px; color: #888888;}
+.menu-item__value {font-size: 15px; color: #888888;}
 .menu-item__arrow svg {width: 16px; height: 16px; stroke: #c4c9d2; stroke-width: 2; fill: none;}
 .menu-item__toggle {width: 44px; height: 26px; background: #111111; border-radius: 13px; position: relative; cursor: pointer; flex-shrink: 0;}
 .menu-item__toggle::after {content: ''; position: absolute; top: 3px; right: 3px; width: 20px; height: 20px; background: #ffffff; border-radius: 50%; box-shadow: 0 1px 3px rgba(0,0,0,0.2);}
@@ -828,7 +828,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 /* 공유 메모 */
 .memo-card {background: #ffffff; border-radius: 14px; margin: 0 16px 8px; overflow: hidden;}
 .memo-card__header {padding: 14px 16px 10px; display: flex; align-items: center; justify-content: space-between;}
-.memo-card__title {font-size: 14px; font-weight: 700; color: #111111;}
+.memo-card__title {font-size: 15px; font-weight: 700; color: #111111;}
 .memo-card__edit {font-size: 13px; color: #888888; cursor: pointer; border: none; background: none; font-family: inherit; padding: 0;}
 .memo-row {padding: 10px 16px; border-top: 1px solid #f8f9fa; display: flex; gap: 12px; align-items: flex-start;}
 .memo-row__icon {font-size: 17px; flex-shrink: 0; margin-top: 1px;}
@@ -857,7 +857,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .logout-btn {margin: 8px 16px 0; width: calc(100% - 32px); height: 50px; background: #ffffff; border: 1px solid #f0f0f0; border-radius: 12px; font-size: 16px; font-weight: 600; color: #E52E2E; cursor: pointer; font-family: inherit;}
 
 /* 그룹 관리 화면 */
-.header__save {background: #3182F6; color: #ffffff; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; padding: 7px 14px; cursor: pointer; font-family: inherit; transition: opacity 0.15s;}
+.header__save {background: #3182F6; color: #ffffff; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; padding: 7px 14px; cursor: pointer; font-family: inherit; transition: opacity 0.15s;}
 .header__save:disabled {opacity: 0.5; cursor: not-allowed;}
 .group-manage-info {background: #ffffff; border-radius: 14px; margin: 16px 16px 0; padding: 16px;}
 .group-manage-emoji-row {display: flex; gap: 8px; margin-bottom: 14px;}
@@ -912,7 +912,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .profile-edit-avatar__camera input {display: none;}
 .profile-edit-avatar__remove {background: none; border: none; padding: 0; font-size: 13px; color: #F04452; cursor: pointer; font-family: inherit; font-weight: 400;}
 .profile-edit-section {margin-bottom: 22px;}
-.profile-edit-label {font-size: 14px; font-weight: 600; color: #4e5968; margin-bottom: 10px;}
+.profile-edit-label {font-size: 15px; font-weight: 600; color: #4e5968; margin-bottom: 10px;}
 .profile-color-chips {display: flex; gap: 10px; flex-wrap: wrap;}
 .profile-color-chip {width: 36px; height: 36px; border-radius: 50%; border: 3px solid transparent; cursor: pointer; transition: border-color 0.12s, transform 0.1s;}
 .profile-color-chip:nth-child(1) {background: #4f7cff;}
