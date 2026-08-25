@@ -2408,6 +2408,106 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   /* ══════════════════════════════════════════
+     02 홈 — 퀵 상세 바텀시트
+     오늘 일정 / 최근 알림 클릭 → 상세 시트 오픈
+  ══════════════════════════════════════════ */
+  (function () {
+    var overlay = document.querySelector('[data-home-quick-overlay]');
+    if (!overlay) return;
+
+    var tagEl        = overlay.querySelector('[data-hq-tag]');
+    var titleEl      = overlay.querySelector('[data-hq-title]');
+    var avatarEl     = overlay.querySelector('[data-hq-avatar]');
+    var authorNameEl = overlay.querySelector('[data-hq-author-name]');
+    var infoEl       = overlay.querySelector('[data-hq-info]');
+    var goBtn        = overlay.querySelector('[data-hq-go-btn]');
+    var currentTab   = 'schedule';
+
+    var CLOCK_SVG  = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+    var CHECK_SVG  = '<svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>';
+    var PERSON_SVG = '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+
+    function buildRow(icon, label, value) {
+      return '<li class="home-quick-sheet__info-item">' + icon +
+        '<span class="home-quick-sheet__info-label">' + label + '</span>' +
+        '<span class="home-quick-sheet__info-value">' + value + '</span></li>';
+    }
+
+    function openSheet(d) {
+      tagEl.textContent        = d.tag || '';
+      tagEl.style.background   = d.tagBg || '#f0f0f0';
+      tagEl.style.color        = d.tagColor || '#888';
+      titleEl.textContent      = d.title || '';
+      avatarEl.textContent     = d.memberInitial || '';
+      avatarEl.style.background = d.memberColor || '#ccc';
+      authorNameEl.textContent = d.member || '';
+
+      var rows = '';
+      if (d.time)     rows += buildRow(CLOCK_SVG,  '일시',   d.time);
+      if (d.status)   rows += buildRow(CHECK_SVG,  '상태',   d.status);
+      if (d.assignee) rows += buildRow(PERSON_SVG, '담당자', d.assignee);
+      infoEl.innerHTML = rows;
+
+      currentTab = d.type === 'todo' ? 'todo' : 'schedule';
+      overlay.classList.add('is-open');
+    }
+
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) overlay.classList.remove('is-open');
+    });
+
+    if (goBtn) {
+      goBtn.addEventListener('click', function () {
+        overlay.classList.remove('is-open');
+        var tabBtn = document.querySelector('[data-app-tab="' + currentTab + '"]');
+        if (tabBtn) tabBtn.click();
+      });
+    }
+
+    var scheduleList = document.querySelector('[data-tab-screen="home"] .schedule-list');
+    if (scheduleList) {
+      scheduleList.addEventListener('click', function (e) {
+        var item = e.target.closest('.schedule-item[data-quick-type]');
+        if (!item) return;
+        var d = item.dataset;
+        openSheet({
+          type:          d.quickType,
+          title:         d.quickTitle,
+          time:          d.quickTime,
+          tag:           d.quickTag,
+          tagBg:         d.quickTagBg,
+          tagColor:      d.quickTagColor,
+          member:        d.quickMember,
+          memberInitial: d.quickMemberInitial,
+          memberColor:   d.quickMemberColor
+        });
+      });
+    }
+
+    var notiList = document.querySelector('[data-tab-screen="home"] .noti-list');
+    if (notiList) {
+      notiList.addEventListener('click', function (e) {
+        var item = e.target.closest('.noti-item[data-quick-type]');
+        if (!item) return;
+        var d = item.dataset;
+        openSheet({
+          type:          d.quickType,
+          title:         d.quickTitle,
+          time:          d.quickTime,
+          tag:           d.quickTag,
+          tagBg:         d.quickTagBg,
+          tagColor:      d.quickTagColor,
+          member:        d.quickMember,
+          memberInitial: d.quickMemberInitial,
+          memberColor:   d.quickMemberColor,
+          status:        d.quickStatus,
+          assignee:      d.quickAssignee
+        });
+      });
+    }
+  }());
+
+  /* ══════════════════════════════════════════
      공통 — focus-visible 폴리필 (키보드 탐색 지원)
   ══════════════════════════════════════════ */
   document.addEventListener('keydown', function() {

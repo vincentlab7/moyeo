@@ -27,7 +27,7 @@
 <div class="tab-screen is-tab-active" data-tab-screen="home">
   <div class="screen-wrap is-active" data-screen-wrap="home">
 
-    <header class="header fixed-topbar">
+    <header class="header">
       <div class="header__group-selector" data-open-sheet>
         <div class="header__group-emoji">👨‍👩‍👧‍👦</div>
         <div class="header__group-info">
@@ -43,7 +43,7 @@
       </div>
     </header>
 
-    <main class="scroll-area home-scroll">
+    <main class="scroll-area">
 
       <article class="ai-card">
         <div class="ai-card__bg"></div>
@@ -67,7 +67,7 @@
           <div class="section__more" data-app-tab="schedule">전체 보기 <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
         <ul class="schedule-list">
-          <li class="schedule-item">
+          <li class="schedule-item" data-quick-type="schedule" data-quick-title="부산 출장" data-quick-time="종일" data-quick-tag="업무" data-quick-tag-bg="#eff2ff" data-quick-tag-color="#4f7cff" data-quick-member="아빠" data-quick-member-initial="아" data-quick-member-color="#4f7cff">
             <div class="schedule-item__avatar" style="background:#4f7cff;">아</div>
             <div class="schedule-item__info">
               <div class="schedule-item__name">아빠</div>
@@ -76,7 +76,7 @@
             </div>
             <div class="schedule-item__tag" style="background:#eff2ff; color:#4f7cff;">업무</div>
           </li>
-          <li class="schedule-item">
+          <li class="schedule-item" data-quick-type="schedule" data-quick-title="친구 모임" data-quick-time="오후 6:00" data-quick-tag="약속" data-quick-tag-bg="#fff7ed" data-quick-tag-color="#f97316" data-quick-member="엄마" data-quick-member-initial="엄" data-quick-member-color="#f97316">
             <div class="schedule-item__avatar" style="background:#f97316;">엄</div>
             <div class="schedule-item__info">
               <div class="schedule-item__name">엄마</div>
@@ -85,7 +85,7 @@
             </div>
             <div class="schedule-item__tag" style="background:#fff7ed; color:#f97316;">약속</div>
           </li>
-          <li class="schedule-item">
+          <li class="schedule-item" data-quick-type="schedule" data-quick-title="사진 동아리" data-quick-time="오후 4:00 – 6:00" data-quick-tag="동아리" data-quick-tag-bg="#faf5ff" data-quick-tag-color="#a855f7" data-quick-member="딸" data-quick-member-initial="딸" data-quick-member-color="#a855f7">
             <div class="schedule-item__avatar" style="background:#a855f7;">딸</div>
             <div class="schedule-item__info">
               <div class="schedule-item__name">딸</div>
@@ -117,14 +117,14 @@
           <div class="section__more" data-app-tab="activity">전체 보기 <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
         </div>
         <ul class="noti-list">
-          <li class="noti-item">
+          <li class="noti-item" data-quick-type="schedule" data-quick-title="부산 출장" data-quick-time="종일" data-quick-tag="업무" data-quick-tag-bg="#eff2ff" data-quick-tag-color="#4f7cff" data-quick-member="아빠" data-quick-member-initial="아" data-quick-member-color="#4f7cff">
             <div class="noti-item__avatar" style="background:#4f7cff;">아</div>
             <div class="noti-item__body">
               <div class="noti-item__text"><strong>아빠</strong>가 부산 출장 일정을 등록했어요</div>
               <div class="noti-item__time">방금 전</div>
             </div>
           </li>
-          <li class="noti-item">
+          <li class="noti-item" data-quick-type="schedule" data-quick-title="사진 동아리" data-quick-time="오후 4:00 – 6:00" data-quick-tag="동아리" data-quick-tag-bg="#faf5ff" data-quick-tag-color="#a855f7" data-quick-member="딸" data-quick-member-initial="딸" data-quick-member-color="#a855f7">
             <div class="noti-item__avatar" style="background:#a855f7;">딸</div>
             <div class="noti-item__body">
               <div class="noti-item__text"><strong>딸</strong>이 동아리 일정을 수정했어요</div>
@@ -185,6 +185,29 @@
         </div>
       </div>
     </aside>
+
+    <!-- 홈 퀵 상세 바텀시트 (일정 / 할일 공용) -->
+    <div class="home-quick-overlay" data-home-quick-overlay>
+      <div class="home-quick-sheet" role="dialog" aria-modal="true" aria-labelledby="home-quick-title">
+        <div class="home-quick-sheet__handle"></div>
+        <div class="home-quick-sheet__head">
+          <div class="home-quick-sheet__tag" data-hq-tag></div>
+          <h2 class="home-quick-sheet__title" id="home-quick-title" data-hq-title></h2>
+          <div class="home-quick-sheet__author">
+            <div class="home-quick-sheet__avatar" data-hq-avatar></div>
+            <span class="home-quick-sheet__author-name" data-hq-author-name></span>
+          </div>
+        </div>
+        <div class="home-quick-sheet__divider"></div>
+        <ul class="home-quick-sheet__info" data-hq-info></ul>
+        <div class="home-quick-sheet__footer">
+          <button class="home-quick-sheet__go-btn" data-hq-go-btn>
+            전체 탭에서 보기
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
 
   </div>
 </div><!-- /tab-screen home -->
@@ -387,34 +410,32 @@
 <div class="tab-screen" data-tab-screen="schedule">
 
   <div class="screen-wrap is-active" data-screen-wrap="schedule-list">
-    <div class="schedule-topbar fixed-topbar">
-      <header class="header">
-        <div class="header__title">일정</div>
-        <div class="header__actions">
-          <div class="view-toggle" data-view-toggle>
-            <button class="view-toggle__btn is-active" data-view="list" aria-label="목록 보기">
-              <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-            </button>
-            <button class="view-toggle__btn" data-view="cal" aria-label="달력 보기">
-              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </button>
-          </div>
-          <button class="header__btn" aria-label="검색" data-go="schedule-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+    <header class="header">
+      <div class="header__title">일정</div>
+      <div class="header__actions">
+        <div class="view-toggle" data-view-toggle>
+          <button class="view-toggle__btn is-active" data-view="list" aria-label="목록 보기">
+            <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </button>
+          <button class="view-toggle__btn" data-view="cal" aria-label="달력 보기">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </button>
         </div>
-      </header>
-      <nav class="filter-tabs" aria-label="일정 필터">
-        <button class="filter-tab is-active" data-filter="all">전체</button>
-        <button class="filter-tab" data-filter="mine">내 일정</button>
-      </nav>
-      <div class="month-nav">
-        <button class="month-nav__btn" data-month-prev aria-label="이전 달"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-        <span class="month-nav__label" data-month-label>2026년 7월</span>
-        <button class="month-nav__btn" data-month-next aria-label="다음 달"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+        <button class="header__btn" aria-label="검색" data-go="schedule-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
       </div>
+    </header>
+    <nav class="filter-tabs" aria-label="일정 필터">
+      <button class="filter-tab is-active" data-filter="all">전체</button>
+      <button class="filter-tab" data-filter="mine">내 일정</button>
+    </nav>
+    <div class="month-nav">
+      <button class="month-nav__btn" data-month-prev aria-label="이전 달"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="month-nav__label" data-month-label>2026년 7월</span>
+      <button class="month-nav__btn" data-month-next aria-label="다음 달"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
     </div>
 
     <!-- 달력 뷰 -->
-    <div class="cal-view schedule-content-offset" data-cal-view>
+    <div class="cal-view" data-cal-view>
       <div class="cal-weekdays">
         <div class="cal-weekday">일</div><div class="cal-weekday">월</div><div class="cal-weekday">화</div>
         <div class="cal-weekday">수</div><div class="cal-weekday">목</div><div class="cal-weekday">금</div><div class="cal-weekday">토</div>
@@ -423,7 +444,7 @@
     </div>
 
     <!-- 리스트 뷰 -->
-    <section class="scroll-area schedule-content-offset" data-list-view>
+    <section class="scroll-area" data-list-view>
       <section class="date-group" data-date="2026-07-29">
         <div class="date-group__header">
           <span class="date-group__date">7월 29일</span>
@@ -540,15 +561,15 @@
 
   <div class="screen-wrap" data-screen-wrap="schedule-detail">
     <div class="detail-screen">
-      <header class="detail-header fixed-topbar">
+      <header class="detail-header">
         <button class="detail-header__back" aria-label="뒤로가기" data-go="schedule-list"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-        <h1 style="font-size:17px;font-weight:700;color:#111;flex:1;text-align:center;">일정 상세</h1>
+        <h1 style="font-size:16px;font-weight:700;color:#111;flex:1;text-align:center;">일정 상세</h1>
         <div class="detail-header__actions">
           <button class="detail-header__btn" aria-label="수정" data-schedule-edit><svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
           <button class="detail-header__btn" aria-label="삭제" data-schedule-delete><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></button>
         </div>
       </header>
-      <section class="scroll-area detail-scroll">
+      <section class="scroll-area">
         <div class="detail-hero">
           <div class="detail-tag" data-detail-tag style="background:#fffbeb;color:#f59e0b;">약속</div>
           <h2 class="detail-title" data-detail-title>일정 제목</h2>
@@ -877,7 +898,7 @@
       <ul class="members-card">
         <li class="member-item" data-go="myinfo-member">
           <div class="member-item__avatar" style="background:#4f7cff;" data-my-member-avatar>아</div>
-          <div class="member-item__info"><div class="member-item__name" data-my-member-name>사용자 <span style="font-size:12px;color:#888;font-weight:400;">(나)</span></div><div class="member-item__status" data-my-member-status></div></div>
+          <div class="member-item__info"><div class="member-item__name" data-my-member-name>사용자 <span style="font-size:11px;color:#888;font-weight:400;">(나)</span></div><div class="member-item__status" data-my-member-status></div></div>
           <div class="member-item__role member-item__role--owner">Owner</div>
         </li>
       </ul>
@@ -898,7 +919,7 @@
           <div class="menu-item__body"><div class="menu-item__label">초대 코드</div><div class="menu-item__sub" data-invite-code>-</div></div>
           <div class="menu-item__right">
             <button class="menu-item__refresh-btn" aria-label="초대코드 재생성" data-refresh-code><svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
-            <button class="menu-item__copy-btn" aria-label="초대코드 복사" data-copy-code style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:#3182F6;font-family:inherit;padding:4px 8px;border-radius:6px;">복사<svg viewBox="0 0 24 24" width="14" height="14" stroke="#3182F6" stroke-width="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+            <button class="menu-item__copy-btn" aria-label="초대코드 복사" data-copy-code style="background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#3182F6;font-family:inherit;padding:4px 8px;border-radius:6px;">복사<svg viewBox="0 0 24 24" width="14" height="14" stroke="#3182F6" stroke-width="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
           </div>
         </div>
       </div>
@@ -960,7 +981,7 @@
   <div class="screen-wrap" data-screen-wrap="myinfo-member">
     <header class="member-detail-header">
       <button class="back-btn" aria-label="뒤로가기" data-go="myinfo-main"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-      <h1 style="font-size:18px;font-weight:700;color:#111;flex:1;text-align:center;">멤버 프로필</h1>
+      <h1 style="font-size:17px;font-weight:700;color:#111;flex:1;text-align:center;">멤버 프로필</h1>
       <div style="width:36px;"></div>
     </header>
     <section class="scroll-area" style="background:#f8f9fa;">
@@ -976,7 +997,7 @@
   <div class="screen-wrap" data-screen-wrap="myinfo-group-manage">
     <header class="member-detail-header">
       <button class="back-btn" aria-label="뒤로가기" data-go="myinfo-main"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-      <h1 style="font-size:18px;font-weight:700;color:#111;flex:1;text-align:center;">그룹 관리</h1>
+      <h1 style="font-size:17px;font-weight:700;color:#111;flex:1;text-align:center;">그룹 관리</h1>
       <button class="header__save" data-group-manage-save>저장</button>
     </header>
     <section class="scroll-area" style="background:#f8f9fa;">
@@ -1047,14 +1068,6 @@
   fetch('/api/config').then(function(r){ return r.json(); }).then(function(cfg){
     window._GCAL_CLIENT_ID = cfg.gcalClientId || '';
   }).catch(function(){});
-
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/firebase-messaging-sw.js').catch(function(e) {
-        console.warn('[sw] 등록 실패:', e.message);
-      });
-    });
-  }
 </script>
 
 <!-- 홈 탭 인라인 스크립트 -->
@@ -1095,15 +1108,25 @@
     var el = document.querySelector('[data-tab-screen="home"] .schedule-list');
     if (!el) return;
     var today = list.filter(function (s) { return _isToday(s.startDate); }).slice(0, 5);
-    if (!today.length) { el.innerHTML = '<li style="list-style:none;padding:16px 0;text-align:center;color:#8B95A1;font-size:15px;">오늘 일정이 없어요</li>'; return; }
+    if (!today.length) { el.innerHTML = '<li style="list-style:none;padding:16px 0;text-align:center;color:#8B95A1;font-size:14px;">오늘 일정이 없어요</li>'; return; }
     el.innerHTML = today.map(function (s) {
       var c = CAT[s.category] || { bg: '#F2F4F6', fg: '#8B95A1' };
       var initial = (s.authorName || '?').charAt(0);
-      return '<li class="schedule-item">' +
+      var timeStr = s.isAllDay ? '종일' : (s.startTime || '');
+      return '<li class="schedule-item"' +
+        ' data-quick-type="schedule"' +
+        ' data-quick-title="' + (s.title || '') + '"' +
+        ' data-quick-time="' + timeStr + '"' +
+        ' data-quick-tag="' + (s.category || '기타') + '"' +
+        ' data-quick-tag-bg="' + c.bg + '"' +
+        ' data-quick-tag-color="' + c.fg + '"' +
+        ' data-quick-member="' + (s.authorName || '') + '"' +
+        ' data-quick-member-initial="' + initial + '"' +
+        ' data-quick-member-color="' + (s.authorColor || '#8B95A1') + '">' +
         '<div class="schedule-item__avatar" style="background:' + (s.authorColor || '#8B95A1') + ';" data-author-uid="' + (s.authorId || '') + '">' + initial + '</div>' +
         '<div class="schedule-item__info"><div class="schedule-item__name">' + (s.authorName || '') + '</div>' +
         '<div class="schedule-item__title">' + s.title + '</div>' +
-        '<div class="schedule-item__time">' + (s.isAllDay ? '종일' : (s.startTime || '')) + '</div></div>' +
+        '<div class="schedule-item__time">' + timeStr + '</div></div>' +
         '<div class="schedule-item__tag" style="background:' + c.bg + ';color:' + c.fg + ';">' + (s.category || '기타') + '</div></li>';
     }).join('');
     if (typeof window._sweepMyAvatars === 'function') window._sweepMyAvatars();
@@ -1141,10 +1164,25 @@
     var el = document.querySelector('[data-tab-screen="home"] .noti-list');
     if (!el) return;
     var recent = list.slice(0, 3);
-    if (!recent.length) { el.innerHTML = '<li style="list-style:none;padding:12px 0;text-align:center;color:#8B95A1;font-size:15px;">최근 활동이 없어요</li>'; return; }
+    if (!recent.length) { el.innerHTML = '<li style="list-style:none;padding:12px 0;text-align:center;color:#8B95A1;font-size:14px;">최근 활동이 없어요</li>'; return; }
     el.innerHTML = recent.map(function (a) {
       var initial = (a.actorName || '?').charAt(0);
-      return '<li class="noti-item">' +
+      var isSchedule = (a.type || '').indexOf('schedule') === 0;
+      var qType     = isSchedule ? 'schedule' : 'todo';
+      var qTag      = isSchedule ? '일정' : '할일';
+      var qTagBg    = isSchedule ? '#eff2ff' : '#f0f0f0';
+      var qTagColor = isSchedule ? '#4f7cff' : '#888888';
+      var parts     = (a.content || '').split(' — ');
+      var qTitle    = parts.length > 1 ? parts[parts.length - 1] : (a.content || '');
+      return '<li class="noti-item"' +
+        ' data-quick-type="' + qType + '"' +
+        ' data-quick-title="' + qTitle + '"' +
+        ' data-quick-tag="' + qTag + '"' +
+        ' data-quick-tag-bg="' + qTagBg + '"' +
+        ' data-quick-tag-color="' + qTagColor + '"' +
+        ' data-quick-member="' + (a.actorName || '') + '"' +
+        ' data-quick-member-initial="' + initial + '"' +
+        ' data-quick-member-color="' + (a.actorColor || '#8B95A1') + '">' +
         '<div class="noti-item__avatar" style="background:' + (a.actorColor || '#8B95A1') + ';" data-author-uid="' + (a.actorId || '') + '">' + initial + '</div>' +
         '<div class="noti-item__body"><div class="noti-item__text">' + a.content + '</div>' +
         '<div class="noti-item__time">' + _relTime(a.createdAt) + '</div></div></li>';
@@ -1329,7 +1367,7 @@
     var groups={},keys=[];
     list.forEach(function(s) { var k=_dateKey(s.startDate); if(!groups[k]){groups[k]=[];keys.push(k);} groups[k].push(s); });
     keys.sort();
-    if (!keys.length) { scroll.innerHTML='<div style="padding:48px 16px;text-align:center;color:#8B95A1;font-size:15px;">'+MON_KO[_curMonth]+'에 등록된 일정이 없어요</div>'; return; }
+    if (!keys.length) { scroll.innerHTML='<div style="padding:48px 16px;text-align:center;color:#8B95A1;font-size:14px;">'+MON_KO[_curMonth]+'에 등록된 일정이 없어요</div>'; return; }
     scroll.innerHTML = keys.map(function(key) {
       var d=new Date(key+'T00:00:00');
       var header='<div class="date-group__header"><span class="date-group__date">'+(d.getMonth()+1)+'월 '+d.getDate()+'일</span><span class="date-group__day">'+DAY_KO[d.getDay()]+'</span><div class="date-group__line"></div></div>';
@@ -1431,7 +1469,7 @@
       /* 참여 멤버 */
       var membersEl=document.querySelector('[data-detail-members]');
       if(membersEl) membersEl.innerHTML=(s.members&&s.members.length?s.members:[{name:s.authorName||'나',initial:initial,color:s.authorColor||'#8B95A1'}]).map(function(m){
-        return '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:36px;height:36px;border-radius:50%;background:'+(m.color||'#8B95A1')+';display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;">'+(m.initial||'?')+'</div><span style="font-size:12px;color:#888;">'+(m.name||'')+'</span></div>';
+        return '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="width:36px;height:36px;border-radius:50%;background:'+(m.color||'#8B95A1')+';display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;">'+(m.initial||'?')+'</div><span style="font-size:11px;color:#888;">'+(m.name||'')+'</span></div>';
       }).join('');
       /* 저녁 여부 */
       var dinnerBadge=document.querySelector('[data-detail-dinner-badge]');
@@ -1582,7 +1620,7 @@
     });
     document.querySelector('[data-month-next]')?.addEventListener('click', function(){
       _curMonth++; if(_curMonth>11){_curMonth=0;_curYear++;} _updateMonthLabel();
-      var popup=document.querySelector('[data-cal-popup]'); if(popup) popup.classList.remove('is-open'); _selectedKey=null;
+      var popup=document.querySelector('[data-cal-popup]'); if(popup) popup.classList.remove('is-open'21); _selectedKey=null;
       if (_calView) _renderCalendar(); else _renderList();
     });
     /* 필터 */
@@ -1710,7 +1748,7 @@
     if(summary){ var lbl=summary.querySelector('.progress-summary__label'); if(lbl) lbl.textContent='그룹 할일'; summary.querySelector('.progress-summary__count').innerHTML='<span>'+doneN+'</span> / '+total+' 완료'; summary.querySelector('.progress-bar__fill').style.width=pct+'%'; }
     wrap.querySelectorAll('.status-group').forEach(function(el){el.remove();});
     var empty=wrap.querySelector('.todo-empty'); if(empty) empty.remove();
-    if(!list.length){ wrap.insertAdjacentHTML('beforeend','<div class="todo-empty" style="padding:32px 0;text-align:center;color:#8B95A1;font-size:15px;">그룹 할일이 없어요</div>'); return; }
+    if(!list.length){ wrap.insertAdjacentHTML('beforeend','<div class="todo-empty" style="padding:32px 0;text-align:center;color:#8B95A1;font-size:14px;">그룹 할일이 없어요</div>'); return; }
     wrap.insertAdjacentHTML('beforeend',_statusGroup('진행전','#c4c9d2',pending)+_statusGroup('진행중','#f59e0b',doing)+_statusGroup('완료','#10b981',done));
     if (typeof window._sweepMyAvatars === 'function') window._sweepMyAvatars();
   }
@@ -1722,7 +1760,7 @@
     var summary=wrap.querySelector('.progress-summary');
     if(summary){ summary.querySelector('.progress-summary__count').innerHTML='<span>'+doneN+'</span> / '+total+' 완료'; summary.querySelector('.progress-bar__fill').style.width=pct+'%'; }
     var empty=wrap.querySelector('.todo-empty'); if(empty) empty.remove();
-    if (!list.length) { wrap.insertAdjacentHTML('beforeend','<div class="todo-empty" style="padding:32px 0;text-align:center;color:#8B95A1;font-size:15px;">내 할일이 없어요</div>'); return; }
+    if (!list.length) { wrap.insertAdjacentHTML('beforeend','<div class="todo-empty" style="padding:32px 0;text-align:center;color:#8B95A1;font-size:14px;">내 할일이 없어요</div>'); return; }
     var pending=list.filter(function(t){return t.status==='pending'||!t.status;}); var doing=list.filter(function(t){return t.status==='doing';});
     wrap.insertAdjacentHTML('beforeend',_statusGroup('진행전','#c4c9d2',pending)+_statusGroup('진행중','#f59e0b',doing)+_statusGroup('완료','#10b981',done));
     if (typeof window._sweepMyAvatars === 'function') window._sweepMyAvatars();
@@ -2114,7 +2152,7 @@
     var mAvatar=document.querySelector('[data-my-member-avatar]'); var mName=document.querySelector('[data-my-member-name]'); var mStatus=document.querySelector('[data-my-member-status]');
     _applyAvatarPhoto(mAvatar, profile.photoURL||'', initial, profile.color);
     window._applyTabAvatar(profile.photoURL||'');
-    if(mName) mName.innerHTML=(profile.displayName||'')+' <span style="font-size:12px;color:#888;font-weight:400;">(나)</span>';
+    if(mName) mName.innerHTML=(profile.displayName||'')+' <span style="font-size:11px;color:#888;font-weight:400;">(나)</span>';
     if(mStatus) mStatus.textContent=profile.status||'';
     var editName=document.querySelector('[data-profile-name-input]'); var editStatus=document.querySelector('[data-profile-status-input]');
     if(editName) editName.value=profile.displayName||''; if(editStatus) editStatus.value=profile.status||'';
@@ -2137,7 +2175,7 @@
     });
     list.innerHTML=sorted.map(function(m){
       var isMe=m.uid===myUid; var initial=(m.displayName||'?').charAt(0);
-      var nameHtml=m.displayName+(isMe?' <span style="font-size:12px;color:#888;font-weight:400;">(나)</span>':'');
+      var nameHtml=m.displayName+(isMe?' <span style="font-size:11px;color:#888;font-weight:400;">(나)</span>':'');
       var avatarStyle=m.photoURL?'background:'+(m.color||'#8B95A1')+' url('+m.photoURL+') center/cover no-repeat;':'background:'+(m.color||'#8B95A1')+';';
       var avatarContent=m.photoURL?'':initial;
       /* ownerId 일치 OR role==='owner' 두 가지로 판단 (기존 문서에 ownerId 필드 없어도 동작) */
@@ -2223,7 +2261,7 @@
     var ownerId = group ? (group.ownerId || '') : '';
     var members = Object.values(window._membersMap || {});
     if (!members.length) {
-      manageMemberList.innerHTML = '<li style="list-style:none;padding:20px;color:#8B95A1;font-size:15px;text-align:center;">멤버 정보를 불러오는 중...</li>';
+      manageMemberList.innerHTML = '<li style="list-style:none;padding:20px;color:#8B95A1;font-size:14px;text-align:center;">멤버 정보를 불러오는 중...</li>';
       return;
     }
     manageMemberList.innerHTML = members.sort(function(a, b) {
@@ -2240,7 +2278,7 @@
         : '<button class="manage-kick-btn" data-kick-uid="' + m.uid + '" data-kick-name="' + (m.displayName || '멤버').replace(/"/g, '&quot;') + '">강퇴</button>';
       return '<li class="member-item">' +
         '<div class="member-item__avatar" style="' + avatarStyle + '">' + avatarContent + '</div>' +
-        '<div class="member-item__info"><div class="member-item__name">' + (m.displayName || '멤버') + (isMe ? ' <span style="font-size:12px;color:#888;font-weight:400;">(나)</span>' : '') + '</div>' +
+        '<div class="member-item__info"><div class="member-item__name">' + (m.displayName || '멤버') + (isMe ? ' <span style="font-size:11px;color:#888;font-weight:400;">(나)</span>' : '') + '</div>' +
         '<div class="member-item__status">' + (m.status || '') + '</div></div>' +
         rightEl + '</li>';
     }).join('');

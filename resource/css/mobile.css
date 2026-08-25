@@ -1,1 +1,12 @@
 /* 모바일 목업 프로젝트 — 현재 추가 모바일 override 없음 */
+
+@media (max-width: 767px) {
+  /* stretch가 부모 체인을 타야 동작하므로 html/body에 명시적 높이 지정 */
+  html, body {height: 100%; height: -webkit-fill-available;}
+
+  /* phone-frame: 모바일에서 기기 화면 높이를 꽉 채움 */
+  .phone-frame {height: 100vh; height: -webkit-fill-available; height: stretch;}
+
+  /* FAB: 모바일에서 phone-frame이 뷰포트를 꽉 채우므로 right: 20px 기준으로 재정렬 */
+  .fab {left: auto; margin-left: 0; right: 20px;}
+}
