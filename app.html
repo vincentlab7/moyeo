@@ -1620,7 +1620,7 @@
     });
     document.querySelector('[data-month-next]')?.addEventListener('click', function(){
       _curMonth++; if(_curMonth>11){_curMonth=0;_curYear++;} _updateMonthLabel();
-      var popup=document.querySelector('[data-cal-popup]'); if(popup) popup.classList.remove('is-open'21); _selectedKey=null;
+      var popup=document.querySelector('[data-cal-popup]'); if(popup) popup.classList.remove('is-open'); _selectedKey=null;
       if (_calView) _renderCalendar(); else _renderList();
     });
     /* 필터 */
