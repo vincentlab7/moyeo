@@ -47,18 +47,32 @@ const CORS = {
 
 /* ── AI 요약 프롬프트 빌더 ── */
 function buildPrompt(data) {
-  const gName     = data.groupName || '우리 그룹';
-  const schedules = (data.schedules || []).map(s => s.title + (s.time ? ` (${s.time})` : '')).join(', ') || '없음';
-  const todos     = (data.todos    || []).map(t => t.title).join(', ') || '없음';
-  const dinner    = (data.members  || []).filter(m => m.dinner === 'possible').map(m => m.name).join(', ') || '미정';
+  const gName        = data.groupName || '우리 그룹';
+  const scheduleList = data.schedules || [];
+  const schedules    = scheduleList.map(s => s.title + (s.time ? ` (${s.time})` : '')).join(', ') || '없음';
+  const todos        = (data.todos || []).map(t => t.title).join(', ') || '없음';
+
+  /* 일정 작성자별 저녁 가능 여부 집계 (impossible 우선) */
+  const dinnerMap = {};
+  scheduleList.forEach(s => {
+    const name = s.author;
+    if (!name) return;
+    if (!dinnerMap[name] || s.dinner === 'impossible') dinnerMap[name] = s.dinner || 'none';
+    else if (s.dinner === 'possible' && dinnerMap[name] === 'none') dinnerMap[name] = 'possible';
+  });
+  const dinnerCannot = Object.entries(dinnerMap).filter(([, v]) => v === 'impossible').map(([k]) => k).join(', ') || '없음';
+  const dinnerCan    = Object.entries(dinnerMap).filter(([, v]) => v === 'possible').map(([k]) => k).join(', ') || '없음';
+
   return `당신은 가족·소그룹 일정 공유 앱 "모여"의 AI 어시스턴트입니다.
 그룹명: ${gName}
 오늘 일정: ${schedules}
 진행 중 할일: ${todos}
-오늘 저녁 가능: ${dinner}
+오늘 저녁 불가능: ${dinnerCannot}
+오늘 저녁 가능: ${dinnerCan}
 
 위 정보를 바탕으로 그룹을 위한 따뜻하고 실용적인 하루 요약을 2~3문장으로 작성하세요.
-반드시 한국어 구어체로 작성하고, 구체적인 일정·할일을 언급하세요.`;
+반드시 한국어 구어체로 작성하고, 구체적인 일정·할일을 언급하세요.
+마지막 문장은 반드시 오늘 저녁 함께하기 어려운 구성원을 자연스럽게 언급하세요. 저녁 불가능이 '없음'이면 "오늘은 다 함께 저녁 어때요?" 처럼 긍정적으로 마무리하세요.`;
 }
 
 /* ── Claude API 프록시 핸들러 ── */

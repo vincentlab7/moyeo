@@ -17,7 +17,7 @@ async function fetchAiSummary(group, schedules, todos) {
   const todaySchedules = (schedules || [])
     .filter(s => _isToday(s.startDate))
     .slice(0, 5)
-    .map(s => ({ title: s.title, time: s.startTime || '' }));
+    .map(s => ({ title: s.title, time: s.startTime || '', author: s.authorName || '', dinner: s.dinner || 'none' }));
 
   const activeTodos = (todos || [])
     .filter(t => t.status !== 'done')
