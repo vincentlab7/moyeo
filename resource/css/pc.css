@@ -322,15 +322,15 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .schedule-card {background: #ffffff; border-radius: 12px; padding: 11px 16px; margin-bottom: 6px; display: flex; gap: 12px; align-items: flex-start; cursor: pointer;}
 .schedule-card:active {background: #f8f9fa;}
 .schedule-card__bar {width: 3px; border-radius: 2px; min-height: 36px; align-self: stretch; flex-shrink: 0;}
-.schedule-card__body {flex: 1;}
-.schedule-card__top {display: flex; align-items: center; justify-content: space-between; gap: 8px;}
+.schedule-card__body {flex: 1; display: grid; grid-template-columns: 1fr auto; grid-template-areas: "top members" "meta members"; row-gap: 3px; align-items: center;}
+.schedule-card__top {grid-area: top; display: flex; align-items: center; gap: 8px;}
 .schedule-card__title {font-size: 17px; font-weight: 600; color: #111111; letter-spacing: -0.2px; flex: 1;}
 .schedule-card__tag {font-size: 13px; font-weight: 600; padding: 3px 8px; border-radius: 20px; flex-shrink: 0;}
-.schedule-card__meta {display: flex; align-items: center; gap: 8px; margin-top: 3px; flex-wrap: wrap;}
+.schedule-card__meta {grid-area: meta; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;}
 .schedule-card__time {font-size: 14px; color: #888888; display: flex; align-items: center; gap: 3px;}
 .schedule-card__time svg {width: 12px; height: 12px; stroke: #c4c9d2; stroke-width: 2; fill: none;}
-.schedule-card__members {display: flex; flex-shrink: 0;}
-.schedule-card__avatar {width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #ffffff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #ffffff; margin-right: -6px;}
+.schedule-card__members {grid-area: members; display: flex; align-items: center; padding-left: 12px;}
+.schedule-card__avatar {width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: #ffffff;}
 .schedule-card__dinner {display: flex; align-items: center; gap: 4px; margin-top: 8px; font-size: 14px; color: #888888;}
 .schedule-card__dinner svg {width: 13px; height: 13px; stroke-width: 1.8; fill: none;}
 
