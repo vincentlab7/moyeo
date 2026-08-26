@@ -1382,8 +1382,10 @@
     list.forEach(function(s) { var k=_dateKey(s.startDate); if(!groups[k]){groups[k]=[];keys.push(k);} groups[k].push(s); });
     keys.sort();
     if (!keys.length) { scroll.innerHTML='<div style="padding:48px 16px;text-align:center;color:#8B95A1;font-size:16px;">'+MON_KO[_curMonth]+'에 등록된 일정이 없어요</div>'; return; }
+    var todayKey=_dateKey(new Date());
     scroll.innerHTML = keys.map(function(key) {
       var d=new Date(key+'T00:00:00');
+      var isPast=key<todayKey;
       var header='<div class="date-group__header"><span class="date-group__date">'+(d.getMonth()+1)+'월 '+d.getDate()+'일</span><span class="date-group__day">'+DAY_KO[d.getDay()]+'</span><div class="date-group__line"></div></div>';
       var cards=groups[key].map(function(s) {
         var c=CAT[s.category]||{bg:'#F2F4F6',fg:'#8B95A1'};
@@ -1396,7 +1398,7 @@
           '<div class="schedule-card__meta"><div class="schedule-card__time"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'+timeStr+'</div></div>' +
           '</div></article>';
       }).join('');
-      return '<section class="date-group" data-date="'+key+'">'+header+cards+'</section>';
+      return '<section class="date-group'+(isPast?' date-group--past':'')+'" data-date="'+key+'">'+header+cards+'</section>';
     }).join('');
     if (typeof window._sweepMyAvatars === 'function') window._sweepMyAvatars();
   }

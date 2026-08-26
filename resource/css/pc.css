@@ -519,9 +519,8 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .today-divider__line {flex: 1; height: 1px; background: #256ef4; opacity: 0.25;}
 .today-divider__label {font-size: 13px; font-weight: 700; color: #256ef4; white-space: nowrap; background: #ecf2fe; padding: 3px 10px; border-radius: 20px;}
 
-/* 지난 일정 흐림 + 클릭 비활성화 */
-.date-group--past {opacity: 0.5;}
-.date-group--past .schedule-card {pointer-events: none; cursor: default;}
+/* 지난 일정 흐림 */
+.date-group--past {opacity: 0.4;}
 
 /* 월 빈 상태 */
 .empty-month {padding: 60px 20px 40px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;}
