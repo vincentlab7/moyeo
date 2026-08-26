@@ -1404,6 +1404,14 @@
       return '<section class="date-group'+(isPast?' date-group--past':'')+'" data-date="'+key+'">'+header+cards+'</section>';
     }).join('');
     if (typeof window._sweepMyAvatars === 'function') window._sweepMyAvatars();
+    if (_shouldScrollToToday) {
+      _shouldScrollToToday = false;
+      var first = scroll.querySelector('.date-group:not(.date-group--past)');
+      if (first) {
+        var cRect = scroll.getBoundingClientRect(); var tRect = first.getBoundingClientRect();
+        scroll.scrollTop += tRect.top - cRect.top;
+      }
+    }
   }
   function _populateMembers(members) {
     var wrap=document.querySelector('[data-member-select]'); if(!wrap) return;
@@ -1543,6 +1551,7 @@
   /* ── 달력 뷰 ── */
   var _calView = false;
   var _selectedKey = null;
+  var _shouldScrollToToday = false;
 
   function _renderCalendar() {
     var grid = document.querySelector('[data-cal-grid]'); if (!grid) return;
@@ -1688,6 +1697,7 @@
       });
     }
     window.onMembers(group.id, function(members){ _populateMembers(members); if (typeof window._sweepAllAvatars === 'function') window._sweepAllAvatars(); });
+    _shouldScrollToToday = true;
     window.onSchedules(group.id, function(list){ _allSchedules=list; if(_calView) _renderCalendar(); else _renderList(); });
     document.querySelector('[data-schedule-register-back]')?.addEventListener('click', function(){ setTimeout(_resetForm,300); });
   };
@@ -1697,6 +1707,7 @@
     _curMonth = now.getMonth();
     _updateMonthLabel();
     _closeCalPopup();
+    _shouldScrollToToday = true;
     if (_calView) _renderCalendar(); else _renderList();
   };
 }());
