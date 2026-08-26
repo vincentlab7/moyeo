@@ -475,9 +475,12 @@
     </section>
 
     <!-- 달력 날짜 클릭 시 일정 팝업 -->
-    <div class="cal-day-popup" data-cal-popup>
-      <div class="cal-day-popup__header" data-cal-popup-header>날짜</div>
-      <div data-cal-popup-list></div>
+    <div class="cal-popup-overlay" data-cal-popup-overlay>
+      <div class="cal-day-popup" data-cal-popup>
+        <div class="cal-day-popup__handle"></div>
+        <div class="cal-day-popup__header" data-cal-popup-header>날짜</div>
+        <div data-cal-popup-list></div>
+      </div>
     </div>
 
     <button class="fab" aria-label="일정 추가" data-go="schedule-register">
@@ -1581,8 +1584,16 @@
     grid.innerHTML = cells;
   }
 
+  function _closeCalPopup() {
+    var popup = document.querySelector('[data-cal-popup]');
+    var overlay = document.querySelector('[data-cal-popup-overlay]');
+    if (popup) popup.classList.remove('is-open');
+    if (overlay) overlay.classList.remove('is-open');
+    _selectedKey = null;
+  }
   function _showCalPopup(key) {
     var popup = document.querySelector('[data-cal-popup]');
+    var overlay = document.querySelector('[data-cal-popup-overlay]');
     var header = document.querySelector('[data-cal-popup-header]');
     var listEl = document.querySelector('[data-cal-popup-list]');
     if (!popup || !listEl) return;
@@ -1614,6 +1625,7 @@
       if (typeof window._sweepMyAvatars === 'function') window._sweepMyAvatars();
     }
     popup.classList.add('is-open');
+    if (overlay) overlay.classList.add('is-open');
   }
 
   function _toggleView(mode) {
@@ -1625,9 +1637,7 @@
     });
     if (calEl) calEl.classList.toggle('is-active', _calView);
     if (listEl) listEl.style.display = _calView ? 'none' : '';
-    var popup = document.querySelector('[data-cal-popup]');
-    if (popup) popup.classList.remove('is-open');
-    _selectedKey = null;
+    _closeCalPopup();
     if (_calView) _renderCalendar(); else _renderList();
   }
 
@@ -1636,12 +1646,12 @@
     /* 월 이동 */
     document.querySelector('[data-month-prev]')?.addEventListener('click', function(){
       _curMonth--; if(_curMonth<0){_curMonth=11;_curYear--;} _updateMonthLabel();
-      var popup=document.querySelector('[data-cal-popup]'); if(popup) popup.classList.remove('is-open'); _selectedKey=null;
+      _closeCalPopup();
       if (_calView) _renderCalendar(); else _renderList();
     });
     document.querySelector('[data-month-next]')?.addEventListener('click', function(){
       _curMonth++; if(_curMonth>11){_curMonth=0;_curYear++;} _updateMonthLabel();
-      var popup=document.querySelector('[data-cal-popup]'); if(popup) popup.classList.remove('is-open'); _selectedKey=null;
+      _closeCalPopup();
       if (_calView) _renderCalendar(); else _renderList();
     });
     /* 필터 */
@@ -1663,13 +1673,18 @@
         var cell = e.target.closest('[data-cal-key]'); if (!cell) return;
         var key = cell.dataset.calKey;
         if (_selectedKey === key) {
-          var popup = document.querySelector('[data-cal-popup]');
-          if (popup) popup.classList.remove('is-open');
-          _selectedKey = null;
+          _closeCalPopup();
           _renderCalendar();
         } else {
           _showCalPopup(key);
         }
+      });
+    }
+    /* 팝업 오버레이 외부 클릭 → 팝업 닫기 */
+    var calOverlay = document.querySelector('[data-cal-popup-overlay]');
+    if (calOverlay) {
+      calOverlay.addEventListener('click', function(e) {
+        if (!e.target.closest('[data-cal-popup]')) { _closeCalPopup(); _renderCalendar(); }
       });
     }
     window.onMembers(group.id, function(members){ _populateMembers(members); if (typeof window._sweepAllAvatars === 'function') window._sweepAllAvatars(); });
@@ -1681,9 +1696,7 @@
     _curYear  = now.getFullYear();
     _curMonth = now.getMonth();
     _updateMonthLabel();
-    var popup = document.querySelector('[data-cal-popup]');
-    if (popup) popup.classList.remove('is-open');
-    _selectedKey = null;
+    _closeCalPopup();
     if (_calView) _renderCalendar(); else _renderList();
   };
 }());
