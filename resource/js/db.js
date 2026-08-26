@@ -253,6 +253,27 @@ if (!IS_FIREBASE_READY) {
     return localStorage.getItem('gcal_access_token');
   }
 
+  function _saveToken(resp) {
+    localStorage.setItem('gcal_access_token', resp.access_token);
+    localStorage.setItem('gcal_token_expiry', String(Date.now() + (resp.expires_in - 60) * 1000));
+    localStorage.setItem('gcal_connected', '1');
+  }
+
+  /* 유효 토큰 확보 후 cb(token) 실행 — 만료 시 팝업 없이 자동 갱신 */
+  function _withToken(cb) {
+    const t = _token();
+    if (t) { cb(t); return; }
+    if (localStorage.getItem('gcal_connected') !== '1') return;
+    const clientId = window._GCAL_CLIENT_ID;
+    if (!clientId || !window.google?.accounts?.oauth2) return;
+    google.accounts.oauth2.initTokenClient({
+      client_id: clientId,
+      scope: 'https://www.googleapis.com/auth/calendar.events',
+      prompt: '',
+      callback: (resp) => { if (resp.access_token) { _saveToken(resp); cb(resp.access_token); } },
+    }).requestAccessToken();
+  }
+
   function _toCalEvent(data) {
     const ev = { summary: data.title || '', description: data.memo || '' };
 
@@ -301,26 +322,20 @@ if (!IS_FIREBASE_READY) {
     return ev;
   }
 
-  window.gcalIsConnected = () => !!_token();
+  window.gcalIsConnected = () => localStorage.getItem('gcal_connected') === '1';
 
   window.gcalConnect = (cb) => {
     const clientId = window._GCAL_CLIENT_ID;
     if (!clientId) { alert('Google Calendar 클라이언트 ID가 설정되지 않았습니다.\n.env 파일에 GCAL_CLIENT_ID를 추가하고 서버를 재시작하세요.'); if (cb) cb(false); return; }
     if (!window.google?.accounts?.oauth2) { if (cb) cb(false); return; }
-    const client = google.accounts.oauth2.initTokenClient({
+    google.accounts.oauth2.initTokenClient({
       client_id: clientId,
       scope: 'https://www.googleapis.com/auth/calendar.events',
       callback: (resp) => {
-        if (resp.access_token) {
-          localStorage.setItem('gcal_access_token', resp.access_token);
-          localStorage.setItem('gcal_token_expiry', String(Date.now() + (resp.expires_in - 60) * 1000));
-          if (cb) cb(true);
-        } else {
-          if (cb) cb(false);
-        }
+        if (resp.access_token) { _saveToken(resp); if (cb) cb(true); }
+        else { if (cb) cb(false); }
       },
-    });
-    client.requestAccessToken();
+    }).requestAccessToken();
   };
 
   window.gcalDisconnect = () => {
@@ -328,40 +343,39 @@ if (!IS_FIREBASE_READY) {
     if (t && window.google?.accounts?.oauth2) google.accounts.oauth2.revoke(t, () => {});
     localStorage.removeItem('gcal_access_token');
     localStorage.removeItem('gcal_token_expiry');
+    localStorage.removeItem('gcal_connected');
   };
 
   window._gcalCreate = (scheduleId, data) => {
-    const t = _token();
-    console.log('[GCal] token:', t ? '있음' : '없음(연동 필요)');
-    if (!t) return;
-    const ev = _toCalEvent(data);
-    console.log('[GCal] 전송할 이벤트:', JSON.stringify(ev));
-    fetch(GCAL_API, {
-      method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + t, 'Content-Type': 'application/json' },
-      body: JSON.stringify(ev),
-    }).then(r => r.json()).then(ev => {
-      console.log('[GCal] API 응답:', JSON.stringify(ev));
-      if (ev.id) localStorage.setItem('gcal_eid_' + scheduleId, ev.id);
-    }).catch(e => console.error('[GCal] 오류:', e));
+    _withToken(t => {
+      fetch(GCAL_API, {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + t, 'Content-Type': 'application/json' },
+        body: JSON.stringify(_toCalEvent(data)),
+      }).then(r => r.json()).then(ev => {
+        if (ev.id) localStorage.setItem('gcal_eid_' + scheduleId, ev.id);
+      }).catch(e => console.error('[GCal] 오류:', e));
+    });
   };
 
   window._gcalUpdate = (scheduleId, data) => {
-    const t   = _token(); if (!t) return;
     const eid = localStorage.getItem('gcal_eid_' + scheduleId); if (!eid) return;
-    fetch(GCAL_API + '/' + eid, {
-      method: 'PUT',
-      headers: { 'Authorization': 'Bearer ' + t, 'Content-Type': 'application/json' },
-      body: JSON.stringify(_toCalEvent(data)),
-    }).catch(() => {});
+    _withToken(t => {
+      fetch(GCAL_API + '/' + eid, {
+        method: 'PUT',
+        headers: { 'Authorization': 'Bearer ' + t, 'Content-Type': 'application/json' },
+        body: JSON.stringify(_toCalEvent(data)),
+      }).catch(() => {});
+    });
   };
 
   window._gcalDelete = (scheduleId) => {
-    const t   = _token(); if (!t) return;
     const eid = localStorage.getItem('gcal_eid_' + scheduleId); if (!eid) return;
-    fetch(GCAL_API + '/' + eid, {
-      method: 'DELETE',
-      headers: { 'Authorization': 'Bearer ' + t },
-    }).then(() => { localStorage.removeItem('gcal_eid_' + scheduleId); }).catch(() => {});
+    _withToken(t => {
+      fetch(GCAL_API + '/' + eid, {
+        method: 'DELETE',
+        headers: { 'Authorization': 'Bearer ' + t },
+      }).then(() => { localStorage.removeItem('gcal_eid_' + scheduleId); }).catch(() => {});
+    });
   };
 }());
