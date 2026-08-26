@@ -2226,13 +2226,40 @@
       /* ownerId 일치 OR role==='owner' 두 가지로 판단 (기존 문서에 ownerId 필드 없어도 동작) */
       var isOwner=(ownerId&&m.uid===ownerId)||m.role==='owner';
       var roleBadge=isOwner?'<div class="member-item__role member-item__role--owner">👑 Owner</div>':'';
-      return '<li class="member-item" data-go="myinfo-member">' +
+      return '<li class="member-item" data-go="myinfo-member"' +
+        ' data-member-name="'+(m.displayName||'').replace(/"/g,'&quot;')+'"' +
+        ' data-member-initial="'+initial+'"' +
+        ' data-member-color="'+(m.color||'#8B95A1')+'"' +
+        ' data-member-status="'+(m.status||'').replace(/"/g,'&quot;')+'"' +
+        ' data-member-role="'+(isOwner?'owner':'member')+'"' +
+        (m.photoURL?' data-member-photo="'+m.photoURL+'"':'')+
+        '>' +
         '<div class="member-item__avatar" style="'+avatarStyle+'"'+(isMe?' data-my-member-avatar':'')+'>'+avatarContent+'</div>' +
         '<div class="member-item__info"><div class="member-item__name"'+(isMe?' data-my-member-name':'')+'>'+nameHtml+'</div>' +
         '<div class="member-item__status"'+(isMe?' data-my-member-status':'')+'>'+(m.status||'')+'</div></div>' +
         roleBadge+'</li>';
     }).join('');
   }
+
+  /* 멤버 리스트 클릭 → 상세 화면 데이터 채우기 */
+  document.addEventListener('click', function(e) {
+    var li = e.target.closest('[data-go="myinfo-member"]');
+    if (!li) return;
+    var name    = li.dataset.memberName    || '멤버';
+    var initial = li.dataset.memberInitial || '?';
+    var color   = li.dataset.memberColor   || '#8B95A1';
+    var status  = li.dataset.memberStatus  || '';
+    var role    = li.dataset.memberRole === 'owner' ? '👑 Owner' : 'Member';
+    var photo   = li.dataset.memberPhoto   || '';
+    var avatarEl = document.querySelector('[data-member-detail-avatar]');
+    var nameEl   = document.querySelector('[data-member-detail-name]');
+    var statusEl = document.querySelector('[data-member-detail-status]');
+    var roleEl   = document.querySelector('[data-member-detail-role]');
+    if (avatarEl) _applyAvatarPhoto(avatarEl, photo, initial, color);
+    if (nameEl)   nameEl.textContent = name;
+    if (statusEl) statusEl.textContent = status;
+    if (roleEl)   roleEl.textContent = role;
+  });
 
   window._tabInit.myinfo = function(group) {
     var codeEl=document.querySelector('[data-invite-code]');
