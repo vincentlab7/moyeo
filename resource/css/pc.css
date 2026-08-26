@@ -9,7 +9,7 @@ body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
 .screen-wrap.is-active {display: flex;}
 .screen-wrap > .scroll-area {flex: 1; min-height: 0; overflow-y: auto; padding-bottom: 80px;}
 .screen-wrap > .register-screen {flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #ffffff;}
-.screen-wrap > .register-screen .scroll-area {flex: 1; min-height: 0; overflow-y: auto; padding-bottom: 20px;}
+.screen-wrap > .register-screen .scroll-area {flex: 1; min-height: 0; overflow-y: auto; padding-bottom: 80px;}
 .screen-wrap > .detail-screen {flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #ffffff;}
 .screen-wrap > .detail-screen .scroll-area {flex: 1; min-height: 0; overflow-y: auto; padding-bottom: 20px;}
 
