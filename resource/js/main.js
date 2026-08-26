@@ -983,6 +983,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.privacy-btn');
+    if (!btn) return;
+    var group = btn.closest('.privacy-toggle');
+    if (!group) return;
+    group.querySelectorAll('.privacy-btn').forEach(function(b) { b.classList.remove('is-selected'); });
+    btn.classList.add('is-selected');
+  });
+
   /* ══════════════════════════════════════════
      04 할일 — 타입/상태 칩 단일 선택
   ══════════════════════════════════════════ */

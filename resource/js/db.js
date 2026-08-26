@@ -42,8 +42,10 @@ if (!IS_FIREBASE_READY) {
       createdAt:     serverTs(),
       updatedAt:     serverTs(),
     }).then(ref => {
-      logActivity(gId, 'schedule_create', `새 일정을 등록했어요 — ${data.title}`, ref.id);
-      window.notifyGroup(gId, '📅 새 일정 등록', `${myName()}님이 "${data.title}" 일정을 추가했어요`);
+      if (!data.isPrivate) {
+        logActivity(gId, 'schedule_create', `새 일정을 등록했어요 — ${data.title}`, ref.id);
+        window.notifyGroup(gId, '📅 새 일정 등록', `${myName()}님이 "${data.title}" 일정을 추가했어요`);
+      }
       console.log('[GCal] addSchedule .then() 진입, _gcalCreate type:', typeof window._gcalCreate);
       try { window._gcalCreate(ref.id, data); } catch(e) { console.error('[GCal] _gcalCreate 호출 오류:', e); }
       return ref;
@@ -53,7 +55,7 @@ if (!IS_FIREBASE_READY) {
     db.collection('groups').doc(gId).collection('schedules').doc(sid).update({
       ...data, updatedAt: serverTs(),
     }).then(() => {
-      logActivity(gId, 'schedule_update', `일정을 수정했어요 — ${data.title || ''}`, sid);
+      if (!data.isPrivate) logActivity(gId, 'schedule_update', `일정을 수정했어요 — ${data.title || ''}`, sid);
       try { window._gcalUpdate(sid, data); } catch(e) {}
     });
 
