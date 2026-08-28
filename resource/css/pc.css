@@ -2,7 +2,7 @@
 body {font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 16px; color: #111111; background: #f0f0f0; display: flex; align-items: flex-start; justify-content: center; min-height: 100vh; gap: 24px; flex-wrap: wrap;}
 .phone-wrap {display: flex; flex-direction: column; align-items: center;}
 .phone-label {margin-bottom: 12px; font-size: 16px; font-weight: 600; color: #888888;}
-.phone-frame {width: 390px; height: 844px; background: #f8f9fa; position: relative; box-shadow: 0 0 0 1px #e5e8eb, 0 24px 64px rgba(0,0,0,0.12); overflow: hidden;}
+.phone-frame {width: 390px; height: 100vh; background: #f8f9fa; position: relative; box-shadow: 0 0 0 1px #e5e8eb, 0 24px 64px rgba(0,0,0,0.12); overflow: hidden;}
 
 /* ── 화면 전환 래퍼 (03~06 공통) ── */
 .screen-wrap {position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: none; flex-direction: column; background: #f8f9fa; overflow: hidden;}
